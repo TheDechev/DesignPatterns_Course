@@ -16,26 +16,17 @@ namespace BasicFacebookFeatures
         public Form1()
         {
             InitializeComponent();
+            picture_smallPictureBox.LoadAsync(r_facebookIcon);
             FacebookWrapper.FacebookService.s_CollectionLimit = 200;
             FacebookWrapper.FacebookService.s_FbApiVersion = 2.8f;
         }
 
         User m_LoggedInUser;
+        private readonly string r_facebookIcon = "http://icons.iconarchive.com/icons/fasticon/web-2/256/FaceBook-icon.png";
 
         private void loginAndInit()
         {
-            /// Owner: design.patterns
-      
-            /// Use the FacebookService.Login method to display the login form to any user who wish to use this application.
-            /// You can then save the result.AccessToken for future auto-connect to this user:
-            LoginResult result = FacebookService.Login("980644158781216", /// (desig patter's "Design Patterns Course App 2.4" app)
-                "email"
-                );
-            // These are NOT the complete list of permissions. Other permissions for example:
-            // "user_birthday", "user_education_history", "user_hometown", "user_likes","user_location","user_relationships","user_relationship_details","user_religion_politics", "user_videos", "user_website", "user_work_history", "email","read_insights","rsvp_event","manage_pages"
-            // The documentation regarding facebook login and permissions can be found here: 
-            // https://developers.facebook.com/docs/facebook-login/permissions#reference
-
+            LoginResult result = FacebookService.Login("980644158781216", "email");
 
             if (!string.IsNullOrEmpty(result.AccessToken))
             {
@@ -51,10 +42,10 @@ namespace BasicFacebookFeatures
         private void fetchUserInfo()
         {
             picture_smallPictureBox.LoadAsync(m_LoggedInUser.PictureNormalURL);
-            if (m_LoggedInUser.Posts.Count > 0)
-            {
-                textBoxStatus.Text = m_LoggedInUser.Posts[0].Message;
-            }
+            userNameLabel.Text = "Welcome " + m_LoggedInUser.FirstName + " " + m_LoggedInUser.LastName + "!";
+            buttonSetStatus.Enabled = true;
+            buttonLogin.Enabled = false;
+            buttonLogout.Enabled = true;
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -66,174 +57,16 @@ namespace BasicFacebookFeatures
         {
             Status postedStatus = m_LoggedInUser.PostStatus(textBoxStatus.Text);
             MessageBox.Show("Status Posted! ID: " + postedStatus.Id);
-
         }
 
-        private void linkPosts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void buttonLogout_Click(object sender, EventArgs e)
         {
-            fetchPosts();
-        }
-
-
-        private void something()
-        {
-            
-        }
-
-        private void fetchPosts()
-        {
-            foreach (Post post in m_LoggedInUser.Posts)
-            {
-                if (post.Message != null)
-                {
-                    listBoxPosts.Items.Add(post.Message);
-                }
-                else if (post.Caption != null)
-                {
-                    listBoxPosts.Items.Add(post.Caption);
-                }
-                else
-                {
-                    listBoxPosts.Items.Add(string.Format("[{0}]", post.Type));
-                }
-            }
-
-            if (m_LoggedInUser.Posts.Count == 0)
-            {
-                MessageBox.Show("No Posts to retrieve :(");
-            }
-        }
-
-        private void linkFriends_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            fetchFriends();
-        }
-
-        private void fetchFriends()
-        {
-            listBoxFriends.Items.Clear();
-            listBoxFriends.DisplayMember = "Name";
-            foreach (User friend in m_LoggedInUser.Friends)
-            {
-                listBoxFriends.Items.Add(friend);
-                friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
-            }
-
-            if (m_LoggedInUser.Friends.Count == 0)
-            {
-                MessageBox.Show("No Friends to retrieve :(");
-            }
-        }
-
-        private void listBoxFriends_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            displaySelectedFriend();
-        }
-
-        private void displaySelectedFriend()
-        {
-            if (listBoxFriends.SelectedItems.Count == 1)
-            {
-                User selectedFriend = listBoxFriends.SelectedItem as User;
-                if (selectedFriend.PictureNormalURL != null)
-                {
-                    pictureBoxFriend.LoadAsync(selectedFriend.PictureNormalURL);
-                }
-                else
-                {
-                    picture_smallPictureBox.Image = picture_smallPictureBox.ErrorImage;
-                }
-            }
-        }
-
-        private void labelEvents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            fetchEvents();
-        }
-
-        private void fetchEvents()
-        {
-            listBoxEvents.Items.Clear();
-            listBoxEvents.DisplayMember = "Name";
-            foreach (Event fbEvent in m_LoggedInUser.Events)
-            {
-                listBoxEvents.Items.Add(fbEvent);
-            }
-
-            if (m_LoggedInUser.Events.Count == 0)
-            {
-                MessageBox.Show("No Events to retrieve :(");
-            }
-        }
-
-        private void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listBoxEvents.SelectedItems.Count == 1)
-            {
-                Event selectedEvent = listBoxEvents.SelectedItem as Event;
-                pictureBoxEvent.LoadAsync(selectedEvent.PictureNormalURL);
-            }
-        }
-
-        private void linkCheckins_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            fetchCheckins();
-        }
-
-        private void fetchCheckins()
-        {
-            foreach (Checkin checkin in m_LoggedInUser.Checkins)
-            {
-                listBoxCheckins.Items.Add(checkin.Place.Name);
-            }
-
-            if (m_LoggedInUser.Checkins.Count == 0)
-            {
-                MessageBox.Show("No Checkins to retrieve :(");
-            }
-        }
-
-        private void linkPages_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            fetchPages();
-        }
-
-        private void fetchPages()
-        {
-            listBoxPages.Items.Clear();
-            listBoxPages.DisplayMember = "Name";
-
-            foreach (Page page in m_LoggedInUser.LikedPages)
-            {
-                listBoxPages.Items.Add(page);
-            }
-
-            if (m_LoggedInUser.LikedPages.Count == 0)
-            {
-                MessageBox.Show("No liked pages to retrieve :(");
-            }
-        }
-
-        private void listBoxPages_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listBoxPages.SelectedItems.Count == 1)
-            {
-                Page selectedPage = listBoxPages.SelectedItem as Page;
-                pictureBoxPage.LoadAsync(selectedPage.PictureNormalURL);
-            }
-        }
-
-        private void linkUserActions_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            string actionType = comboBoxActionType.SelectedItem.ToString();
-            FacebookObjectCollection<Page> actions = FacebookService.GetCollection<Page>(actionType);
-            dynamic actionsData = FacebookService.GetDynamicData(actionType);
-            dataGridViewActions.DataSource = actions;
-        }
-
-        private void tabPage4_Click(object sender, EventArgs e)
-        {
-
+            FacebookService.Logout(null);
+            picture_smallPictureBox.LoadAsync(r_facebookIcon);
+            userNameLabel.Text = "";
+            buttonSetStatus.Enabled = false;
+            buttonLogin.Enabled = true;
+            buttonLogout.Enabled = false;
         }
     }
 }
