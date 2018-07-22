@@ -1,6 +1,6 @@
 ﻿using FacebookWrapper.ObjectModel;
 
-namespace FacebookApp_UI
+namespace FacebookApp
 {
     internal class CommonInfoHelper
     {

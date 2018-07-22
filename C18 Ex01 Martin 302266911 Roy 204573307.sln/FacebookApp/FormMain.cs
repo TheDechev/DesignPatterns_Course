@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 
-namespace FacebookApp_UI
+namespace FacebookApp
 {
     internal partial class Form1 : Form
     {

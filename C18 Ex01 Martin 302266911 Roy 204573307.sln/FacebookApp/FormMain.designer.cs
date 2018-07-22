@@ -1,4 +1,4 @@
-﻿namespace FacebookApp_UI
+﻿namespace FacebookApp
 {
     internal partial class Form1
     {
