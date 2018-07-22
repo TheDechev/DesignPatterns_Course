@@ -41,17 +41,26 @@
             this.userNameLabel = new System.Windows.Forms.Label();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listBoxCommonEvents = new System.Windows.Forms.ListBox();
+            this.listBoxCommonPages = new System.Windows.Forms.ListBox();
             this.labelCommonEvents = new System.Windows.Forms.Label();
             this.labelCommonPages = new System.Windows.Forms.Label();
             this.labelFriendsList = new System.Windows.Forms.Label();
             this.comboBoxFriends = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.listBoxCommonPages = new System.Windows.Forms.ListBox();
-            this.listBoxCommonEvents = new System.Windows.Forms.ListBox();
+            this.linkCityWikipedia = new System.Windows.Forms.LinkLabel();
+            this.labelCityWikipedia = new System.Windows.Forms.Label();
+            this.listBoxCityWeather = new System.Windows.Forms.ListBox();
+            this.labelCityInfo = new System.Windows.Forms.Label();
+            this.labelFriendsFromSelectedCity = new System.Windows.Forms.Label();
+            this.listBoxFriendsFromSelectedCity = new System.Windows.Forms.ListBox();
+            this.comboBoxCity = new System.Windows.Forms.ComboBox();
+            this.cityLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picture_smallPictureBox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // picture_smallPictureBox
@@ -89,7 +98,7 @@
             // 
             // textBoxStatus
             // 
-            this.textBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxStatus.Location = new System.Drawing.Point(82, 291);
@@ -198,12 +207,32 @@
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Common Info With A Friend";
             // 
+            // listBoxCommonEvents
+            // 
+            this.listBoxCommonEvents.BackColor = System.Drawing.Color.AliceBlue;
+            this.listBoxCommonEvents.Enabled = false;
+            this.listBoxCommonEvents.FormattingEnabled = true;
+            this.listBoxCommonEvents.Location = new System.Drawing.Point(397, 37);
+            this.listBoxCommonEvents.Name = "listBoxCommonEvents";
+            this.listBoxCommonEvents.Size = new System.Drawing.Size(202, 264);
+            this.listBoxCommonEvents.TabIndex = 6;
+            // 
+            // listBoxCommonPages
+            // 
+            this.listBoxCommonPages.BackColor = System.Drawing.Color.AliceBlue;
+            this.listBoxCommonPages.Enabled = false;
+            this.listBoxCommonPages.FormattingEnabled = true;
+            this.listBoxCommonPages.Location = new System.Drawing.Point(158, 37);
+            this.listBoxCommonPages.Name = "listBoxCommonPages";
+            this.listBoxCommonPages.Size = new System.Drawing.Size(202, 264);
+            this.listBoxCommonPages.TabIndex = 5;
+            // 
             // labelCommonEvents
             // 
             this.labelCommonEvents.AutoSize = true;
             this.labelCommonEvents.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCommonEvents.ForeColor = System.Drawing.Color.White;
-            this.labelCommonEvents.Location = new System.Drawing.Point(405, 14);
+            this.labelCommonEvents.Location = new System.Drawing.Point(393, 13);
             this.labelCommonEvents.Name = "labelCommonEvents";
             this.labelCommonEvents.Size = new System.Drawing.Size(163, 21);
             this.labelCommonEvents.TabIndex = 4;
@@ -246,32 +275,108 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.SteelBlue;
+            this.tabPage3.Controls.Add(this.linkCityWikipedia);
+            this.tabPage3.Controls.Add(this.labelCityWikipedia);
+            this.tabPage3.Controls.Add(this.listBoxCityWeather);
+            this.tabPage3.Controls.Add(this.labelCityInfo);
+            this.tabPage3.Controls.Add(this.labelFriendsFromSelectedCity);
+            this.tabPage3.Controls.Add(this.listBoxFriendsFromSelectedCity);
+            this.tabPage3.Controls.Add(this.comboBoxCity);
+            this.tabPage3.Controls.Add(this.cityLabel);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(638, 348);
             this.tabPage3.TabIndex = 3;
-            this.tabPage3.Text = "Best Posts By Year";
+            this.tabPage3.Text = "City Advisor";
             // 
-            // listBoxCommonPages
+            // linkCityWikipedia
             // 
-            this.listBoxCommonPages.BackColor = System.Drawing.Color.AliceBlue;
-            this.listBoxCommonPages.Enabled = false;
-            this.listBoxCommonPages.FormattingEnabled = true;
-            this.listBoxCommonPages.Location = new System.Drawing.Point(158, 37);
-            this.listBoxCommonPages.Name = "listBoxCommonPages";
-            this.listBoxCommonPages.Size = new System.Drawing.Size(202, 264);
-            this.listBoxCommonPages.TabIndex = 5;
+            this.linkCityWikipedia.AutoSize = true;
+            this.linkCityWikipedia.Enabled = false;
+            this.linkCityWikipedia.Location = new System.Drawing.Point(394, 288);
+            this.linkCityWikipedia.Name = "linkCityWikipedia";
+            this.linkCityWikipedia.Size = new System.Drawing.Size(141, 13);
+            this.linkCityWikipedia.TabIndex = 12;
+            this.linkCityWikipedia.TabStop = true;
+            this.linkCityWikipedia.Text = "click here for city information";
+            this.linkCityWikipedia.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCityWikipedia_LinkClicked);
             // 
-            // listBoxCommonEvents
+            // labelCityWikipedia
             // 
-            this.listBoxCommonEvents.BackColor = System.Drawing.Color.AliceBlue;
-            this.listBoxCommonEvents.Enabled = false;
-            this.listBoxCommonEvents.FormattingEnabled = true;
-            this.listBoxCommonEvents.Location = new System.Drawing.Point(409, 37);
-            this.listBoxCommonEvents.Name = "listBoxCommonEvents";
-            this.listBoxCommonEvents.Size = new System.Drawing.Size(202, 264);
-            this.listBoxCommonEvents.TabIndex = 6;
+            this.labelCityWikipedia.AutoSize = true;
+            this.labelCityWikipedia.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCityWikipedia.ForeColor = System.Drawing.Color.White;
+            this.labelCityWikipedia.Location = new System.Drawing.Point(393, 267);
+            this.labelCityWikipedia.Name = "labelCityWikipedia";
+            this.labelCityWikipedia.Size = new System.Drawing.Size(102, 21);
+            this.labelCityWikipedia.TabIndex = 10;
+            this.labelCityWikipedia.Text = "Wikipedia:";
+            // 
+            // listBoxCityWeather
+            // 
+            this.listBoxCityWeather.BackColor = System.Drawing.Color.AliceBlue;
+            this.listBoxCityWeather.Enabled = false;
+            this.listBoxCityWeather.FormattingEnabled = true;
+            this.listBoxCityWeather.Location = new System.Drawing.Point(397, 37);
+            this.listBoxCityWeather.Name = "listBoxCityWeather";
+            this.listBoxCityWeather.Size = new System.Drawing.Size(202, 212);
+            this.listBoxCityWeather.TabIndex = 9;
+            // 
+            // labelCityInfo
+            // 
+            this.labelCityInfo.AutoSize = true;
+            this.labelCityInfo.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCityInfo.ForeColor = System.Drawing.Color.White;
+            this.labelCityInfo.Location = new System.Drawing.Point(393, 13);
+            this.labelCityInfo.Name = "labelCityInfo";
+            this.labelCityInfo.Size = new System.Drawing.Size(90, 21);
+            this.labelCityInfo.TabIndex = 8;
+            this.labelCityInfo.Text = "Weather:";
+            // 
+            // labelFriendsFromSelectedCity
+            // 
+            this.labelFriendsFromSelectedCity.AutoSize = true;
+            this.labelFriendsFromSelectedCity.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFriendsFromSelectedCity.ForeColor = System.Drawing.Color.White;
+            this.labelFriendsFromSelectedCity.Location = new System.Drawing.Point(155, 13);
+            this.labelFriendsFromSelectedCity.Name = "labelFriendsFromSelectedCity";
+            this.labelFriendsFromSelectedCity.Size = new System.Drawing.Size(83, 21);
+            this.labelFriendsFromSelectedCity.TabIndex = 7;
+            this.labelFriendsFromSelectedCity.Text = "Friends:";
+            // 
+            // listBoxFriendsFromSelectedCity
+            // 
+            this.listBoxFriendsFromSelectedCity.BackColor = System.Drawing.Color.AliceBlue;
+            this.listBoxFriendsFromSelectedCity.Enabled = false;
+            this.listBoxFriendsFromSelectedCity.FormattingEnabled = true;
+            this.listBoxFriendsFromSelectedCity.Location = new System.Drawing.Point(159, 37);
+            this.listBoxFriendsFromSelectedCity.Name = "listBoxFriendsFromSelectedCity";
+            this.listBoxFriendsFromSelectedCity.Size = new System.Drawing.Size(202, 264);
+            this.listBoxFriendsFromSelectedCity.TabIndex = 6;
+            // 
+            // comboBoxCity
+            // 
+            this.comboBoxCity.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.comboBoxCity.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxCity.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.comboBoxCity.FormattingEnabled = true;
+            this.comboBoxCity.Location = new System.Drawing.Point(12, 37);
+            this.comboBoxCity.Name = "comboBoxCity";
+            this.comboBoxCity.Size = new System.Drawing.Size(121, 23);
+            this.comboBoxCity.TabIndex = 5;
+            this.comboBoxCity.Text = "Select City";
+            // 
+            // cityLabel
+            // 
+            this.cityLabel.AutoSize = true;
+            this.cityLabel.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cityLabel.ForeColor = System.Drawing.Color.White;
+            this.cityLabel.Location = new System.Drawing.Point(8, 13);
+            this.cityLabel.Name = "cityLabel";
+            this.cityLabel.Size = new System.Drawing.Size(52, 21);
+            this.cityLabel.TabIndex = 4;
+            this.cityLabel.Text = "City:";
             // 
             // Form1
             // 
@@ -291,6 +396,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -314,5 +421,13 @@
         private System.Windows.Forms.Label labelCommonEvents;
         private System.Windows.Forms.ListBox listBoxCommonEvents;
         private System.Windows.Forms.ListBox listBoxCommonPages;
+        private System.Windows.Forms.ComboBox comboBoxCity;
+        private System.Windows.Forms.Label cityLabel;
+        private System.Windows.Forms.Label labelFriendsFromSelectedCity;
+        private System.Windows.Forms.ListBox listBoxFriendsFromSelectedCity;
+        private System.Windows.Forms.Label labelCityInfo;
+        private System.Windows.Forms.ListBox listBoxCityWeather;
+        private System.Windows.Forms.Label labelCityWikipedia;
+        private System.Windows.Forms.LinkLabel linkCityWikipedia;
     }
 }
