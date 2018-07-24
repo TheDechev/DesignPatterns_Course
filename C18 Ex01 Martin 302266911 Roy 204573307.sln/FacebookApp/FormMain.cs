@@ -18,13 +18,13 @@ namespace FacebookApp
         public Form1()
         {
             InitializeComponent();
-            picture_smallPictureBox.Image = Resource.EmptyPicture;
-            FacebookWrapper.FacebookService.s_CollectionLimit = 200;
-            FacebookWrapper.FacebookService.s_FbApiVersion = 2.8f;
+            pictureBoxProfile.Image = Resource.EmptyPicture;
+            pictureBoxProfile.Image = Resource.EmptyPicture;
+            FacebookService.s_CollectionLimit = 200;
+            FacebookService.s_FbApiVersion = 2.8f;
         }
 
         private User m_LoggedInUser;
-        private User m_SelectedFriend;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -36,7 +36,19 @@ namespace FacebookApp
         {
             try
             {
-                LoginResult result = FacebookService.Login("980644158781216", "email");
+
+                LoginResult result = FacebookService.Login("980644158781216",
+                "email", 
+                "public_profile",
+                "user_friends",
+                "user_likes",
+                "user_photos",
+                "user_posts",
+                "user_birthday",
+                "user_events",
+                "manage_pages",
+                "user_location",
+                "user_gender");
 
                 if (!string.IsNullOrEmpty(result.AccessToken))
                 {
@@ -60,7 +72,7 @@ namespace FacebookApp
 
         private void fetchUserInfo()
         {
-            picture_smallPictureBox.LoadAsync(m_LoggedInUser.PictureNormalURL);
+            pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
             userNameLabel.Text = "Welcome, " + m_LoggedInUser.FirstName + " " + m_LoggedInUser.LastName + "!";
             buttonSetStatus.Enabled = true;
             buttonLogin.Enabled = false;
@@ -89,15 +101,15 @@ namespace FacebookApp
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.Logout(null);
-            picture_smallPictureBox.Image = Resource.EmptyPicture;
+            pictureBoxProfile.Image = Resource.EmptyPicture;
             userNameLabel.Text = string.Empty;
             buttonSetStatus.Enabled = false;
             buttonLogout.Visible = false;
             buttonLogout.Enabled = false;
             buttonLogin.Visible = true;
             buttonLogin.Enabled = true;
-            listBoxCommonEvents.Enabled = false;
-            listBoxCommonPages.Enabled = false;
+            listBoxFilteredFriends.Enabled = false;
+            //listBoxCommonPages.Enabled = false;
         }
 
         private void loadInfo()
@@ -118,10 +130,21 @@ namespace FacebookApp
         {
             foreach (User friend in m_LoggedInUser.Friends)
             {
-                comboBoxFriends.Items.Add(friend);
-                fetchCityVisitorFeatureInfo(friend.Location.Location.City);
+                //comboBoxFriends.Items.Add(friend);
+
+                if(friend.Location != null)
+                {
+                    fetchCityVisitorFeatureInfo(friend.Location.Name);
+                }
+
                 friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
             }
+            if (m_LoggedInUser != null)
+            {
+                fetchCityVisitorFeatureInfo(m_LoggedInUser.Location.Name);
+
+            }
+
             //fetchCityInfoToListBox("Jerusalem"); // Uncomment to fetch city info manually (check only)
         }
 
@@ -132,32 +155,16 @@ namespace FacebookApp
 
         private void fetchCityVisitorFeatureInfo(string friendCity)
         {
-            if (friendCity != null)
+            if (!comboBoxCity.Items.Contains(friendCity))
             {
-                if (!comboBoxCity.Items.Contains(friendCity))
-                {
-                    comboBoxCity.Items.Add(friendCity);
-                }
+                comboBoxCity.Items.Add(friendCity);
             }
         }
 
         private void formInit()
         {
-            comboBoxFriends.SelectedIndexChanged += ComboBoxFriends_OnSelectedIndexChanged;
+            //comboBoxFriends.SelectedIndexChanged += ComboBoxFriends_OnSelectedIndexChanged;
             comboBoxCity.SelectedIndexChanged += ComboBoxCity_OnSelectedIndexChanged;
-        }
-
-        private void ComboBoxFriends_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.m_SelectedFriend = comboBoxFriends.SelectedItem as User;
-
-            if (this.m_SelectedFriend != null)
-            {
-                CommonInfoHelper commonInfo = new CommonInfoHelper(this.m_LoggedInUser, this.m_SelectedFriend);
-                listBoxCommonEvents.Enabled = true;
-                listBoxCommonPages.Enabled = true;
-                addCommonItemsToLists(commonInfo);
-            }
         }
 
         private void ComboBoxCity_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -169,7 +176,7 @@ namespace FacebookApp
                 // Add all friends that live in selectedCity to friends list box:
                 foreach (User friend in m_LoggedInUser.Friends)
                 {
-                    if (friend.Location.Location.City.Equals(selectedCity))
+                    if (friend.Location != null && friend.Location.Name.Equals(selectedCity))
                     {
                         listBoxFriendsFromSelectedCity.Items.Add(friend.Name);
                     }
@@ -240,22 +247,164 @@ namespace FacebookApp
             linkCityWikipedia.Enabled = true;
         }
 
-        private void addCommonItemsToLists(CommonInfoHelper i_CommonInfo)
-        {
-            foreach (Page currentPage in i_CommonInfo.LikedPages)
-            {
-                listBoxCommonPages.Items.Add(currentPage);
-            }
-
-            foreach (Event currentEvent in i_CommonInfo.AttendedEvents)
-            {
-                listBoxCommonEvents.Items.Add(currentEvent);
-            }
-        }
 
         private void linkCityWikipedia_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(e.Link.LinkData as string);
+        }
+
+        private void radioButtonMale_CheckedChanged(object sender, EventArgs e)
+        {
+            addFriendsByGender(User.eGender.male);
+        }
+
+        private void radioButtonFemale_CheckedChanged(object sender, EventArgs e)
+        {
+            addFriendsByGender(User.eGender.female);
+        }
+        
+        private void addFriendsByGender(User.eGender i_Gender)
+        {
+            listBoxFilteredFriends.Items.Clear();
+
+            foreach (User friend in m_LoggedInUser.Friends)
+            {
+                if (friend.Gender == i_Gender)
+                {
+                    listBoxFilteredFriends.Enabled = true;
+                    listBoxFilteredFriends.Items.Add(friend);
+                }
+            }
+
+             DisplayOnEmptyList("No one from the friends stated this gender :(");
+        }
+
+        private void radioButtonLanguage_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonLanguage.Checked == false)
+            {
+                comboBoxCommonLanguage.Enabled = false;
+            }
+            else
+            {
+                if (this.m_LoggedInUser.Languages != null)
+                {
+                    comboBoxCommonLanguage.Enabled = true;
+                    if (comboBoxCommonLanguage.Items.Count == 0)
+                    {
+                        foreach (Page page in this.m_LoggedInUser.Languages)
+                        {
+                            comboBoxCommonLanguage.Items.Add(page.Name);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void radioButtonYears_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonYears.Checked == false)
+            {
+                numericUpDownYearsRange.Enabled = false;
+                buttonCheckYear.Enabled = false;
+            }
+            else
+            {
+                numericUpDownYearsRange.Enabled = true;
+                buttonCheckYear.Enabled = true;
+            }
+        }
+
+        private void comboBoxCommonLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedLanguage = comboBoxCommonLanguage.SelectedItem as string;
+            listBoxFilteredFriends.Items.Clear();
+            foreach (User friend in m_LoggedInUser.Friends)
+            {
+                if (friend.Languages != null)
+                {
+                    foreach (Page page in friend.Languages)
+                    {
+                        if (page.Name == selectedLanguage)
+                        {
+                            listBoxFilteredFriends.Enabled = true;
+                            listBoxFilteredFriends.Items.Add(friend);
+                        }
+                    }
+                }
+            }
+            DisplayOnEmptyList("Nobody from your friends speaks this language! (Or hasn't updated it)");
+
+        }
+
+        private void DisplayOnEmptyList(string i_Msg)
+        {
+            if (listBoxFilteredFriends.Items.Count == 0 || listBoxFilteredFriends.Enabled == false)
+            {
+                listBoxFilteredFriends.Items.Clear();
+                listBoxFilteredFriends.Items.Add(i_Msg);
+                listBoxFilteredFriends.Enabled = false;
+            }
+        }
+
+        private void listBoxFilteredFriends_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            User selectedUser = listBoxFilteredFriends.SelectedItem as User;
+            if (selectedUser != null)
+            {
+                pictureBoxFriends.LoadAsync(selectedUser.PictureNormalURL);
+            }
+        }
+
+        private void buttonCheckYear_Click(object sender, EventArgs e)
+        {
+            if(numericUpDownYearsRange.Enabled == true)
+            {
+                listBoxFilteredFriends.Items.Clear();
+                int selectedValue = Convert.ToInt32(numericUpDownYearsRange.Value);
+                string birthday = this.m_LoggedInUser.Birthday;
+                int yearOfBirth = int.Parse(string.Format("{0}{1}{2}{3}", birthday[6], birthday[7], birthday[8], birthday[9]));
+                int friendYearOfBirth;
+
+                foreach (User friend in this.m_LoggedInUser.Friends)
+                {
+                    birthday = friend.Birthday;
+                    if (birthday != null)
+                    {
+                        friendYearOfBirth = int.Parse(string.Format("{0}{1}{2}{3}", birthday[6], birthday[7], birthday[8], birthday[9]));
+                        if (friendYearOfBirth == yearOfBirth - selectedValue || friendYearOfBirth == yearOfBirth + selectedValue)
+                        {
+                            listBoxFilteredFriends.Enabled = true;
+                            listBoxFilteredFriends.Items.Add(friend);
+                        }
+                    }
+                }
+
+                DisplayOnEmptyList("Nobody matches this year range!");
+            }
+        }
+
+        private void radioButtonSameMonth_CheckedChanged(object sender, EventArgs e)
+        {
+            string birthday = this.m_LoggedInUser.Birthday;
+            int monthOfBirth = int.Parse(string.Format("{0}{1}", birthday[3], birthday[4]));
+            int friendMonthOfBirth;
+
+            foreach (User friend in this.m_LoggedInUser.Friends)
+            {
+                birthday = friend.Birthday;
+                if (birthday != null)
+                {
+                    friendMonthOfBirth = int.Parse(string.Format("{0}{1}", birthday[3], birthday[4]));
+                    if (friendMonthOfBirth == monthOfBirth)
+                    {
+                        listBoxFilteredFriends.Enabled = true;
+                        listBoxFilteredFriends.Items.Add(friend);
+                    }
+                }
+            }
+
+            DisplayOnEmptyList("You're a special snowflake! Nobody from your friendlist is born on this day :)");
         }
     }
 }

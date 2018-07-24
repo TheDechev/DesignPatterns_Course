@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.picture_smallPictureBox = new System.Windows.Forms.PictureBox();
+            this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.postStatusLabel = new System.Windows.Forms.Label();
             this.textBoxStatus = new System.Windows.Forms.TextBox();
@@ -41,12 +41,18 @@
             this.userNameLabel = new System.Windows.Forms.Label();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.listBoxCommonEvents = new System.Windows.Forms.ListBox();
-            this.listBoxCommonPages = new System.Windows.Forms.ListBox();
+            this.pictureBoxFriends = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonCheckYear = new System.Windows.Forms.Button();
+            this.comboBoxCommonLanguage = new System.Windows.Forms.ComboBox();
+            this.radioButtonSameMonth = new System.Windows.Forms.RadioButton();
+            this.numericUpDownYearsRange = new System.Windows.Forms.NumericUpDown();
+            this.radioButtonYears = new System.Windows.Forms.RadioButton();
+            this.radioButtonLanguage = new System.Windows.Forms.RadioButton();
+            this.radioButtonFemale = new System.Windows.Forms.RadioButton();
+            this.radioButtonMale = new System.Windows.Forms.RadioButton();
+            this.listBoxFilteredFriends = new System.Windows.Forms.ListBox();
             this.labelCommonEvents = new System.Windows.Forms.Label();
-            this.labelCommonPages = new System.Windows.Forms.Label();
-            this.labelFriendsList = new System.Windows.Forms.Label();
-            this.comboBoxFriends = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.linkCityWikipedia = new System.Windows.Forms.LinkLabel();
             this.labelCityWikipedia = new System.Windows.Forms.Label();
@@ -56,30 +62,34 @@
             this.listBoxFriendsFromSelectedCity = new System.Windows.Forms.ListBox();
             this.comboBoxCity = new System.Windows.Forms.ComboBox();
             this.cityLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.picture_smallPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriends)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYearsRange)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // picture_smallPictureBox
+            // pictureBoxProfile
             // 
-            this.picture_smallPictureBox.Location = new System.Drawing.Point(252, 59);
-            this.picture_smallPictureBox.Name = "picture_smallPictureBox";
-            this.picture_smallPictureBox.Size = new System.Drawing.Size(130, 130);
-            this.picture_smallPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picture_smallPictureBox.TabIndex = 41;
-            this.picture_smallPictureBox.TabStop = false;
+            this.pictureBoxProfile.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxProfile.Location = new System.Drawing.Point(235, 65);
+            this.pictureBoxProfile.Name = "pictureBoxProfile";
+            this.pictureBoxProfile.Size = new System.Drawing.Size(150, 150);
+            this.pictureBoxProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxProfile.TabIndex = 41;
+            this.pictureBoxProfile.TabStop = false;
             // 
             // buttonLogin
             // 
             this.buttonLogin.BackColor = System.Drawing.Color.White;
             this.buttonLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.buttonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLogin.Location = new System.Drawing.Point(252, 210);
+            this.buttonLogin.Location = new System.Drawing.Point(235, 221);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(130, 24);
+            this.buttonLogin.Size = new System.Drawing.Size(150, 24);
             this.buttonLogin.TabIndex = 36;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = false;
@@ -98,7 +108,7 @@
             // 
             // textBoxStatus
             // 
-            this.textBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.textBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxStatus.Location = new System.Drawing.Point(82, 291);
@@ -142,7 +152,7 @@
             this.tabPage1.Controls.Add(this.buttonLogout);
             this.tabPage1.Controls.Add(this.buttonLogin);
             this.tabPage1.Controls.Add(this.buttonSetStatus);
-            this.tabPage1.Controls.Add(this.picture_smallPictureBox);
+            this.tabPage1.Controls.Add(this.pictureBoxProfile);
             this.tabPage1.Controls.Add(this.textBoxStatus);
             this.tabPage1.Controls.Add(this.postStatusLabel);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -158,7 +168,7 @@
             this.buttonFetchInfo.Enabled = false;
             this.buttonFetchInfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.buttonFetchInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFetchInfo.Location = new System.Drawing.Point(272, 240);
+            this.buttonFetchInfo.Location = new System.Drawing.Point(266, 251);
             this.buttonFetchInfo.Name = "buttonFetchInfo";
             this.buttonFetchInfo.Size = new System.Drawing.Size(90, 23);
             this.buttonFetchInfo.TabIndex = 49;
@@ -169,11 +179,11 @@
             // userNameLabel
             // 
             this.userNameLabel.AutoSize = true;
-            this.userNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.userNameLabel.Location = new System.Drawing.Point(231, 22);
+            this.userNameLabel.Location = new System.Drawing.Point(208, 26);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(0, 20);
+            this.userNameLabel.Size = new System.Drawing.Size(0, 25);
             this.userNameLabel.TabIndex = 48;
             // 
             // buttonLogout
@@ -182,9 +192,9 @@
             this.buttonLogout.Enabled = false;
             this.buttonLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.buttonLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLogout.Location = new System.Drawing.Point(252, 210);
+            this.buttonLogout.Location = new System.Drawing.Point(235, 221);
             this.buttonLogout.Name = "buttonLogout";
-            this.buttonLogout.Size = new System.Drawing.Size(130, 24);
+            this.buttonLogout.Size = new System.Drawing.Size(150, 24);
             this.buttonLogout.TabIndex = 47;
             this.buttonLogout.Text = "Logout";
             this.buttonLogout.UseVisualStyleBackColor = false;
@@ -194,83 +204,169 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.SteelBlue;
-            this.tabPage2.Controls.Add(this.listBoxCommonEvents);
-            this.tabPage2.Controls.Add(this.listBoxCommonPages);
+            this.tabPage2.Controls.Add(this.pictureBoxFriends);
+            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.listBoxFilteredFriends);
             this.tabPage2.Controls.Add(this.labelCommonEvents);
-            this.tabPage2.Controls.Add(this.labelCommonPages);
-            this.tabPage2.Controls.Add(this.labelFriendsList);
-            this.tabPage2.Controls.Add(this.comboBoxFriends);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(638, 348);
             this.tabPage2.TabIndex = 2;
-            this.tabPage2.Text = "Common Info With A Friend";
+            this.tabPage2.Text = "Friends Filter";
             // 
-            // listBoxCommonEvents
+            // pictureBoxFriends
             // 
-            this.listBoxCommonEvents.BackColor = System.Drawing.Color.AliceBlue;
-            this.listBoxCommonEvents.Enabled = false;
-            this.listBoxCommonEvents.FormattingEnabled = true;
-            this.listBoxCommonEvents.Location = new System.Drawing.Point(397, 37);
-            this.listBoxCommonEvents.Name = "listBoxCommonEvents";
-            this.listBoxCommonEvents.Size = new System.Drawing.Size(202, 264);
-            this.listBoxCommonEvents.TabIndex = 6;
+            this.pictureBoxFriends.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxFriends.Location = new System.Drawing.Point(499, 118);
+            this.pictureBoxFriends.Name = "pictureBoxFriends";
+            this.pictureBoxFriends.Size = new System.Drawing.Size(120, 120);
+            this.pictureBoxFriends.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxFriends.TabIndex = 8;
+            this.pictureBoxFriends.TabStop = false;
             // 
-            // listBoxCommonPages
+            // groupBox1
             // 
-            this.listBoxCommonPages.BackColor = System.Drawing.Color.AliceBlue;
-            this.listBoxCommonPages.Enabled = false;
-            this.listBoxCommonPages.FormattingEnabled = true;
-            this.listBoxCommonPages.Location = new System.Drawing.Point(158, 37);
-            this.listBoxCommonPages.Name = "listBoxCommonPages";
-            this.listBoxCommonPages.Size = new System.Drawing.Size(202, 264);
-            this.listBoxCommonPages.TabIndex = 5;
+            this.groupBox1.Controls.Add(this.buttonCheckYear);
+            this.groupBox1.Controls.Add(this.comboBoxCommonLanguage);
+            this.groupBox1.Controls.Add(this.radioButtonSameMonth);
+            this.groupBox1.Controls.Add(this.numericUpDownYearsRange);
+            this.groupBox1.Controls.Add(this.radioButtonYears);
+            this.groupBox1.Controls.Add(this.radioButtonLanguage);
+            this.groupBox1.Controls.Add(this.radioButtonFemale);
+            this.groupBox1.Controls.Add(this.radioButtonMale);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.Location = new System.Drawing.Point(8, 63);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(232, 231);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Choose a friends filter:";
+            // 
+            // buttonCheckYear
+            // 
+            this.buttonCheckYear.BackColor = System.Drawing.Color.White;
+            this.buttonCheckYear.Enabled = false;
+            this.buttonCheckYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCheckYear.Font = new System.Drawing.Font("Arial", 8.259F);
+            this.buttonCheckYear.ForeColor = System.Drawing.Color.Black;
+            this.buttonCheckYear.Location = new System.Drawing.Point(126, 105);
+            this.buttonCheckYear.Name = "buttonCheckYear";
+            this.buttonCheckYear.Size = new System.Drawing.Size(53, 25);
+            this.buttonCheckYear.TabIndex = 11;
+            this.buttonCheckYear.Text = "Check";
+            this.buttonCheckYear.UseVisualStyleBackColor = false;
+            this.buttonCheckYear.Click += new System.EventHandler(this.buttonCheckYear_Click);
+            // 
+            // comboBoxCommonLanguage
+            // 
+            this.comboBoxCommonLanguage.Enabled = false;
+            this.comboBoxCommonLanguage.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxCommonLanguage.FormattingEnabled = true;
+            this.comboBoxCommonLanguage.Location = new System.Drawing.Point(56, 185);
+            this.comboBoxCommonLanguage.Name = "comboBoxCommonLanguage";
+            this.comboBoxCommonLanguage.Size = new System.Drawing.Size(160, 23);
+            this.comboBoxCommonLanguage.TabIndex = 10;
+            this.comboBoxCommonLanguage.SelectedIndexChanged += new System.EventHandler(this.comboBoxCommonLanguage_SelectedIndexChanged);
+            // 
+            // radioButtonSameMonth
+            // 
+            this.radioButtonSameMonth.AutoSize = true;
+            this.radioButtonSameMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonSameMonth.Location = new System.Drawing.Point(13, 131);
+            this.radioButtonSameMonth.Name = "radioButtonSameMonth";
+            this.radioButtonSameMonth.Size = new System.Drawing.Size(141, 21);
+            this.radioButtonSameMonth.TabIndex = 9;
+            this.radioButtonSameMonth.TabStop = true;
+            this.radioButtonSameMonth.Text = "Born same month ";
+            this.radioButtonSameMonth.UseVisualStyleBackColor = true;
+            this.radioButtonSameMonth.CheckedChanged += new System.EventHandler(this.radioButtonSameMonth_CheckedChanged);
+            // 
+            // numericUpDownYearsRange
+            // 
+            this.numericUpDownYearsRange.Enabled = false;
+            this.numericUpDownYearsRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownYearsRange.Location = new System.Drawing.Point(56, 106);
+            this.numericUpDownYearsRange.Name = "numericUpDownYearsRange";
+            this.numericUpDownYearsRange.Size = new System.Drawing.Size(64, 21);
+            this.numericUpDownYearsRange.TabIndex = 8;
+            // 
+            // radioButtonYears
+            // 
+            this.radioButtonYears.AutoSize = true;
+            this.radioButtonYears.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonYears.Location = new System.Drawing.Point(13, 79);
+            this.radioButtonYears.Name = "radioButtonYears";
+            this.radioButtonYears.Size = new System.Drawing.Size(203, 21);
+            this.radioButtonYears.TabIndex = 3;
+            this.radioButtonYears.TabStop = true;
+            this.radioButtonYears.Text = "Born Within X Years Range:";
+            this.radioButtonYears.UseVisualStyleBackColor = true;
+            this.radioButtonYears.CheckedChanged += new System.EventHandler(this.radioButtonYears_CheckedChanged);
+            // 
+            // radioButtonLanguage
+            // 
+            this.radioButtonLanguage.AutoSize = true;
+            this.radioButtonLanguage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonLanguage.Location = new System.Drawing.Point(13, 158);
+            this.radioButtonLanguage.Name = "radioButtonLanguage";
+            this.radioButtonLanguage.Size = new System.Drawing.Size(216, 21);
+            this.radioButtonLanguage.TabIndex = 2;
+            this.radioButtonLanguage.TabStop = true;
+            this.radioButtonLanguage.Text = "Speaking Common Language:";
+            this.radioButtonLanguage.UseVisualStyleBackColor = true;
+            this.radioButtonLanguage.CheckedChanged += new System.EventHandler(this.radioButtonLanguage_CheckedChanged);
+            // 
+            // radioButtonFemale
+            // 
+            this.radioButtonFemale.AutoSize = true;
+            this.radioButtonFemale.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonFemale.Location = new System.Drawing.Point(13, 51);
+            this.radioButtonFemale.Name = "radioButtonFemale";
+            this.radioButtonFemale.Size = new System.Drawing.Size(123, 21);
+            this.radioButtonFemale.TabIndex = 1;
+            this.radioButtonFemale.TabStop = true;
+            this.radioButtonFemale.Text = "Female Friends";
+            this.radioButtonFemale.UseVisualStyleBackColor = true;
+            this.radioButtonFemale.CheckedChanged += new System.EventHandler(this.radioButtonFemale_CheckedChanged);
+            // 
+            // radioButtonMale
+            // 
+            this.radioButtonMale.AutoSize = true;
+            this.radioButtonMale.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonMale.Location = new System.Drawing.Point(13, 26);
+            this.radioButtonMale.Name = "radioButtonMale";
+            this.radioButtonMale.Size = new System.Drawing.Size(107, 21);
+            this.radioButtonMale.TabIndex = 0;
+            this.radioButtonMale.TabStop = true;
+            this.radioButtonMale.Text = "Male Friends";
+            this.radioButtonMale.UseVisualStyleBackColor = true;
+            this.radioButtonMale.CheckedChanged += new System.EventHandler(this.radioButtonMale_CheckedChanged);
+            // 
+            // listBoxFilteredFriends
+            // 
+            this.listBoxFilteredFriends.BackColor = System.Drawing.Color.AliceBlue;
+            this.listBoxFilteredFriends.Enabled = false;
+            this.listBoxFilteredFriends.FormattingEnabled = true;
+            this.listBoxFilteredFriends.HorizontalExtent = 15;
+            this.listBoxFilteredFriends.HorizontalScrollbar = true;
+            this.listBoxFilteredFriends.Location = new System.Drawing.Point(246, 50);
+            this.listBoxFilteredFriends.Name = "listBoxFilteredFriends";
+            this.listBoxFilteredFriends.Size = new System.Drawing.Size(234, 264);
+            this.listBoxFilteredFriends.TabIndex = 6;
+            this.listBoxFilteredFriends.SelectedIndexChanged += new System.EventHandler(this.listBoxFilteredFriends_SelectedIndexChanged);
             // 
             // labelCommonEvents
             // 
             this.labelCommonEvents.AutoSize = true;
             this.labelCommonEvents.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCommonEvents.ForeColor = System.Drawing.Color.White;
-            this.labelCommonEvents.Location = new System.Drawing.Point(393, 13);
+            this.labelCommonEvents.Location = new System.Drawing.Point(306, 26);
             this.labelCommonEvents.Name = "labelCommonEvents";
-            this.labelCommonEvents.Size = new System.Drawing.Size(163, 21);
+            this.labelCommonEvents.Size = new System.Drawing.Size(107, 21);
             this.labelCommonEvents.TabIndex = 4;
-            this.labelCommonEvents.Text = "Common Events:";
-            // 
-            // labelCommonPages
-            // 
-            this.labelCommonPages.AutoSize = true;
-            this.labelCommonPages.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCommonPages.ForeColor = System.Drawing.Color.White;
-            this.labelCommonPages.Location = new System.Drawing.Point(154, 13);
-            this.labelCommonPages.Name = "labelCommonPages";
-            this.labelCommonPages.Size = new System.Drawing.Size(156, 21);
-            this.labelCommonPages.TabIndex = 2;
-            this.labelCommonPages.Text = "Common Pages:";
-            // 
-            // labelFriendsList
-            // 
-            this.labelFriendsList.AutoSize = true;
-            this.labelFriendsList.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFriendsList.ForeColor = System.Drawing.Color.White;
-            this.labelFriendsList.Location = new System.Drawing.Point(8, 13);
-            this.labelFriendsList.Name = "labelFriendsList";
-            this.labelFriendsList.Size = new System.Drawing.Size(120, 21);
-            this.labelFriendsList.TabIndex = 1;
-            this.labelFriendsList.Text = "Friends List:";
-            // 
-            // comboBoxFriends
-            // 
-            this.comboBoxFriends.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.comboBoxFriends.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxFriends.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.comboBoxFriends.FormattingEnabled = true;
-            this.comboBoxFriends.Location = new System.Drawing.Point(12, 37);
-            this.comboBoxFriends.Name = "comboBoxFriends";
-            this.comboBoxFriends.Size = new System.Drawing.Size(121, 23);
-            this.comboBoxFriends.TabIndex = 0;
-            this.comboBoxFriends.Text = "Select a friend";
+            this.labelCommonEvents.Text = "Friends list";
             // 
             // tabPage3
             // 
@@ -390,12 +486,16 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Facebook App";
-            ((System.ComponentModel.ISupportInitialize)(this.picture_smallPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriends)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYearsRange)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
@@ -403,7 +503,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.PictureBox picture_smallPictureBox;
+        private System.Windows.Forms.PictureBox pictureBoxProfile;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Label postStatusLabel;
         private System.Windows.Forms.TextBox textBoxStatus;
@@ -414,13 +514,9 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button buttonLogout;
         private System.Windows.Forms.Label userNameLabel;
-        private System.Windows.Forms.ComboBox comboBoxFriends;
-        private System.Windows.Forms.Label labelFriendsList;
         private System.Windows.Forms.Button buttonFetchInfo;
-        private System.Windows.Forms.Label labelCommonPages;
         private System.Windows.Forms.Label labelCommonEvents;
-        private System.Windows.Forms.ListBox listBoxCommonEvents;
-        private System.Windows.Forms.ListBox listBoxCommonPages;
+        private System.Windows.Forms.ListBox listBoxFilteredFriends;
         private System.Windows.Forms.ComboBox comboBoxCity;
         private System.Windows.Forms.Label cityLabel;
         private System.Windows.Forms.Label labelFriendsFromSelectedCity;
@@ -429,5 +525,15 @@
         private System.Windows.Forms.ListBox listBoxCityWeather;
         private System.Windows.Forms.Label labelCityWikipedia;
         private System.Windows.Forms.LinkLabel linkCityWikipedia;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButtonYears;
+        private System.Windows.Forms.RadioButton radioButtonLanguage;
+        private System.Windows.Forms.RadioButton radioButtonFemale;
+        private System.Windows.Forms.RadioButton radioButtonMale;
+        private System.Windows.Forms.NumericUpDown numericUpDownYearsRange;
+        private System.Windows.Forms.PictureBox pictureBoxFriends;
+        private System.Windows.Forms.RadioButton radioButtonSameMonth;
+        private System.Windows.Forms.ComboBox comboBoxCommonLanguage;
+        private System.Windows.Forms.Button buttonCheckYear;
     }
 }
