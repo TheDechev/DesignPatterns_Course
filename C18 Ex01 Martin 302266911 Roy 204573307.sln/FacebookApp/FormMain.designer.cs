@@ -54,6 +54,7 @@
             this.listBoxFilteredFriends = new System.Windows.Forms.ListBox();
             this.labelCommonEvents = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pictureBoxCityFriend = new System.Windows.Forms.PictureBox();
             this.linkCityWikipedia = new System.Windows.Forms.LinkLabel();
             this.labelCityWikipedia = new System.Windows.Forms.Label();
             this.listBoxCityWeather = new System.Windows.Forms.ListBox();
@@ -70,6 +71,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYearsRange)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCityFriend)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxProfile
@@ -371,6 +373,7 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.SteelBlue;
+            this.tabPage3.Controls.Add(this.pictureBoxCityFriend);
             this.tabPage3.Controls.Add(this.linkCityWikipedia);
             this.tabPage3.Controls.Add(this.labelCityWikipedia);
             this.tabPage3.Controls.Add(this.listBoxCityWeather);
@@ -385,6 +388,16 @@
             this.tabPage3.Size = new System.Drawing.Size(638, 348);
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "City Advisor";
+            // 
+            // pictureBoxCityFriend
+            // 
+            this.pictureBoxCityFriend.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxCityFriend.Location = new System.Drawing.Point(13, 79);
+            this.pictureBoxCityFriend.Name = "pictureBoxCityFriend";
+            this.pictureBoxCityFriend.Size = new System.Drawing.Size(120, 120);
+            this.pictureBoxCityFriend.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxCityFriend.TabIndex = 13;
+            this.pictureBoxCityFriend.TabStop = false;
             // 
             // linkCityWikipedia
             // 
@@ -450,6 +463,7 @@
             this.listBoxFriendsFromSelectedCity.Name = "listBoxFriendsFromSelectedCity";
             this.listBoxFriendsFromSelectedCity.Size = new System.Drawing.Size(202, 264);
             this.listBoxFriendsFromSelectedCity.TabIndex = 6;
+            this.listBoxFriendsFromSelectedCity.SelectedIndexChanged += new System.EventHandler(this.listBoxFriendsFromSelectedCity_SelectedIndexChanged);
             // 
             // comboBoxCity
             // 
@@ -498,6 +512,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYearsRange)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCityFriend)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -535,5 +550,6 @@
         private System.Windows.Forms.RadioButton radioButtonSameMonth;
         private System.Windows.Forms.ComboBox comboBoxCommonLanguage;
         private System.Windows.Forms.Button buttonCheckYear;
+        private System.Windows.Forms.PictureBox pictureBoxCityFriend;
     }
 }

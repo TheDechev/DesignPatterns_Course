@@ -70,6 +70,8 @@ namespace FacebookApp
             }
         }
 
+        // 
+
         private void fetchUserInfo()
         {
             pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
@@ -144,14 +146,11 @@ namespace FacebookApp
                 fetchCityVisitorFeatureInfo(m_LoggedInUser.Location.Name);
 
             }
-
-            //fetchCityInfoToListBox("Jerusalem"); // Uncomment to fetch city info manually (check only)
         }
 
-        private int kelvinToCelsius(float kelvinTemperature)
-        {
-            return (int)(kelvinTemperature - 273.15);
-        }
+        // ===================== ====================== ====================== 
+        // ======================== First Fetaure Code =======================
+        // ===================== ====================== ====================== 
 
         private void fetchCityVisitorFeatureInfo(string friendCity)
         {
@@ -170,7 +169,9 @@ namespace FacebookApp
         private void ComboBoxCity_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedCity = comboBoxCity.SelectedItem as string;
-
+            listBoxFriendsFromSelectedCity.Items.Clear();
+            listBoxCityWeather.Items.Clear();
+            pictureBoxCityFriend.Image = global::FacebookApp.Resource.EmptyPicture;
             if (selectedCity != null)
             {
                 // Add all friends that live in selectedCity to friends list box:
@@ -178,12 +179,17 @@ namespace FacebookApp
                 {
                     if (friend.Location != null && friend.Location.Name.Equals(selectedCity))
                     {
-                        listBoxFriendsFromSelectedCity.Items.Add(friend.Name);
+                        listBoxFriendsFromSelectedCity.Items.Add(friend);
                     }
                 }
                 // Add city information to weather list box:
                 try
                 {
+                    if (selectedCity.Contains(", Israel"))
+                    {
+                        selectedCity = selectedCity.Replace(", Israel", "");
+                    }
+
                     fetchCityInfoToListBox(selectedCity);
                 }
                 catch (Exception)
@@ -205,6 +211,8 @@ namespace FacebookApp
             fetchHumidityPercentageToListBox(root);
             fetchSunTimesToListBox(root);
             fetchWikipediaLinkToListBox(selectedCity);
+            this.listBoxFriendsFromSelectedCity.Enabled = true;
+            this.listBoxCityWeather.Enabled = true;
         }
 
         void fetchCityNameToListBox(string selectedCity)
@@ -220,6 +228,11 @@ namespace FacebookApp
             int currentCelsiusTemperature = kelvinToCelsius(float.Parse(currentKelvinTemperature));
             string temperatureStr = String.Format("Temperature (celsius): {0} degrees", currentCelsiusTemperature);
             listBoxCityWeather.Items.Add(temperatureStr);
+        }
+
+        private int kelvinToCelsius(float kelvinTemperature)
+        {
+            return (int)(kelvinTemperature - 273.15);
         }
 
         void fetchHumidityPercentageToListBox(XmlElement root)
@@ -240,6 +253,7 @@ namespace FacebookApp
 
         void fetchWikipediaLinkToListBox(string selectedCity)
         {
+            linkCityWikipedia.Links.Clear();
             LinkLabel.Link wiki = new LinkLabel.Link();
             string linkByCity = "https://en.wikipedia.org/wiki/" + selectedCity;
             wiki.LinkData = linkByCity;
@@ -252,6 +266,19 @@ namespace FacebookApp
         {
             Process.Start(e.Link.LinkData as string);
         }
+
+        private void listBoxFriendsFromSelectedCity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            User selectedUser = listBoxFriendsFromSelectedCity.SelectedItem as User;
+            if (selectedUser != null)
+            {
+                pictureBoxCityFriend.LoadAsync(selectedUser.PictureNormalURL);
+            }
+        }
+
+        // ===================== ====================== ====================== 
+        // ======================= Second Fetaure Code =======================
+        // ===================== ====================== ====================== 
 
         private void radioButtonMale_CheckedChanged(object sender, EventArgs e)
         {
