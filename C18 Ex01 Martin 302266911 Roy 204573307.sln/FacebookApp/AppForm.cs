@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Xml;
 using System.Windows.Forms;
+using System.Diagnostics;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
-using System.Xml;
-using System.Diagnostics;
 
 namespace FacebookApp
 {
@@ -36,8 +30,8 @@ namespace FacebookApp
         {
             try
             {
-
-                LoginResult result = FacebookService.Login("980644158781216",
+                LoginResult result = FacebookService.Login(
+                "980644158781216",
                 "email", 
                 "public_profile",
                 "user_friends",
@@ -69,8 +63,6 @@ namespace FacebookApp
                 MessageBox.Show("There was a problem with logging in! Try again.", "Log-in Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
-        // 
 
         private void fetchUserInfo()
         {
@@ -111,7 +103,6 @@ namespace FacebookApp
             buttonLogin.Visible = true;
             buttonLogin.Enabled = true;
             listBoxFilteredFriends.Enabled = false;
-            //listBoxCommonPages.Enabled = false;
         }
 
         private void loadInfo()
@@ -132,8 +123,6 @@ namespace FacebookApp
         {
             foreach (User friend in m_LoggedInUser.Friends)
             {
-                //comboBoxFriends.Items.Add(friend);
-
                 if(friend.Location != null)
                 {
                     fetchCityVisitorFeatureInfo(friend.Location.Name);
@@ -141,17 +130,16 @@ namespace FacebookApp
 
                 friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
             }
+
             if (m_LoggedInUser != null)
             {
                 fetchCityVisitorFeatureInfo(m_LoggedInUser.Location.Name);
-
             }
         }
 
         // ===================== ====================== ====================== 
         // ======================== First Fetaure Code =======================
         // ===================== ====================== ====================== 
-
         private void fetchCityVisitorFeatureInfo(string friendCity)
         {
             if (!comboBoxCity.Items.Contains(friendCity))
@@ -162,7 +150,6 @@ namespace FacebookApp
 
         private void formInit()
         {
-            //comboBoxFriends.SelectedIndexChanged += ComboBoxFriends_OnSelectedIndexChanged;
             comboBoxCity.SelectedIndexChanged += ComboBoxCity_OnSelectedIndexChanged;
         }
 
@@ -182,12 +169,13 @@ namespace FacebookApp
                         listBoxFriendsFromSelectedCity.Items.Add(friend);
                     }
                 }
+
                 // Add city information to weather list box:
                 try
                 {
                     if (selectedCity.Contains(", Israel"))
                     {
-                        selectedCity = selectedCity.Replace(", Israel", "");
+                        selectedCity = selectedCity.Replace(", Israel", string.Empty);
                     }
 
                     fetchCityInfoToListBox(selectedCity);
@@ -199,7 +187,7 @@ namespace FacebookApp
             }
         }
 
-        void fetchCityInfoToListBox(string selectedCity)
+        private void fetchCityInfoToListBox(string selectedCity)
         {
             string url = "http://api.openweathermap.org/data/2.5/weather?q=" + selectedCity +
                     ",il&mode=xml&appid=0a08b75b9e93b7524a2642d309468a15";
@@ -215,18 +203,18 @@ namespace FacebookApp
             this.listBoxCityWeather.Enabled = true;
         }
 
-        void fetchCityNameToListBox(string selectedCity)
+        private void fetchCityNameToListBox(string selectedCity)
         {
             string cityNameString = "City Name: " + selectedCity;
             listBoxCityWeather.Items.Add(cityNameString);
         }
 
-        void fetchCurrentTemperatureToListBox(XmlElement root)
+        private void fetchCurrentTemperatureToListBox(XmlElement root)
         {
             XmlNodeList temperature = root.SelectNodes("/current/temperature");
             string currentKelvinTemperature = temperature[0].Attributes[0].Value;
             int currentCelsiusTemperature = kelvinToCelsius(float.Parse(currentKelvinTemperature));
-            string temperatureStr = String.Format("Temperature (celsius): {0} degrees", currentCelsiusTemperature);
+            string temperatureStr = string.Format("Temperature (celsius): {0} degrees", currentCelsiusTemperature);
             listBoxCityWeather.Items.Add(temperatureStr);
         }
 
@@ -235,23 +223,23 @@ namespace FacebookApp
             return (int)(kelvinTemperature - 273.15);
         }
 
-        void fetchHumidityPercentageToListBox(XmlElement root)
+        private void fetchHumidityPercentageToListBox(XmlElement root)
         {
             XmlNodeList humidity = root.SelectNodes("/current/humidity");
-            string humidityString = String.Format("Humidity: {0}%", humidity[0].Attributes[0].Value);
+            string humidityString = string.Format("Humidity: {0}%", humidity[0].Attributes[0].Value);
             listBoxCityWeather.Items.Add(humidityString);
         }
 
-        void fetchSunTimesToListBox(XmlElement root)
+        private void fetchSunTimesToListBox(XmlElement root)
         {
             XmlNodeList sun = root.SelectNodes("/current/city/sun");
-            string sunrise = String.Format("Sunrise (GMT): {0}", sun[0].Attributes[0].Value);
+            string sunrise = string.Format("Sunrise (GMT): {0}", sun[0].Attributes[0].Value);
             listBoxCityWeather.Items.Add(sunrise);
-            string sunset = String.Format("Sunset (GMT): {0}", sun[0].Attributes[1].Value);
+            string sunset = string.Format("Sunset (GMT): {0}", sun[0].Attributes[1].Value);
             listBoxCityWeather.Items.Add(sunset);
         }
 
-        void fetchWikipediaLinkToListBox(string selectedCity)
+        private void fetchWikipediaLinkToListBox(string selectedCity)
         {
             linkCityWikipedia.Links.Clear();
             LinkLabel.Link wiki = new LinkLabel.Link();
@@ -260,7 +248,6 @@ namespace FacebookApp
             linkCityWikipedia.Links.Add(wiki);
             linkCityWikipedia.Enabled = true;
         }
-
 
         private void linkCityWikipedia_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -279,7 +266,6 @@ namespace FacebookApp
         // ===================== ====================== ====================== 
         // ======================= Second Fetaure Code =======================
         // ===================== ====================== ====================== 
-
         private void radioButtonMale_CheckedChanged(object sender, EventArgs e)
         {
             addFriendsByGender(User.eGender.male);
@@ -360,8 +346,8 @@ namespace FacebookApp
                     }
                 }
             }
-            DisplayOnEmptyList("Nobody from your friends speaks this language! (Or hasn't updated it)");
 
+            DisplayOnEmptyList("Nobody from your friends speaks this language! (Or hasn't updated it)");
         }
 
         private void DisplayOnEmptyList(string i_Msg)
