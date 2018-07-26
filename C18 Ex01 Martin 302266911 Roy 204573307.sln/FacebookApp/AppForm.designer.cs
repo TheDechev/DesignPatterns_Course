@@ -1,6 +1,6 @@
 ﻿namespace FacebookApp
 {
-    internal partial class Form1
+    internal partial class AppForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,15 +29,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppForm));
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.postStatusLabel = new System.Windows.Forms.Label();
             this.textBoxStatus = new System.Windows.Forms.TextBox();
-            this.buttonSetStatus = new System.Windows.Forms.Button();
+            this.buttonPostStatus = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.buttonFetchInfo = new System.Windows.Forms.Button();
+            this.checkBoxRememberMe = new System.Windows.Forms.CheckBox();
             this.userNameLabel = new System.Windows.Forms.Label();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -89,7 +89,7 @@
             this.buttonLogin.BackColor = System.Drawing.Color.White;
             this.buttonLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.buttonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLogin.Location = new System.Drawing.Point(235, 221);
+            this.buttonLogin.Location = new System.Drawing.Point(235, 251);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(150, 24);
             this.buttonLogin.TabIndex = 36;
@@ -118,21 +118,21 @@
             this.textBoxStatus.Size = new System.Drawing.Size(489, 26);
             this.textBoxStatus.TabIndex = 45;
             // 
-            // buttonSetStatus
+            // buttonPostStatus
             // 
-            this.buttonSetStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSetStatus.BackColor = System.Drawing.Color.White;
-            this.buttonSetStatus.Enabled = false;
-            this.buttonSetStatus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
-            this.buttonSetStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSetStatus.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSetStatus.Location = new System.Drawing.Point(577, 290);
-            this.buttonSetStatus.Name = "buttonSetStatus";
-            this.buttonSetStatus.Size = new System.Drawing.Size(56, 27);
-            this.buttonSetStatus.TabIndex = 46;
-            this.buttonSetStatus.Text = "Post";
-            this.buttonSetStatus.UseVisualStyleBackColor = false;
-            this.buttonSetStatus.Click += new System.EventHandler(this.buttonSetStatus_Click);
+            this.buttonPostStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPostStatus.BackColor = System.Drawing.Color.White;
+            this.buttonPostStatus.Enabled = false;
+            this.buttonPostStatus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
+            this.buttonPostStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPostStatus.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPostStatus.Location = new System.Drawing.Point(577, 290);
+            this.buttonPostStatus.Name = "buttonPostStatus";
+            this.buttonPostStatus.Size = new System.Drawing.Size(56, 27);
+            this.buttonPostStatus.TabIndex = 46;
+            this.buttonPostStatus.Text = "Post";
+            this.buttonPostStatus.UseVisualStyleBackColor = false;
+            this.buttonPostStatus.Click += new System.EventHandler(this.buttonPostStatus_Click);
             // 
             // tabControl1
             // 
@@ -149,11 +149,11 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.SteelBlue;
-            this.tabPage1.Controls.Add(this.buttonFetchInfo);
+            this.tabPage1.Controls.Add(this.checkBoxRememberMe);
             this.tabPage1.Controls.Add(this.userNameLabel);
             this.tabPage1.Controls.Add(this.buttonLogout);
             this.tabPage1.Controls.Add(this.buttonLogin);
-            this.tabPage1.Controls.Add(this.buttonSetStatus);
+            this.tabPage1.Controls.Add(this.buttonPostStatus);
             this.tabPage1.Controls.Add(this.pictureBoxProfile);
             this.tabPage1.Controls.Add(this.textBoxStatus);
             this.tabPage1.Controls.Add(this.postStatusLabel);
@@ -164,19 +164,17 @@
             this.tabPage1.TabIndex = 1;
             this.tabPage1.Text = "Main";
             // 
-            // buttonFetchInfo
+            // checkBoxRememberMe
             // 
-            this.buttonFetchInfo.BackColor = System.Drawing.Color.White;
-            this.buttonFetchInfo.Enabled = false;
-            this.buttonFetchInfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
-            this.buttonFetchInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFetchInfo.Location = new System.Drawing.Point(266, 251);
-            this.buttonFetchInfo.Name = "buttonFetchInfo";
-            this.buttonFetchInfo.Size = new System.Drawing.Size(90, 23);
-            this.buttonFetchInfo.TabIndex = 49;
-            this.buttonFetchInfo.Text = "Fetch Info";
-            this.buttonFetchInfo.UseVisualStyleBackColor = false;
-            this.buttonFetchInfo.Visible = false;
+            this.checkBoxRememberMe.AutoSize = true;
+            this.checkBoxRememberMe.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxRememberMe.ForeColor = System.Drawing.Color.White;
+            this.checkBoxRememberMe.Location = new System.Drawing.Point(265, 225);
+            this.checkBoxRememberMe.Name = "checkBoxRememberMe";
+            this.checkBoxRememberMe.Size = new System.Drawing.Size(94, 18);
+            this.checkBoxRememberMe.TabIndex = 50;
+            this.checkBoxRememberMe.Text = "Remember me";
+            this.checkBoxRememberMe.UseVisualStyleBackColor = true;
             // 
             // userNameLabel
             // 
@@ -194,7 +192,7 @@
             this.buttonLogout.Enabled = false;
             this.buttonLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.buttonLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLogout.Location = new System.Drawing.Point(235, 221);
+            this.buttonLogout.Location = new System.Drawing.Point(235, 251);
             this.buttonLogout.Name = "buttonLogout";
             this.buttonLogout.Size = new System.Drawing.Size(150, 24);
             this.buttonLogout.TabIndex = 47;
@@ -348,12 +346,12 @@
             // 
             // listBoxFilteredFriends
             // 
+            this.listBoxFilteredFriends.AllowDrop = true;
             this.listBoxFilteredFriends.BackColor = System.Drawing.Color.AliceBlue;
             this.listBoxFilteredFriends.Enabled = false;
             this.listBoxFilteredFriends.FormattingEnabled = true;
-            this.listBoxFilteredFriends.HorizontalExtent = 15;
-            this.listBoxFilteredFriends.HorizontalScrollbar = true;
             this.listBoxFilteredFriends.Location = new System.Drawing.Point(246, 50);
+            this.listBoxFilteredFriends.MultiColumn = true;
             this.listBoxFilteredFriends.Name = "listBoxFilteredFriends";
             this.listBoxFilteredFriends.Size = new System.Drawing.Size(234, 264);
             this.listBoxFilteredFriends.TabIndex = 6;
@@ -405,10 +403,10 @@
             this.linkCityWikipedia.Enabled = false;
             this.linkCityWikipedia.Location = new System.Drawing.Point(394, 288);
             this.linkCityWikipedia.Name = "linkCityWikipedia";
-            this.linkCityWikipedia.Size = new System.Drawing.Size(141, 13);
+            this.linkCityWikipedia.Size = new System.Drawing.Size(115, 13);
             this.linkCityWikipedia.TabIndex = 12;
             this.linkCityWikipedia.TabStop = true;
-            this.linkCityWikipedia.Text = "click here for city information";
+            this.linkCityWikipedia.Text = "Click Here For City Info";
             this.linkCityWikipedia.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCityWikipedia_LinkClicked);
             // 
             // labelCityWikipedia
@@ -488,7 +486,7 @@
             this.cityLabel.TabIndex = 4;
             this.cityLabel.Text = "City:";
             // 
-            // Form1
+            // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -497,7 +495,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "AppForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Facebook App";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
@@ -522,14 +520,13 @@
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Label postStatusLabel;
         private System.Windows.Forms.TextBox textBoxStatus;
-        private System.Windows.Forms.Button buttonSetStatus;
+        private System.Windows.Forms.Button buttonPostStatus;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button buttonLogout;
         private System.Windows.Forms.Label userNameLabel;
-        private System.Windows.Forms.Button buttonFetchInfo;
         private System.Windows.Forms.Label labelCommonEvents;
         private System.Windows.Forms.ListBox listBoxFilteredFriends;
         private System.Windows.Forms.ComboBox comboBoxCity;
@@ -551,5 +548,6 @@
         private System.Windows.Forms.ComboBox comboBoxCommonLanguage;
         private System.Windows.Forms.Button buttonCheckYear;
         private System.Windows.Forms.PictureBox pictureBoxCityFriend;
+        private System.Windows.Forms.CheckBox checkBoxRememberMe;
     }
 }

@@ -7,55 +7,89 @@ using FacebookWrapper;
 
 namespace FacebookApp
 {
-    internal partial class Form1 : Form
+    internal partial class AppForm : Form
     {
-        public Form1()
+        private readonly AppLogic r_AppLogic = new AppLogic();
+        private FacebookObjectCollection<User> m_FilteredFriends;
+
+        public AppForm()
         {
             InitializeComponent();
-            pictureBoxProfile.Image = Resource.EmptyPicture;
-            pictureBoxProfile.Image = Resource.EmptyPicture;
+            r_AppLogic.AppSettings = AppSettings.LoadFromFile();
+            StartPosition = FormStartPosition.Manual;
+            Location = this.r_AppLogic.AppSettings.LastWindowLocation;
+            checkBoxRememberMe.Checked = this.r_AppLogic.AppSettings.RememberUser;
             FacebookService.s_CollectionLimit = 200;
             FacebookService.s_FbApiVersion = 2.8f;
         }
 
-        private User m_LoggedInUser;
-
-        protected override void OnLoad(EventArgs e)
+        protected override void OnShown(EventArgs e)
         {
+            base.OnShown(e);
+
+            if (this.r_AppLogic.AppSettings.RememberUser && !string.IsNullOrEmpty(this.r_AppLogic.AppSettings.LastAccessToken))
+            {
+                this.r_AppLogic.Connect(this.r_AppLogic.AppSettings.LastAccessToken);
+                this.r_AppLogic.m_LoginStatus = eLoginStatus.LoggedIn;
+                this.r_AppLogic.LoggedUser = this.r_AppLogic.LoginResult.LoggedInUser;
+                if (this.r_AppLogic.LoggedUser != null)
+                {
+                    this.pictureBoxProfile.LoadAsync(this.r_AppLogic.LoggedUser.PictureLargeURL);
+                    loginAndInit();
+                    loadInfo();
+                }
+            }
+
             this.formInit();
-            base.OnLoad(e);
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            if (this.checkBoxRememberMe.Checked && this.buttonLogout.Visible == true)
+            {
+                this.updateAppSettings();
+            }
+            else
+            {
+                if (r_AppLogic.m_LoginStatus == eLoginStatus.LoggedIn)
+                {
+                    this.r_AppLogic.AppSettings.deleteFile();
+                }
+            }
+        }
+
+        private void updateAppSettings()
+        {
+            this.r_AppLogic.AppSettings.LastWindowLocation = this.Location;
+            this.r_AppLogic.AppSettings.RememberUser = this.checkBoxRememberMe.Checked;
+            if (this.r_AppLogic.LoggedUser != null)
+            {
+                this.r_AppLogic.AppSettings.LastAccessToken = this.r_AppLogic.AppSettings.RememberUser
+                                                                  ? this.r_AppLogic.LoginResult.AccessToken
+                                                                  : null;
+            }
+
+            this.r_AppLogic.AppSettings.SaveToFile();
+        }
+
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            loginAndInit();
+            loadInfo();
         }
 
         private void loginAndInit()
         {
             try
             {
-                LoginResult result = FacebookService.Login(
-                "980644158781216",
-                "email", 
-                "public_profile",
-                "user_friends",
-                "user_likes",
-                "user_photos",
-                "user_posts",
-                "user_birthday",
-                "user_events",
-                "manage_pages",
-                "user_location",
-                "user_gender");
-
-                if (!string.IsNullOrEmpty(result.AccessToken))
+                if (this.r_AppLogic.Login())
                 {
-                    m_LoggedInUser = result.LoggedInUser;
                     buttonLogin.Visible = false;
                     buttonLogin.Enabled = false;
                     buttonLogout.Visible = true;
                     buttonLogout.Enabled = true;
                     fetchUserInfo();
-                }
-                else
-                {
-                    MessageBox.Show(result.ErrorMessage);
                 }
             }
             catch
@@ -66,24 +100,18 @@ namespace FacebookApp
 
         private void fetchUserInfo()
         {
-            pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
-            userNameLabel.Text = "Welcome, " + m_LoggedInUser.FirstName + " " + m_LoggedInUser.LastName + "!";
-            buttonSetStatus.Enabled = true;
+            pictureBoxProfile.LoadAsync(r_AppLogic.LoggedUser.PictureNormalURL);
+            userNameLabel.Text = "Welcome, " + r_AppLogic.LoggedUser.FirstName + " " + r_AppLogic.LoggedUser.LastName + "!";
+            buttonPostStatus.Enabled = true;
             buttonLogin.Enabled = false;
             buttonLogout.Enabled = true;
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
-        {
-            loginAndInit();
-            loadInfo();
-        }
-
-        private void buttonSetStatus_Click(object sender, EventArgs e)
+        private void buttonPostStatus_Click(object sender, EventArgs e)
         {
             try
             {
-                Status postedStatus = m_LoggedInUser.PostStatus(textBoxStatus.Text);
+                Status postedStatus = r_AppLogic.LoggedUser.PostStatus(textBoxStatus.Text);
                 MessageBox.Show("Status Posted! ID: " + postedStatus.Id);
             }
             catch (Exception)
@@ -97,14 +125,14 @@ namespace FacebookApp
             FacebookService.Logout(null);
             pictureBoxProfile.Image = Resource.EmptyPicture;
             userNameLabel.Text = string.Empty;
-            buttonSetStatus.Enabled = false;
+            buttonPostStatus.Enabled = false;
             buttonLogout.Visible = false;
             buttonLogout.Enabled = false;
             buttonLogin.Visible = true;
             buttonLogin.Enabled = true;
             listBoxFilteredFriends.Enabled = false;
         }
-
+          
         private void loadInfo()
         {
             try
@@ -113,15 +141,13 @@ namespace FacebookApp
             }
             catch
             {
-                MessageBox.Show("Couldn't load info for user. Try manually fetching.", "Fetch Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                buttonFetchInfo.Visible = true;
-                buttonFetchInfo.Enabled = true;
+                MessageBox.Show("Couldn't load info for user. Try re-logging to fix it..", "Fetch Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void fetchFeaturesInfo()
         {
-            foreach (User friend in m_LoggedInUser.Friends)
+            foreach (User friend in r_AppLogic.LoggedUser.Friends)
             {
                 if(friend.Location != null)
                 {
@@ -131,20 +157,20 @@ namespace FacebookApp
                 friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
             }
 
-            if (m_LoggedInUser != null)
+            if (r_AppLogic.LoggedUser != null)
             {
-                fetchCityVisitorFeatureInfo(m_LoggedInUser.Location.Name);
+                fetchCityVisitorFeatureInfo(r_AppLogic.LoggedUser.Location.Name);
             }
         }
 
         // ===================== ====================== ====================== 
         // ======================== First Fetaure Code =======================
         // ===================== ====================== ====================== 
-        private void fetchCityVisitorFeatureInfo(string friendCity)
+        private void fetchCityVisitorFeatureInfo(string i_FriendCity)
         {
-            if (!comboBoxCity.Items.Contains(friendCity))
+            if (!comboBoxCity.Items.Contains(i_FriendCity))
             {
-                comboBoxCity.Items.Add(friendCity);
+                comboBoxCity.Items.Add(i_FriendCity);
             }
         }
 
@@ -158,16 +184,21 @@ namespace FacebookApp
             string selectedCity = comboBoxCity.SelectedItem as string;
             listBoxFriendsFromSelectedCity.Items.Clear();
             listBoxCityWeather.Items.Clear();
-            pictureBoxCityFriend.Image = global::FacebookApp.Resource.EmptyPicture;
+            pictureBoxCityFriend.Image = Resource.EmptyPicture;
             if (selectedCity != null)
             {
                 // Add all friends that live in selectedCity to friends list box:
-                foreach (User friend in m_LoggedInUser.Friends)
+                foreach (User friend in r_AppLogic.LoggedUser.Friends)
                 {
                     if (friend.Location != null && friend.Location.Name.Equals(selectedCity))
                     {
                         listBoxFriendsFromSelectedCity.Items.Add(friend);
                     }
+                }
+
+                if (this.r_AppLogic.LoggedUser.Location != null && this.r_AppLogic.LoggedUser.Location.Name.Equals(selectedCity))
+                {
+                    listBoxFriendsFromSelectedCity.Items.Add(this.r_AppLogic.LoggedUser);
                 }
 
                 // Add city information to weather list box:
@@ -187,18 +218,18 @@ namespace FacebookApp
             }
         }
 
-        private void fetchCityInfoToListBox(string selectedCity)
+        private void fetchCityInfoToListBox(string i_SelectedCity)
         {
-            string url = "http://api.openweathermap.org/data/2.5/weather?q=" + selectedCity +
+            string url = "http://api.openweathermap.org/data/2.5/weather?q=" + i_SelectedCity +
                     ",il&mode=xml&appid=0a08b75b9e93b7524a2642d309468a15";
             XmlDocument doc1 = new XmlDocument();
             doc1.Load(url);
             XmlElement root = doc1.DocumentElement;
-            fetchCityNameToListBox(selectedCity);
+            fetchCityNameToListBox(i_SelectedCity);
             fetchCurrentTemperatureToListBox(root);
             fetchHumidityPercentageToListBox(root);
             fetchSunTimesToListBox(root);
-            fetchWikipediaLinkToListBox(selectedCity);
+            fetchWikipediaLinkToListBox(i_SelectedCity);
             this.listBoxFriendsFromSelectedCity.Enabled = true;
             this.listBoxCityWeather.Enabled = true;
         }
@@ -276,22 +307,6 @@ namespace FacebookApp
             addFriendsByGender(User.eGender.female);
         }
         
-        private void addFriendsByGender(User.eGender i_Gender)
-        {
-            listBoxFilteredFriends.Items.Clear();
-
-            foreach (User friend in m_LoggedInUser.Friends)
-            {
-                if (friend.Gender == i_Gender)
-                {
-                    listBoxFilteredFriends.Enabled = true;
-                    listBoxFilteredFriends.Items.Add(friend);
-                }
-            }
-
-             DisplayOnEmptyList("No one from the friends stated this gender :(");
-        }
-
         private void radioButtonLanguage_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonLanguage.Checked == false)
@@ -300,12 +315,12 @@ namespace FacebookApp
             }
             else
             {
-                if (this.m_LoggedInUser.Languages != null)
+                if (this.r_AppLogic.LoggedUser.Languages != null)
                 {
                     comboBoxCommonLanguage.Enabled = true;
                     if (comboBoxCommonLanguage.Items.Count == 0)
                     {
-                        foreach (Page page in this.m_LoggedInUser.Languages)
+                        foreach (Page page in this.r_AppLogic.LoggedUser.Languages)
                         {
                             comboBoxCommonLanguage.Items.Add(page.Name);
                         }
@@ -328,36 +343,18 @@ namespace FacebookApp
             }
         }
 
-        private void comboBoxCommonLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        private void radioButtonSameMonth_CheckedChanged(object sender, EventArgs e)
         {
-            string selectedLanguage = comboBoxCommonLanguage.SelectedItem as string;
             listBoxFilteredFriends.Items.Clear();
-            foreach (User friend in m_LoggedInUser.Friends)
-            {
-                if (friend.Languages != null)
-                {
-                    foreach (Page page in friend.Languages)
-                    {
-                        if (page.Name == selectedLanguage)
-                        {
-                            listBoxFilteredFriends.Enabled = true;
-                            listBoxFilteredFriends.Items.Add(friend);
-                        }
-                    }
-                }
-            }
-
-            DisplayOnEmptyList("Nobody from your friends speaks this language! (Or hasn't updated it)");
+            this.m_FilteredFriends = this.r_AppLogic.filterFriendsBySameBirthMonth();
+            DisplayOnEmptyList(string.Format("Nobody from your friendlist is born on this day :)", Environment.NewLine));
         }
 
-        private void DisplayOnEmptyList(string i_Msg)
+        private void comboBoxCommonLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBoxFilteredFriends.Items.Count == 0 || listBoxFilteredFriends.Enabled == false)
-            {
-                listBoxFilteredFriends.Items.Clear();
-                listBoxFilteredFriends.Items.Add(i_Msg);
-                listBoxFilteredFriends.Enabled = false;
-            }
+            listBoxFilteredFriends.Items.Clear();
+            this.m_FilteredFriends = this.r_AppLogic.filterFriendsByLanguage(comboBoxCommonLanguage.SelectedItem as string);
+            DisplayOnEmptyList("Nobody from your friends speaks this language! (Or hasn't updated it)");
         }
 
         private void listBoxFilteredFriends_SelectedIndexChanged(object sender, EventArgs e)
@@ -374,50 +371,36 @@ namespace FacebookApp
             if(numericUpDownYearsRange.Enabled == true)
             {
                 listBoxFilteredFriends.Items.Clear();
-                int selectedValue = Convert.ToInt32(numericUpDownYearsRange.Value);
-                string birthday = this.m_LoggedInUser.Birthday;
-                int yearOfBirth = int.Parse(string.Format("{0}{1}{2}{3}", birthday[6], birthday[7], birthday[8], birthday[9]));
-                int friendYearOfBirth;
-
-                foreach (User friend in this.m_LoggedInUser.Friends)
-                {
-                    birthday = friend.Birthday;
-                    if (birthday != null)
-                    {
-                        friendYearOfBirth = int.Parse(string.Format("{0}{1}{2}{3}", birthday[6], birthday[7], birthday[8], birthday[9]));
-                        if (friendYearOfBirth == yearOfBirth - selectedValue || friendYearOfBirth == yearOfBirth + selectedValue)
-                        {
-                            listBoxFilteredFriends.Enabled = true;
-                            listBoxFilteredFriends.Items.Add(friend);
-                        }
-                    }
-                }
-
+                m_FilteredFriends = r_AppLogic.filterFriendsByYearDifference(Convert.ToInt32(numericUpDownYearsRange.Value));
                 DisplayOnEmptyList("Nobody matches this year range!");
             }
         }
 
-        private void radioButtonSameMonth_CheckedChanged(object sender, EventArgs e)
+        private void addFriendsByGender(User.eGender i_Gender)
         {
-            string birthday = this.m_LoggedInUser.Birthday;
-            int monthOfBirth = int.Parse(string.Format("{0}{1}", birthday[3], birthday[4]));
-            int friendMonthOfBirth;
+            listBoxFilteredFriends.Items.Clear();
+            m_FilteredFriends = r_AppLogic.filterFriendsByGender(i_Gender);
+            DisplayOnEmptyList("No one from the friends stated this gender :(");
+        }
 
-            foreach (User friend in this.m_LoggedInUser.Friends)
+        private void DisplayOnEmptyList(string i_Msg)
+        {
+            if (m_FilteredFriends.Count != 0)
             {
-                birthday = friend.Birthday;
-                if (birthday != null)
+                listBoxFilteredFriends.Enabled = true;
+
+                foreach(User friend in m_FilteredFriends)
                 {
-                    friendMonthOfBirth = int.Parse(string.Format("{0}{1}", birthday[3], birthday[4]));
-                    if (friendMonthOfBirth == monthOfBirth)
-                    {
-                        listBoxFilteredFriends.Enabled = true;
-                        listBoxFilteredFriends.Items.Add(friend);
-                    }
+                    listBoxFilteredFriends.Items.Add(friend);
                 }
             }
 
-            DisplayOnEmptyList("You're a special snowflake! Nobody from your friendlist is born on this day :)");
+            if (listBoxFilteredFriends.Items.Count == 0 || listBoxFilteredFriends.Enabled == false)
+            {
+                listBoxFilteredFriends.Items.Clear();
+                listBoxFilteredFriends.Items.Add(i_Msg);
+                listBoxFilteredFriends.Enabled = false;
+            }
         }
     }
 }

@@ -56,6 +56,9 @@
     <Compile Include="AppForm.designer.cs">
       <DependentUpon>AppForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppLogic.cs" />
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="LoginStatus.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.Designer.cs">
