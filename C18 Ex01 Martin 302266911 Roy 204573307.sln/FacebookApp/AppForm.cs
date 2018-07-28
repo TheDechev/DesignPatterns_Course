@@ -36,11 +36,8 @@ namespace FacebookApp
                 {
                     this.pictureBoxProfile.LoadAsync(this.r_AppLogic.LoggedUser.PictureLargeURL);
                     loginAndInit();
-                    loadInfo();
                 }
             }
-
-            this.formInit();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -76,7 +73,6 @@ namespace FacebookApp
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             loginAndInit();
-            loadInfo();
         }
 
         private void loginAndInit()
@@ -90,6 +86,7 @@ namespace FacebookApp
                     buttonLogout.Visible = true;
                     buttonLogout.Enabled = true;
                     fetchUserInfo();
+                    loadCityAdvisorInfo();
                 }
             }
             catch
@@ -132,51 +129,41 @@ namespace FacebookApp
             buttonLogin.Enabled = true;
             listBoxFilteredFriends.Enabled = false;
         }
-          
-        private void loadInfo()
+
+        // ===================== ====================== ====================== 
+        // ======================== First Feature Code =======================
+        // ===================== ====================== ====================== 
+        private void loadCityAdvisorInfo()
         {
             try
             {
-                fetchFeaturesInfo();
+                foreach (User friend in r_AppLogic.LoggedUser.Friends)
+                {
+                    if (friend.Location != null)
+                    {
+                        fetchCityAdvisorFeatureInfo(friend.Location.Name);
+                    }
+
+                    friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
+                }
+
+                if (r_AppLogic.LoggedUser != null)
+                {
+                    fetchCityAdvisorFeatureInfo(r_AppLogic.LoggedUser.Location.Name);
+                }
             }
             catch
             {
-                MessageBox.Show("Couldn't load info for user. Try re-logging to fix it..", "Fetch Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Couldn't load firends' cities. Try re-logging to fix it..", "Fetch Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        private void fetchFeaturesInfo()
-        {
-            foreach (User friend in r_AppLogic.LoggedUser.Friends)
-            {
-                if(friend.Location != null)
-                {
-                    fetchCityVisitorFeatureInfo(friend.Location.Name);
-                }
-
-                friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
-            }
-
-            if (r_AppLogic.LoggedUser != null)
-            {
-                fetchCityVisitorFeatureInfo(r_AppLogic.LoggedUser.Location.Name);
-            }
-        }
-
-        // ===================== ====================== ====================== 
-        // ======================== First Fetaure Code =======================
-        // ===================== ====================== ====================== 
-        private void fetchCityVisitorFeatureInfo(string i_FriendCity)
+        private void fetchCityAdvisorFeatureInfo(string i_FriendCity)
         {
             if (!comboBoxCity.Items.Contains(i_FriendCity))
             {
                 comboBoxCity.Items.Add(i_FriendCity);
             }
-        }
-
-        private void formInit()
-        {
-            comboBoxCity.SelectedIndexChanged += ComboBoxCity_OnSelectedIndexChanged;
         }
 
         private void ComboBoxCity_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -220,15 +207,11 @@ namespace FacebookApp
 
         private void fetchCityInfoToListBox(string i_SelectedCity)
         {
-            string url = "http://api.openweathermap.org/data/2.5/weather?q=" + i_SelectedCity +
-                    ",il&mode=xml&appid=0a08b75b9e93b7524a2642d309468a15";
-            XmlDocument doc1 = new XmlDocument();
-            doc1.Load(url);
-            XmlElement root = doc1.DocumentElement;
+            r_AppLogic.CityAdvisor.fetchXML(i_SelectedCity);
             fetchCityNameToListBox(i_SelectedCity);
-            fetchCurrentTemperatureToListBox(root);
-            fetchHumidityPercentageToListBox(root);
-            fetchSunTimesToListBox(root);
+            fetchCurrentTemperatureToListBox();
+            fetchHumidityPercentageToListBox();
+            fetchSunTimesToListBox();
             fetchWikipediaLinkToListBox(i_SelectedCity);
             this.listBoxFriendsFromSelectedCity.Enabled = true;
             this.listBoxCityWeather.Enabled = true;
@@ -240,34 +223,24 @@ namespace FacebookApp
             listBoxCityWeather.Items.Add(cityNameString);
         }
 
-        private void fetchCurrentTemperatureToListBox(XmlElement root)
+        private void fetchCurrentTemperatureToListBox()
         {
-            XmlNodeList temperature = root.SelectNodes("/current/temperature");
-            string currentKelvinTemperature = temperature[0].Attributes[0].Value;
-            int currentCelsiusTemperature = kelvinToCelsius(float.Parse(currentKelvinTemperature));
-            string temperatureStr = string.Format("Temperature (celsius): {0} degrees", currentCelsiusTemperature);
+            string temperatureStr = r_AppLogic.CityAdvisor.fetchTemperatureString();
             listBoxCityWeather.Items.Add(temperatureStr);
         }
 
-        private int kelvinToCelsius(float kelvinTemperature)
+        private void fetchHumidityPercentageToListBox()
         {
-            return (int)(kelvinTemperature - 273.15);
-        }
-
-        private void fetchHumidityPercentageToListBox(XmlElement root)
-        {
-            XmlNodeList humidity = root.SelectNodes("/current/humidity");
-            string humidityString = string.Format("Humidity: {0}%", humidity[0].Attributes[0].Value);
+            string humidityString = r_AppLogic.CityAdvisor.fetchHumidityString();
             listBoxCityWeather.Items.Add(humidityString);
         }
 
-        private void fetchSunTimesToListBox(XmlElement root)
+        private void fetchSunTimesToListBox()
         {
-            XmlNodeList sun = root.SelectNodes("/current/city/sun");
-            string sunrise = string.Format("Sunrise (GMT): {0}", sun[0].Attributes[0].Value);
-            listBoxCityWeather.Items.Add(sunrise);
-            string sunset = string.Format("Sunset (GMT): {0}", sun[0].Attributes[1].Value);
-            listBoxCityWeather.Items.Add(sunset);
+            string sunriseTime = r_AppLogic.CityAdvisor.fetchSunriseTime();
+            listBoxCityWeather.Items.Add(sunriseTime);
+            string sunsetTime = r_AppLogic.CityAdvisor.fetchSunsetTime();
+            listBoxCityWeather.Items.Add(sunsetTime);
         }
 
         private void fetchWikipediaLinkToListBox(string selectedCity)
@@ -295,7 +268,7 @@ namespace FacebookApp
         }
 
         // ===================== ====================== ====================== 
-        // ======================= Second Fetaure Code =======================
+        // ======================= Second Feature Code =======================
         // ===================== ====================== ====================== 
         private void radioButtonMale_CheckedChanged(object sender, EventArgs e)
         {

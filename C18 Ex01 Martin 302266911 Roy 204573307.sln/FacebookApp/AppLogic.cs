@@ -11,6 +11,7 @@ namespace FacebookApp
     {
         private const string k_AppID = "980644158781216";
         private User m_LoggedInUser;
+        private CityAdvisorFeature m_cityAdvisor = new CityAdvisorFeature();
 
         public AppSettings AppSettings { get; set; }
 
@@ -28,6 +29,14 @@ namespace FacebookApp
             set
             {
                 m_LoggedInUser = value;
+            }
+        }
+
+        public CityAdvisorFeature CityAdvisor
+        {
+            get
+            {
+                return m_cityAdvisor;
             }
         }
 

@@ -474,6 +474,7 @@
             this.comboBoxCity.Size = new System.Drawing.Size(121, 23);
             this.comboBoxCity.TabIndex = 5;
             this.comboBoxCity.Text = "Select City";
+            this.comboBoxCity.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCity_OnSelectedIndexChanged);
             // 
             // cityLabel
             // 

@@ -58,6 +58,8 @@
     </Compile>
     <Compile Include="AppLogic.cs" />
     <Compile Include="AppSettings.cs" />
+    <Compile Include="CityAdvisorFeature.cs" />
+    <Compile Include="FriendsFilterFeature.cs" />
     <Compile Include="LoginStatus.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
