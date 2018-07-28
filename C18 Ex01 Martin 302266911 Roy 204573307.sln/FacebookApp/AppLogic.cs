@@ -12,7 +12,7 @@ namespace FacebookApp
         private readonly string r_AppID = "980644158781216";
         private User m_LoggedInUser;
         private CityAdvisorFeature m_CityAdvisor;
-        private FriendsFilterFeature m_FriendsFilter;
+        private FriendsFilterFeature m_Filter;
         public eLoginStatus m_LoginStatus = eLoginStatus.LoggedOut;
 
         public AppSettings AppSettings { get; set; }
@@ -29,7 +29,7 @@ namespace FacebookApp
             set
             {
                 m_LoggedInUser = value;
-                m_FriendsFilter.LoggedUser = value;
+                m_Filter.LoggedUser = value;
             }
         }
 
@@ -45,14 +45,14 @@ namespace FacebookApp
         {
             get
             {
-                return m_FriendsFilter;
+                return m_Filter;
             }
         }
 
         public AppLogic()
         {
             m_CityAdvisor = new CityAdvisorFeature();
-            m_FriendsFilter = new FriendsFilterFeature(m_LoggedInUser);
+            m_Filter = new FriendsFilterFeature(m_LoggedInUser);
         }
 
         public string AppID
