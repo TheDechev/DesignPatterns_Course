@@ -9,15 +9,15 @@ namespace FacebookApp
 {
     internal class AppLogic
     {
-        private const string k_AppID = "980644158781216";
+        private readonly string r_AppID = "980644158781216";
         private User m_LoggedInUser;
-        private CityAdvisorFeature m_cityAdvisor = new CityAdvisorFeature();
+        private CityAdvisorFeature m_CityAdvisor;
+        private FriendsFilterFeature m_FriendsFilter;
+        public eLoginStatus m_LoginStatus = eLoginStatus.LoggedOut;
 
         public AppSettings AppSettings { get; set; }
 
         public LoginResult LoginResult { get; set; }
-
-        public eLoginStatus m_LoginStatus = eLoginStatus.LoggedOut;
 
         public User LoggedUser
         {
@@ -29,6 +29,7 @@ namespace FacebookApp
             set
             {
                 m_LoggedInUser = value;
+                m_FriendsFilter.LoggedUser = value;
             }
         }
 
@@ -36,15 +37,29 @@ namespace FacebookApp
         {
             get
             {
-                return m_cityAdvisor;
+                return m_CityAdvisor;
             }
+        }
+
+        public FriendsFilterFeature FriendsFilter
+        {
+            get
+            {
+                return m_FriendsFilter;
+            }
+        }
+
+        public AppLogic()
+        {
+            m_CityAdvisor = new CityAdvisorFeature();
+            m_FriendsFilter = new FriendsFilterFeature(m_LoggedInUser);
         }
 
         public string AppID
         {
             get
             {
-                return k_AppID;
+                return r_AppID;
             }
         }
 
@@ -78,90 +93,6 @@ namespace FacebookApp
         internal void Connect(string i_LastAccessToken)
         {
             LoginResult = FacebookService.Connect(i_LastAccessToken);
-        }
-
-        public FacebookObjectCollection<User> filterFriendsByLanguage(string i_SelectedLanguage)
-        {
-            FacebookObjectCollection<User> resCollection = new FacebookObjectCollection<User>();
-
-            foreach (User friend in LoggedUser.Friends)
-            {
-                if (friend.Languages != null)
-                {
-                    foreach (Page page in friend.Languages)
-                    {
-                        if(page.Name == i_SelectedLanguage)
-                        {
-                            resCollection.Add(friend);
-                        }
-                    }
-                }
-            }
-
-            return resCollection;
-        }
-
-        public FacebookObjectCollection<User> filterFriendsByYearDifference(int i_SelectedValue)
-        {
-            FacebookObjectCollection<User> resCollection = new FacebookObjectCollection<User>();
-
-            string birthday = LoggedUser.Birthday;
-            int yearOfBirth = int.Parse(string.Format("{0}{1}{2}{3}", birthday[6], birthday[7], birthday[8], birthday[9]));
-            int friendYearOfBirth;
-
-            foreach (User friend in LoggedUser.Friends)
-            {
-                birthday = friend.Birthday;
-                if (birthday != null)
-                {
-                    friendYearOfBirth = int.Parse(string.Format("{0}{1}{2}{3}", birthday[6], birthday[7], birthday[8], birthday[9]));
-                    if (friendYearOfBirth == yearOfBirth - i_SelectedValue || friendYearOfBirth == yearOfBirth + i_SelectedValue)
-                    {
-                        resCollection.Add(friend);
-                    }
-                }
-            }
-
-            return resCollection;
-        }
-
-        public FacebookObjectCollection<User> filterFriendsByGender(User.eGender i_Gender)
-        {
-            FacebookObjectCollection<User> resCollection = new FacebookObjectCollection<User>();
-
-            foreach (User friend in LoggedUser.Friends)
-            {
-                if (friend.Gender == i_Gender)
-                {
-                    resCollection.Add(friend);
-                }
-            }
-
-            return resCollection;
-        }
-
-        public FacebookObjectCollection<User> filterFriendsBySameBirthMonth()
-        {
-            FacebookObjectCollection<User> resCollection = new FacebookObjectCollection<User>();
-
-            string birthday = LoggedUser.Birthday;
-            int monthOfBirth = int.Parse(string.Format("{0}{1}", birthday[3], birthday[4]));
-            int friendMonthOfBirth;
-
-            foreach (User friend in LoggedUser.Friends)
-            {
-                birthday = friend.Birthday;
-                if (birthday != null)
-                {
-                    friendMonthOfBirth = int.Parse(string.Format("{0}{1}", birthday[3], birthday[4]));
-                    if (friendMonthOfBirth == monthOfBirth)
-                    {
-                        resCollection.Add(friend);
-                    }
-                }
-            }
-
-            return resCollection;
         }
     }
 }

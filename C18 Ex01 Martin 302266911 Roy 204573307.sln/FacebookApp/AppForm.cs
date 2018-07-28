@@ -70,11 +70,6 @@ namespace FacebookApp
             this.r_AppLogic.AppSettings.SaveToFile();
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
-        {
-            loginAndInit();
-        }
-
         private void loginAndInit()
         {
             try
@@ -115,6 +110,11 @@ namespace FacebookApp
             {
                 MessageBox.Show("There is a problem with posting :(", "Post Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            loginAndInit();
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -291,12 +291,10 @@ namespace FacebookApp
                 if (this.r_AppLogic.LoggedUser.Languages != null)
                 {
                     comboBoxCommonLanguage.Enabled = true;
-                    if (comboBoxCommonLanguage.Items.Count == 0)
+                    comboBoxCommonLanguage.Items.Clear();
+                    foreach (Page page in this.r_AppLogic.LoggedUser.Languages)
                     {
-                        foreach (Page page in this.r_AppLogic.LoggedUser.Languages)
-                        {
-                            comboBoxCommonLanguage.Items.Add(page.Name);
-                        }
+                        comboBoxCommonLanguage.Items.Add(page.Name);
                     }
                 }
             }
@@ -319,14 +317,14 @@ namespace FacebookApp
         private void radioButtonSameMonth_CheckedChanged(object sender, EventArgs e)
         {
             listBoxFilteredFriends.Items.Clear();
-            this.m_FilteredFriends = this.r_AppLogic.filterFriendsBySameBirthMonth();
+            this.m_FilteredFriends = this.r_AppLogic.FriendsFilter.filterBySameBirthMonth();
             DisplayOnEmptyList(string.Format("Nobody from your friendlist is born on this day :)", Environment.NewLine));
         }
 
         private void comboBoxCommonLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBoxFilteredFriends.Items.Clear();
-            this.m_FilteredFriends = this.r_AppLogic.filterFriendsByLanguage(comboBoxCommonLanguage.SelectedItem as string);
+            this.m_FilteredFriends = this.r_AppLogic.FriendsFilter.filterByLanguage(comboBoxCommonLanguage.SelectedItem as string);
             DisplayOnEmptyList("Nobody from your friends speaks this language! (Or hasn't updated it)");
         }
 
@@ -344,7 +342,7 @@ namespace FacebookApp
             if(numericUpDownYearsRange.Enabled == true)
             {
                 listBoxFilteredFriends.Items.Clear();
-                m_FilteredFriends = r_AppLogic.filterFriendsByYearDifference(Convert.ToInt32(numericUpDownYearsRange.Value));
+                m_FilteredFriends = r_AppLogic.FriendsFilter.filterByYearDifference(Convert.ToInt32(numericUpDownYearsRange.Value));
                 DisplayOnEmptyList("Nobody matches this year range!");
             }
         }
@@ -352,7 +350,7 @@ namespace FacebookApp
         private void addFriendsByGender(User.eGender i_Gender)
         {
             listBoxFilteredFriends.Items.Clear();
-            m_FilteredFriends = r_AppLogic.filterFriendsByGender(i_Gender);
+            m_FilteredFriends = r_AppLogic.FriendsFilter.filterByGender(i_Gender);
             DisplayOnEmptyList("No one from the friends stated this gender :(");
         }
 
