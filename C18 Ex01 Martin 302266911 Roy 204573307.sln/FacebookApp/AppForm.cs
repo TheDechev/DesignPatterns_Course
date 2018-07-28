@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Xml;
 using System.Windows.Forms;
 using System.Diagnostics;
 using FacebookWrapper.ObjectModel;
@@ -26,7 +25,6 @@ namespace FacebookApp
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-
             if (this.r_AppLogic.AppSettings.RememberUser && !string.IsNullOrEmpty(this.r_AppLogic.AppSettings.LastAccessToken))
             {
                 this.r_AppLogic.Connect(this.r_AppLogic.AppSettings.LastAccessToken);
@@ -43,7 +41,7 @@ namespace FacebookApp
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-            if (this.checkBoxRememberMe.Checked && this.buttonLogout.Visible == true)
+            if (this.checkBoxRememberMe.Checked && this.buttonLogout.Enabled == true)
             {
                 this.updateAppSettings();
             }
@@ -51,7 +49,7 @@ namespace FacebookApp
             {
                 if (r_AppLogic.m_LoginStatus == eLoginStatus.LoggedIn)
                 {
-                    this.r_AppLogic.AppSettings.deleteFile();
+                    this.r_AppLogic.AppSettings.DeleteFile();
                 }
             }
         }
@@ -207,7 +205,7 @@ namespace FacebookApp
 
         private void fetchCityInfoToListBox(string i_SelectedCity)
         {
-            r_AppLogic.CityAdvisor.fetchXML(i_SelectedCity);
+            r_AppLogic.CityAdvisor.FetchXML(i_SelectedCity);
             fetchCityNameToListBox(i_SelectedCity);
             fetchCurrentTemperatureToListBox();
             fetchHumidityPercentageToListBox();
@@ -225,21 +223,21 @@ namespace FacebookApp
 
         private void fetchCurrentTemperatureToListBox()
         {
-            string temperatureStr = r_AppLogic.CityAdvisor.fetchTemperatureString();
+            string temperatureStr = r_AppLogic.CityAdvisor.FetchTemperatureString();
             listBoxCityWeather.Items.Add(temperatureStr);
         }
 
         private void fetchHumidityPercentageToListBox()
         {
-            string humidityString = r_AppLogic.CityAdvisor.fetchHumidityString();
+            string humidityString = r_AppLogic.CityAdvisor.FetchHumidityString();
             listBoxCityWeather.Items.Add(humidityString);
         }
 
         private void fetchSunTimesToListBox()
         {
-            string sunriseTime = r_AppLogic.CityAdvisor.fetchSunriseTime();
+            string sunriseTime = r_AppLogic.CityAdvisor.FetchSunriseTime();
             listBoxCityWeather.Items.Add(sunriseTime);
-            string sunsetTime = r_AppLogic.CityAdvisor.fetchSunsetTime();
+            string sunsetTime = r_AppLogic.CityAdvisor.FetchSunsetTime();
             listBoxCityWeather.Items.Add(sunsetTime);
         }
 
@@ -288,7 +286,7 @@ namespace FacebookApp
             }
             else
             {
-                if (this.r_AppLogic.LoggedUser.Languages != null)
+                if (this.r_AppLogic.LoggedUser != null && this.r_AppLogic.LoggedUser.Languages != null)
                 {
                     comboBoxCommonLanguage.Enabled = true;
                     comboBoxCommonLanguage.Items.Clear();
@@ -317,15 +315,15 @@ namespace FacebookApp
         private void radioButtonSameMonth_CheckedChanged(object sender, EventArgs e)
         {
             listBoxFilteredFriends.Items.Clear();
-            this.m_FilteredFriends = this.r_AppLogic.FriendsFilter.filterBySameBirthMonth();
-            DisplayOnEmptyList(string.Format("Nobody from your friendlist is born on this day :)", Environment.NewLine));
+            this.m_FilteredFriends = this.r_AppLogic.FriendsFilter.FilterBySameBirthMonth();
+            displayOnEmptyList(string.Format("Nobody from your friendlist is born on this day :)", Environment.NewLine));
         }
 
         private void comboBoxCommonLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBoxFilteredFriends.Items.Clear();
-            this.m_FilteredFriends = this.r_AppLogic.FriendsFilter.filterByLanguage(comboBoxCommonLanguage.SelectedItem as string);
-            DisplayOnEmptyList("Nobody from your friends speaks this language! (Or hasn't updated it)");
+            this.m_FilteredFriends = this.r_AppLogic.FriendsFilter.FilterByLanguage(comboBoxCommonLanguage.SelectedItem as string);
+            displayOnEmptyList("Nobody from your friends speaks this language! (Or hasn't updated it)");
         }
 
         private void listBoxFilteredFriends_SelectedIndexChanged(object sender, EventArgs e)
@@ -342,19 +340,19 @@ namespace FacebookApp
             if(numericUpDownYearsRange.Enabled == true)
             {
                 listBoxFilteredFriends.Items.Clear();
-                m_FilteredFriends = r_AppLogic.FriendsFilter.filterByYearDifference(Convert.ToInt32(numericUpDownYearsRange.Value));
-                DisplayOnEmptyList("Nobody matches this year range!");
+                m_FilteredFriends = r_AppLogic.FriendsFilter.FilterByYearDifference(Convert.ToInt32(numericUpDownYearsRange.Value));
+                displayOnEmptyList("Nobody matches this year range!");
             }
         }
 
         private void addFriendsByGender(User.eGender i_Gender)
         {
             listBoxFilteredFriends.Items.Clear();
-            m_FilteredFriends = r_AppLogic.FriendsFilter.filterByGender(i_Gender);
-            DisplayOnEmptyList("No one from the friends stated this gender :(");
+            m_FilteredFriends = r_AppLogic.FriendsFilter.FilterByGender(i_Gender);
+            displayOnEmptyList("No one from the friends stated this gender :(");
         }
 
-        private void DisplayOnEmptyList(string i_Msg)
+        private void displayOnEmptyList(string i_Msg)
         {
             if (m_FilteredFriends.Count != 0)
             {

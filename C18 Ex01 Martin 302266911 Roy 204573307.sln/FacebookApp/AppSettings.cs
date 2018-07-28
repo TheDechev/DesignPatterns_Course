@@ -47,7 +47,7 @@ namespace FacebookApp
             }
         }
 
-        public void deleteFile()
+        public void DeleteFile()
         {
             try
             {
