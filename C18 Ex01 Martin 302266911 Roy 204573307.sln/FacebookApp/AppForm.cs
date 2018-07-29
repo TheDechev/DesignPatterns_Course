@@ -133,6 +133,7 @@ namespace FacebookApp
         // ===================== ====================== ====================== 
         private void loadCityAdvisorInfo()
         {
+
             try
             {
                 foreach (User friend in r_AppLogic.LoggedUser.Friends)
@@ -145,7 +146,7 @@ namespace FacebookApp
                     friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
                 }
 
-                if (r_AppLogic.LoggedUser != null)
+                if (r_AppLogic.LoggedUser != null && r_AppLogic.LoggedUser.Location != null)
                 {
                     fetchCityAdvisorFeatureInfo(r_AppLogic.LoggedUser.Location.Name);
                 }
@@ -370,6 +371,11 @@ namespace FacebookApp
                 listBoxFilteredFriends.Items.Add(i_Msg);
                 listBoxFilteredFriends.Enabled = false;
             }
+        }
+
+        private void pictureBoxProfile_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
