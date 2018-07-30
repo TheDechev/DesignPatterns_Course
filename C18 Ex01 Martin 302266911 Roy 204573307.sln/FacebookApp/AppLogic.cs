@@ -89,7 +89,14 @@ namespace FacebookApp
 
         internal void Connect(string i_LastAccessToken)
         {
-            LoginResult = FacebookService.Connect(i_LastAccessToken);
+            try
+            {
+                LoginResult = FacebookService.Connect(i_LastAccessToken);
+            }
+            catch
+            {
+                Login();
+            }
         }
 
         public List<string> GetLatestPhotos(int i_NumOfItems)

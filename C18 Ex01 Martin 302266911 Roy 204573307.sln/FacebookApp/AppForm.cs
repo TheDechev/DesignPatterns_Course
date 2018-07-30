@@ -419,42 +419,55 @@ namespace FacebookApp
 
         private void updateLatestPhotos()
         {
-            List<string> latestPhotos = this.r_AppLogic.GetLatestPhotos(panelPhotos.Controls.Count);
-
-            int currentItem = 0;
-
-            foreach (string photo in latestPhotos)
+            try
             {
-                if (currentItem >= panelPhotos.Controls.Count)
+                List<string> latestPhotos = this.r_AppLogic.GetLatestPhotos(panelPhotos.Controls.Count);
+
+                int currentItem = 0;
+
+                foreach (string photo in latestPhotos)
                 {
-                    break;
+                    if (currentItem >= panelPhotos.Controls.Count)
+                    {
+                        break;
+                    }
+                    (panelPhotos.Controls[currentItem] as PictureBox).LoadAsync(photo);
+                    currentItem++;
                 }
-                (panelPhotos.Controls[currentItem] as PictureBox).LoadAsync(photo);
-                currentItem++;
             }
+            catch
+            {
+                MessageBox.Show("There was a problem loading the photos.", "Photos Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+
         }
 
         private void updateLatestsPosts()
         {
-            int currentItem = 0;
-            List<Post> latestPosts = this.r_AppLogic.GetLatestPosts(panelPhotosMain.Controls.Count);
-            foreach (Post post in latestPosts)
+            try
             {
-                if (currentItem > panelPhotosMain.Controls.Count)
+                int currentItem = 0;
+                List<Post> latestPosts = this.r_AppLogic.GetLatestPosts(panelPhotosMain.Controls.Count);
+                foreach (Post post in latestPosts)
                 {
-                    break;
+                    if (currentItem > panelPhotosMain.Controls.Count)
+                    {
+                        break;
+                    }
+
+                    (panelPostsMain.Controls[currentItem] as TextBox).Text = string.Format(
+                        "{0}{1}Created On: {2}{1} Liked By: {3}{1}. ", post.Message, Environment.NewLine, post.CreatedTime.ToString(), post.LikedBy.Count);
+                    (panelPhotosMain.Controls[currentItem] as PictureBox).LoadAsync(post.From.PictureLargeURL);
+                    currentItem++;
                 }
-
-                (panelPostsMain.Controls[currentItem] as TextBox).Text = string.Format(
-                    "{0}{1}Created On: {2}{1} Liked By: {3}{1}. ", post.Message, Environment.NewLine, post.CreatedTime.ToString(), post.LikedBy.Count);
-                (panelPhotosMain.Controls[currentItem] as PictureBox).LoadAsync(post.From.PictureLargeURL);
-                currentItem++;
             }
+            catch
+            {
+                MessageBox.Show("There was a problem loading the posts.", "Posts Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
 
-        private void pictureBoxProfile_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
