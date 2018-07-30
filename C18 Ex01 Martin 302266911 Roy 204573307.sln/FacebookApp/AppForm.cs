@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
+using System.Collections.Generic;
 
 namespace FacebookApp
 {
@@ -18,7 +19,7 @@ namespace FacebookApp
             StartPosition = FormStartPosition.Manual;
             Location = this.r_AppLogic.AppSettings.LastWindowLocation;
             checkBoxRememberMe.Checked = this.r_AppLogic.AppSettings.RememberUser;
-            FacebookService.s_CollectionLimit = 200;
+            FacebookService.s_CollectionLimit = 10;
             FacebookService.s_FbApiVersion = 2.8f;
         }
 
@@ -80,6 +81,8 @@ namespace FacebookApp
                     buttonLogout.Enabled = true;
                     fetchUserInfo();
                     loadCityAdvisorInfo();
+                    loadFriendsList();
+                    loadLatestInfo();
                 }
             }
             catch
@@ -91,7 +94,7 @@ namespace FacebookApp
         private void fetchUserInfo()
         {
             pictureBoxProfile.LoadAsync(r_AppLogic.LoggedUser.PictureNormalURL);
-            userNameLabel.Text = "Welcome, " + r_AppLogic.LoggedUser.FirstName + " " + r_AppLogic.LoggedUser.LastName + "!";
+            userNameLabel.Text = string.Format("Welcome, {0} {1} !", r_AppLogic.LoggedUser.FirstName, r_AppLogic.LoggedUser.LastName);
             buttonPostStatus.Enabled = true;
             buttonLogin.Enabled = false;
             buttonLogout.Enabled = true;
@@ -103,6 +106,7 @@ namespace FacebookApp
             {
                 Status postedStatus = r_AppLogic.LoggedUser.PostStatus(textBoxStatus.Text);
                 MessageBox.Show("Status Posted! ID: " + postedStatus.Id);
+                updateLatestsPosts();
             }
             catch (Exception)
             {
@@ -118,6 +122,8 @@ namespace FacebookApp
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.Logout(null);
+            resetControls();
+            this.r_AppLogic.LoggedUser = null;
             pictureBoxProfile.Image = Resource.EmptyPicture;
             userNameLabel.Text = string.Empty;
             buttonPostStatus.Enabled = false;
@@ -163,6 +169,28 @@ namespace FacebookApp
             {
                 comboBoxCity.Items.Add(i_FriendCity);
             }
+        }
+
+        private void resetControls()
+        {
+            foreach (Control picture in panelPhotos.Controls)
+            {
+                (picture as PictureBox).Image = Resource.NoImage;
+            }
+
+            listBoxFriendsMain.Items.Clear();
+
+            foreach (Control post in panelPostsMain.Controls)
+            {
+                (post as TextBox).Text = string.Empty;
+            }
+
+            foreach (Control profilePic in panelPhotosMain.Controls)
+            {
+                (profilePic as PictureBox).Image = Resource.EmptyPicture;
+            }
+
+            comboBoxCity.Items.Clear();
         }
 
         private void ComboBoxCity_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -370,6 +398,59 @@ namespace FacebookApp
                 listBoxFilteredFriends.Items.Clear();
                 listBoxFilteredFriends.Items.Add(i_Msg);
                 listBoxFilteredFriends.Enabled = false;
+            }
+        }
+
+        private void loadFriendsList()
+        {
+            if(this.r_AppLogic.LoggedUser != null)
+            {
+                foreach (User friend in this.r_AppLogic.LoggedUser.Friends)
+                {
+                    listBoxFriendsMain.Items.Add(friend);
+                }
+            }
+        }
+
+        private void loadLatestInfo()
+        {
+
+            updateLatestPhotos();
+            updateLatestsPosts();
+        }
+
+        private void updateLatestPhotos()
+        {
+            List<string> latestPhotos = this.r_AppLogic.GetLatestPhotos(panelPhotos.Controls.Count);
+
+            int currentItem = 0;
+
+            foreach (string photo in latestPhotos)
+            {
+                if (currentItem >= panelPhotos.Controls.Count)
+                {
+                    break;
+                }
+                (panelPhotos.Controls[currentItem] as PictureBox).LoadAsync(photo);
+                currentItem++;
+            }
+        }
+
+        private void updateLatestsPosts()
+        {
+            int currentItem = 0;
+            List<Post> latestPosts = this.r_AppLogic.GetLatestPosts(panelPhotosMain.Controls.Count);
+            foreach (Post post in latestPosts)
+            {
+                if (currentItem > panelPhotosMain.Controls.Count)
+                {
+                    break;
+                }
+
+                (panelPostsMain.Controls[currentItem] as TextBox).Text = string.Format(
+                    "{0}{1}Created On: {2}{1} Liked By: {3}{1}. ", post.Message, Environment.NewLine, post.CreatedTime.ToString(), post.LikedBy.Count);
+                (panelPhotosMain.Controls[currentItem] as PictureBox).LoadAsync(post.From.PictureLargeURL);
+                currentItem++;
             }
         }
 
