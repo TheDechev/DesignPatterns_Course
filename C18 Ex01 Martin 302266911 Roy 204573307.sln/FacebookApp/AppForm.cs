@@ -75,10 +75,6 @@ namespace FacebookApp
             {
                 if (this.r_AppLogic.Login())
                 {
-                    buttonLogin.Visible = false;
-                    buttonLogin.Enabled = false;
-                    buttonLogout.Visible = true;
-                    buttonLogout.Enabled = true;
                     fetchUserInfo();
                     loadCityAdvisorInfo();
                     loadFriendsList();
@@ -87,7 +83,7 @@ namespace FacebookApp
             }
             catch
             {
-                MessageBox.Show("There was a problem with logging in! Try again.", "Log-in Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("There was a problem with logging in! Try to log out.", "Log-in Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -96,8 +92,6 @@ namespace FacebookApp
             pictureBoxProfile.LoadAsync(r_AppLogic.LoggedUser.PictureNormalURL);
             userNameLabel.Text = string.Format("Welcome, {0} {1} !", r_AppLogic.LoggedUser.FirstName, r_AppLogic.LoggedUser.LastName);
             buttonPostStatus.Enabled = true;
-            buttonLogin.Enabled = false;
-            buttonLogout.Enabled = true;
         }
 
         private void buttonPostStatus_Click(object sender, EventArgs e)
@@ -121,17 +115,21 @@ namespace FacebookApp
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-            FacebookService.Logout(null);
-            resetControls();
-            this.r_AppLogic.LoggedUser = null;
-            pictureBoxProfile.Image = Resource.EmptyPicture;
-            userNameLabel.Text = string.Empty;
-            buttonPostStatus.Enabled = false;
-            buttonLogout.Visible = false;
-            buttonLogout.Enabled = false;
-            buttonLogin.Visible = true;
-            buttonLogin.Enabled = true;
-            listBoxFilteredFriends.Enabled = false;
+            try
+            {
+                FacebookService.Logout(null);
+                resetControls();
+                this.r_AppLogic.LoggedUser = null;
+                pictureBoxProfile.Image = Resource.EmptyPicture;
+                userNameLabel.Text = string.Empty;
+                buttonPostStatus.Enabled = false;
+                listBoxFilteredFriends.Enabled = false;
+            }
+            catch
+            {
+                MessageBox.Show("There was a problem. Try logging in again.", "Log-out Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
 
         // ===================== ====================== ====================== 

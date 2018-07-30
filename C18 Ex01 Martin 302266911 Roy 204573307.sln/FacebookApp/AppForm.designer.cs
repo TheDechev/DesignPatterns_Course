@@ -38,15 +38,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panelPhotosMain = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBoxPosts3 = new System.Windows.Forms.PictureBox();
-            this.pictureBoxPosts4 = new System.Windows.Forms.PictureBox();
             this.panelPostsMain = new System.Windows.Forms.Panel();
-            this.textBoxPosts3 = new System.Windows.Forms.TextBox();
-            this.textBoxPosts1 = new System.Windows.Forms.TextBox();
-            this.textBoxPosts4 = new System.Windows.Forms.TextBox();
-            this.textBoxPosts2 = new System.Windows.Forms.TextBox();
             this.panelPhotos = new System.Windows.Forms.Panel();
             this.pictureBoxPhoto6 = new System.Windows.Forms.PictureBox();
             this.pictureBoxPhoto5 = new System.Windows.Forms.PictureBox();
@@ -85,14 +77,18 @@
             this.listBoxFriendsFromSelectedCity = new System.Windows.Forms.ListBox();
             this.comboBoxCity = new System.Windows.Forms.ComboBox();
             this.cityLabel = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.textBoxPosts4 = new System.Windows.Forms.TextBox();
+            this.textBoxPosts1 = new System.Windows.Forms.TextBox();
+            this.pictureBoxPosts3 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxPosts4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.textBoxPosts3 = new System.Windows.Forms.TextBox();
+            this.textBoxPosts2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panelPhotosMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts4)).BeginInit();
             this.panelPostsMain.SuspendLayout();
             this.panelPhotos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto6)).BeginInit();
@@ -108,6 +104,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYearsRange)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCityFriend)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxProfile
@@ -126,7 +126,7 @@
             this.buttonLogin.BackColor = System.Drawing.Color.White;
             this.buttonLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.buttonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLogin.Location = new System.Drawing.Point(8, 167);
+            this.buttonLogin.Location = new System.Drawing.Point(8, 192);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(150, 24);
             this.buttonLogin.TabIndex = 36;
@@ -220,46 +220,6 @@
             this.panelPhotosMain.Size = new System.Drawing.Size(56, 238);
             this.panelPhotosMain.TabIndex = 74;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::FacebookApp.Resource.EmptyPicture;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(49, 53);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 64;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::FacebookApp.Resource.EmptyPicture;
-            this.pictureBox2.Location = new System.Drawing.Point(3, 180);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(49, 53);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 65;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBoxPosts3
-            // 
-            this.pictureBoxPosts3.Image = global::FacebookApp.Resource.EmptyPicture;
-            this.pictureBoxPosts3.Location = new System.Drawing.Point(3, 122);
-            this.pictureBoxPosts3.Name = "pictureBoxPosts3";
-            this.pictureBoxPosts3.Size = new System.Drawing.Size(49, 53);
-            this.pictureBoxPosts3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPosts3.TabIndex = 62;
-            this.pictureBoxPosts3.TabStop = false;
-            // 
-            // pictureBoxPosts4
-            // 
-            this.pictureBoxPosts4.Image = global::FacebookApp.Resource.EmptyPicture;
-            this.pictureBoxPosts4.Location = new System.Drawing.Point(3, 63);
-            this.pictureBoxPosts4.Name = "pictureBoxPosts4";
-            this.pictureBoxPosts4.Size = new System.Drawing.Size(49, 53);
-            this.pictureBoxPosts4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPosts4.TabIndex = 63;
-            this.pictureBoxPosts4.TabStop = false;
-            // 
             // panelPostsMain
             // 
             this.panelPostsMain.Controls.Add(this.textBoxPosts3);
@@ -271,50 +231,6 @@
             this.panelPostsMain.Name = "panelPostsMain";
             this.panelPostsMain.Size = new System.Drawing.Size(260, 235);
             this.panelPostsMain.TabIndex = 73;
-            // 
-            // textBoxPosts3
-            // 
-            this.textBoxPosts3.Location = new System.Drawing.Point(0, 2);
-            this.textBoxPosts3.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxPosts3.Multiline = true;
-            this.textBoxPosts3.Name = "textBoxPosts3";
-            this.textBoxPosts3.ReadOnly = true;
-            this.textBoxPosts3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxPosts3.Size = new System.Drawing.Size(258, 54);
-            this.textBoxPosts3.TabIndex = 66;
-            // 
-            // textBoxPosts1
-            // 
-            this.textBoxPosts1.Location = new System.Drawing.Point(0, 118);
-            this.textBoxPosts1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxPosts1.Multiline = true;
-            this.textBoxPosts1.Name = "textBoxPosts1";
-            this.textBoxPosts1.ReadOnly = true;
-            this.textBoxPosts1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxPosts1.Size = new System.Drawing.Size(258, 54);
-            this.textBoxPosts1.TabIndex = 64;
-            // 
-            // textBoxPosts4
-            // 
-            this.textBoxPosts4.Location = new System.Drawing.Point(0, 176);
-            this.textBoxPosts4.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxPosts4.Multiline = true;
-            this.textBoxPosts4.Name = "textBoxPosts4";
-            this.textBoxPosts4.ReadOnly = true;
-            this.textBoxPosts4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxPosts4.Size = new System.Drawing.Size(258, 54);
-            this.textBoxPosts4.TabIndex = 67;
-            // 
-            // textBoxPosts2
-            // 
-            this.textBoxPosts2.Location = new System.Drawing.Point(0, 60);
-            this.textBoxPosts2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxPosts2.Multiline = true;
-            this.textBoxPosts2.Name = "textBoxPosts2";
-            this.textBoxPosts2.ReadOnly = true;
-            this.textBoxPosts2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxPosts2.Size = new System.Drawing.Size(258, 54);
-            this.textBoxPosts2.TabIndex = 65;
             // 
             // panelPhotos
             // 
@@ -456,7 +372,7 @@
             this.checkBoxRememberMe.AutoSize = true;
             this.checkBoxRememberMe.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxRememberMe.ForeColor = System.Drawing.Color.White;
-            this.checkBoxRememberMe.Location = new System.Drawing.Point(37, 198);
+            this.checkBoxRememberMe.Location = new System.Drawing.Point(37, 168);
             this.checkBoxRememberMe.Name = "checkBoxRememberMe";
             this.checkBoxRememberMe.Size = new System.Drawing.Size(94, 18);
             this.checkBoxRememberMe.TabIndex = 50;
@@ -476,16 +392,14 @@
             // buttonLogout
             // 
             this.buttonLogout.BackColor = System.Drawing.Color.White;
-            this.buttonLogout.Enabled = false;
             this.buttonLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.buttonLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLogout.Location = new System.Drawing.Point(8, 168);
+            this.buttonLogout.Location = new System.Drawing.Point(8, 222);
             this.buttonLogout.Name = "buttonLogout";
             this.buttonLogout.Size = new System.Drawing.Size(150, 24);
             this.buttonLogout.TabIndex = 47;
             this.buttonLogout.Text = "Logout";
-            this.buttonLogout.UseVisualStyleBackColor = false;
-            this.buttonLogout.Visible = false;
+            this.buttonLogout.UseVisualStyleBackColor = true;
             this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
             // 
             // tabPage2
@@ -774,6 +688,90 @@
             this.cityLabel.TabIndex = 4;
             this.cityLabel.Text = "City:";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 180);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(49, 53);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 65;
+            this.pictureBox2.TabStop = false;
+            // 
+            // textBoxPosts4
+            // 
+            this.textBoxPosts4.Location = new System.Drawing.Point(0, 176);
+            this.textBoxPosts4.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxPosts4.Multiline = true;
+            this.textBoxPosts4.Name = "textBoxPosts4";
+            this.textBoxPosts4.ReadOnly = true;
+            this.textBoxPosts4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxPosts4.Size = new System.Drawing.Size(258, 54);
+            this.textBoxPosts4.TabIndex = 67;
+            // 
+            // textBoxPosts1
+            // 
+            this.textBoxPosts1.Location = new System.Drawing.Point(0, 118);
+            this.textBoxPosts1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxPosts1.Multiline = true;
+            this.textBoxPosts1.Name = "textBoxPosts1";
+            this.textBoxPosts1.ReadOnly = true;
+            this.textBoxPosts1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxPosts1.Size = new System.Drawing.Size(258, 54);
+            this.textBoxPosts1.TabIndex = 64;
+            // 
+            // pictureBoxPosts3
+            // 
+            this.pictureBoxPosts3.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxPosts3.Location = new System.Drawing.Point(3, 122);
+            this.pictureBoxPosts3.Name = "pictureBoxPosts3";
+            this.pictureBoxPosts3.Size = new System.Drawing.Size(49, 53);
+            this.pictureBoxPosts3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPosts3.TabIndex = 62;
+            this.pictureBoxPosts3.TabStop = false;
+            // 
+            // pictureBoxPosts4
+            // 
+            this.pictureBoxPosts4.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxPosts4.Location = new System.Drawing.Point(3, 63);
+            this.pictureBoxPosts4.Name = "pictureBoxPosts4";
+            this.pictureBoxPosts4.Size = new System.Drawing.Size(49, 53);
+            this.pictureBoxPosts4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPosts4.TabIndex = 63;
+            this.pictureBoxPosts4.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(49, 53);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 64;
+            this.pictureBox1.TabStop = false;
+            // 
+            // textBoxPosts3
+            // 
+            this.textBoxPosts3.Location = new System.Drawing.Point(0, 2);
+            this.textBoxPosts3.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxPosts3.Multiline = true;
+            this.textBoxPosts3.Name = "textBoxPosts3";
+            this.textBoxPosts3.ReadOnly = true;
+            this.textBoxPosts3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxPosts3.Size = new System.Drawing.Size(258, 54);
+            this.textBoxPosts3.TabIndex = 66;
+            // 
+            // textBoxPosts2
+            // 
+            this.textBoxPosts2.Location = new System.Drawing.Point(0, 60);
+            this.textBoxPosts2.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxPosts2.Multiline = true;
+            this.textBoxPosts2.Name = "textBoxPosts2";
+            this.textBoxPosts2.ReadOnly = true;
+            this.textBoxPosts2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxPosts2.Size = new System.Drawing.Size(258, 54);
+            this.textBoxPosts2.TabIndex = 65;
+            // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -791,10 +789,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.panelPhotosMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts4)).EndInit();
             this.panelPostsMain.ResumeLayout(false);
             this.panelPostsMain.PerformLayout();
             this.panelPhotos.ResumeLayout(false);
@@ -814,6 +808,10 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCityFriend)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -858,15 +856,7 @@
         private System.Windows.Forms.ListBox listBoxFriendsMain;
         private System.Windows.Forms.Panel panelPhotos;
         private System.Windows.Forms.Panel panelPhotosMain;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBoxPosts3;
-        private System.Windows.Forms.PictureBox pictureBoxPosts4;
         private System.Windows.Forms.Panel panelPostsMain;
-        private System.Windows.Forms.TextBox textBoxPosts3;
-        private System.Windows.Forms.TextBox textBoxPosts1;
-        private System.Windows.Forms.TextBox textBoxPosts4;
-        private System.Windows.Forms.TextBox textBoxPosts2;
         private System.Windows.Forms.PictureBox pictureBoxPosts2;
         private System.Windows.Forms.PictureBox pictureBoxPosts1;
         private System.Windows.Forms.PictureBox pictureBoxPhoto6;
@@ -874,5 +864,13 @@
         private System.Windows.Forms.PictureBox pictureBoxPhoto4;
         private System.Windows.Forms.PictureBox pictureBoxPhoto3;
         private System.Windows.Forms.PictureBox pictureBoxPhoto2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBoxPosts3;
+        private System.Windows.Forms.PictureBox pictureBoxPosts4;
+        private System.Windows.Forms.TextBox textBoxPosts3;
+        private System.Windows.Forms.TextBox textBoxPosts1;
+        private System.Windows.Forms.TextBox textBoxPosts4;
+        private System.Windows.Forms.TextBox textBoxPosts2;
     }
 }
