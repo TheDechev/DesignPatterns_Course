@@ -1,6 +1,6 @@
-﻿using FacebookWrapper.ObjectModel;
+﻿using System.Collections.Generic;
+using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
-using System.Collections.Generic;
 
 namespace FacebookApp
 {
@@ -107,7 +107,7 @@ namespace FacebookApp
 
             foreach(Album album in LoggedUser.Albums)
             {
-                for(int i=0; i<album.Photos.Count; i++)
+                for(int i = 0; i < album.Photos.Count; i++)
                 {
                     resPhotos.Add(album.Photos[i].PictureNormalURL);
                     counter++;
@@ -119,7 +119,6 @@ namespace FacebookApp
             }
 
             return resPhotos;
-
         }
 
         public List<Post> GetLatestPosts(int i_NumOfItems)
@@ -132,11 +131,11 @@ namespace FacebookApp
                 {
                     break;
                 }
+
                 resPosts.Add(this.LoggedUser.NewsFeed[i]);
             }
 
             return resPosts;    
         }
-
     }
 }

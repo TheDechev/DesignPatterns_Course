@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
-using System.Collections.Generic;
 
 namespace FacebookApp
 {
@@ -129,7 +129,6 @@ namespace FacebookApp
             {
                 MessageBox.Show("There was a problem. Try logging in again.", "Log-out Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
         }
 
         // ===================== ====================== ====================== 
@@ -137,7 +136,6 @@ namespace FacebookApp
         // ===================== ====================== ====================== 
         private void loadCityAdvisorInfo()
         {
-
             try
             {
                 foreach (User friend in r_AppLogic.LoggedUser.Friends)
@@ -189,6 +187,8 @@ namespace FacebookApp
             }
 
             comboBoxCity.Items.Clear();
+            pictureBoxCityFriend.Image = Resource.EmptyPicture;
+            pictureBoxFriends.Image = Resource.EmptyPicture;
         }
 
         private void ComboBoxCity_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -412,7 +412,6 @@ namespace FacebookApp
 
         private void loadLatestInfo()
         {
-
             updateLatestPhotos();
             updateLatestsPosts();
         }
@@ -431,6 +430,7 @@ namespace FacebookApp
                     {
                         break;
                     }
+
                     (panelPhotos.Controls[currentItem] as PictureBox).LoadAsync(photo);
                     currentItem++;
                 }
@@ -438,9 +438,7 @@ namespace FacebookApp
             catch
             {
                 MessageBox.Show("There was a problem loading the photos.", "Photos Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
-
         }
 
         private void updateLatestsPosts()
@@ -466,8 +464,6 @@ namespace FacebookApp
             {
                 MessageBox.Show("There was a problem loading the posts.", "Posts Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
         }
-
     }
 }

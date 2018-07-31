@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookApp", "FacebookApp\FacebookApp.csproj", "{17D2309E-90A8-4B5D-8A5A-B1437F4983AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{114A9BD9-4EF5-47D3-9C58-8949B8AF9363}"
+	ProjectSection(SolutionItems) = preProject
+		C18 Ex01 Martin 302266911 Roy 204573307.docx = C18 Ex01 Martin 302266911 Roy 204573307.docx
+		Exercise Checking Report.txt = Exercise Checking Report.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDA81E01-3720-4BF3-A39A-A2ED8D5AE073}
 	EndGlobalSection
 EndGlobal
