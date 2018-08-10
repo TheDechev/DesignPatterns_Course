@@ -1,0 +1,9 @@
+==========================Exercise Checking Report==========================
+Exercise No...........: 2
+First Student Details.: 302266911 - Martin Dechev
+Second Student Details: 204573307 - Roy Koren
+Delivery Date.........: 
+Delivered In Delay....:  
+Delay Reason..........: -
+Comments..............: 
+========================End Exercise Checking Report========================
