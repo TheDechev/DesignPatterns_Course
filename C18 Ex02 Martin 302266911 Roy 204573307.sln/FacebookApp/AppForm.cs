@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
+using System.Threading;
 
 namespace FacebookApp
 {
@@ -75,10 +76,8 @@ namespace FacebookApp
             {
                 if (this.r_AppLogic.Login())
                 {
-                    fetchUserInfo();
-                    loadCityAdvisorInfo();
-                    loadFriendsList();
-                    loadLatestInfo();
+                    //TODO: Update the docx file about this multi-thread use.
+                    new Thread(loadLatestInfo).Start();
                 }
             }
             catch
@@ -163,7 +162,7 @@ namespace FacebookApp
         {
             if (!comboBoxCity.Items.Contains(i_FriendCity))
             {
-                comboBoxCity.Items.Add(i_FriendCity);
+                comboBoxCity.Invoke(new Action(() => comboBoxCity.Items.Add(i_FriendCity)));
             }
         }
 
@@ -405,21 +404,25 @@ namespace FacebookApp
             {
                 foreach (User friend in this.r_AppLogic.LoggedUser.Friends)
                 {
-                    listBoxFriendsMain.Items.Add(friend);
+                    listBoxFriendsMain.Invoke(new Action(() => listBoxFriendsMain.Items.Add(friend)));
                 }
             }
         }
 
         private void loadLatestInfo()
         {
-            updateLatestPhotos();
-            updateLatestsPosts();
+            fetchUserInfo();
+            new Thread(updateLatestPhotos).Start();
+            new Thread(updateLatestsPosts).Start();
+            new Thread(loadFriendsList).Start();
+            new Thread(loadCityAdvisorInfo).Start();
         }
 
         private void updateLatestPhotos()
         {
             try
             {
+                PictureBox currentPictureBox;
                 List<string> latestPhotos = this.r_AppLogic.GetLatestPhotos(panelPhotos.Controls.Count);
 
                 int currentItem = 0;
@@ -431,7 +434,8 @@ namespace FacebookApp
                         break;
                     }
 
-                    (panelPhotos.Controls[currentItem] as PictureBox).LoadAsync(photo);
+                    currentPictureBox = panelPhotos.Controls[currentItem] as PictureBox;
+                    currentPictureBox.Invoke(new Action(() => currentPictureBox.LoadAsync(photo)));
                     currentItem++;
                 }
             }
@@ -446,6 +450,9 @@ namespace FacebookApp
             try
             {
                 int currentItem = 0;
+                string postInfo;
+                TextBox currentTextBox;
+                PictureBox currentPictureBox;
                 List<Post> latestPosts = this.r_AppLogic.GetLatestPosts(panelPhotosMain.Controls.Count);
                 foreach (Post post in latestPosts)
                 {
@@ -453,10 +460,12 @@ namespace FacebookApp
                     {
                         break;
                     }
-
-                    (panelPostsMain.Controls[currentItem] as TextBox).Text = string.Format(
+                    postInfo = string.Format(
                         "{0}{1}Created On: {2}{1} Liked By: {3}{1}. ", post.Message, Environment.NewLine, post.CreatedTime.ToString(), post.LikedBy.Count);
-                    (panelPhotosMain.Controls[currentItem] as PictureBox).LoadAsync(post.From.PictureLargeURL);
+                    currentTextBox = panelPostsMain.Controls[currentItem] as TextBox;
+                    currentTextBox.Invoke(new Action(() => currentTextBox.Text = postInfo));
+                    currentPictureBox = panelPhotosMain.Controls[currentItem] as PictureBox;
+                    currentPictureBox.Invoke(new Action(() => currentPictureBox.LoadAsync(post.From.PictureLargeURL)));
                     currentItem++;
                 }
             }
