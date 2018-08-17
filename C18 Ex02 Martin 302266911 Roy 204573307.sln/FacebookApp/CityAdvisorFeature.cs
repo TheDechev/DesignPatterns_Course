@@ -2,8 +2,29 @@
 
 namespace FacebookApp
 {
-    internal class CityAdvisorFeature
+    internal sealed class CityAdvisorFeature
     {
+        private CityAdvisorFeature()
+        {
+        }
+
+        public static CityAdvisorFeature CityAdvisorInstance
+        {
+            get
+            {
+                return CityAdvisorSingleton.sr_instance;
+            }
+        }
+
+        private class CityAdvisorSingleton
+        {
+            static CityAdvisorSingleton()
+            {
+            }
+
+            internal static readonly CityAdvisorFeature sr_instance = new CityAdvisorFeature();
+        }
+
         private XmlDocument m_XmlDoc = new XmlDocument();
         private XmlElement m_Root;
         private XmlNodeList m_CurrentNode;

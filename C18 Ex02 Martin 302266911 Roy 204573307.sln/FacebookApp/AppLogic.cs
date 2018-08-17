@@ -12,6 +12,12 @@ namespace FacebookApp
         private FriendsFilterFeature m_Filter;
         public eLoginStatus m_LoginStatus = eLoginStatus.LoggedOut;
 
+        public AppLogic()
+        {
+            m_CityAdvisor = CityAdvisorFeature.CityAdvisorInstance;
+            m_Filter = new FriendsFilterFeature(m_LoggedInUser);
+        }
+
         public AppSettings AppSettings { get; set; }
 
         public LoginResult LoginResult { get; set; }
@@ -44,12 +50,6 @@ namespace FacebookApp
             {
                 return m_Filter;
             }
-        }
-
-        public AppLogic()
-        {
-            m_CityAdvisor = new CityAdvisorFeature();
-            m_Filter = new FriendsFilterFeature(m_LoggedInUser);
         }
 
         public string AppID

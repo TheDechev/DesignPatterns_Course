@@ -89,8 +89,11 @@ namespace FacebookApp
         private void fetchUserInfo()
         {
             pictureBoxProfile.LoadAsync(r_AppLogic.LoggedUser.PictureNormalURL);
-            userNameLabel.Text = string.Format("Welcome, {0} {1} !", r_AppLogic.LoggedUser.FirstName, r_AppLogic.LoggedUser.LastName);
-            buttonPostStatus.Enabled = true;
+            userNameLabel.Invoke(new Action(() =>
+            {
+                userNameLabel.Text = string.Format("Welcome, {0} {1} !", r_AppLogic.LoggedUser.FirstName, r_AppLogic.LoggedUser.LastName);
+                buttonPostStatus.Enabled = true;
+            }));
         }
 
         private void buttonPostStatus_Click(object sender, EventArgs e)
