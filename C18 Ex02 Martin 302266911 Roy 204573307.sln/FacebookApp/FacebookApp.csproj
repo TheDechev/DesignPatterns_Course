@@ -64,6 +64,7 @@
     <Compile Include="CityAdvisorFeature.cs" />
     <Compile Include="FriendsFilterFeature.cs" />
     <Compile Include="LoginStatus.cs" />
+    <Compile Include="PhotoProxy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.Designer.cs">

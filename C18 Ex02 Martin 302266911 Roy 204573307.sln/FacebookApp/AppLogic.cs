@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
+using System;
 
 namespace FacebookApp
 {
@@ -8,13 +9,11 @@ namespace FacebookApp
     {
         private readonly string r_AppID = "980644158781216";
         private User m_LoggedInUser;
-        private CityAdvisorFeature m_CityAdvisor;
         private FriendsFilterFeature m_Filter;
         public eLoginStatus m_LoginStatus = eLoginStatus.LoggedOut;
 
         public AppLogic()
         {
-            m_CityAdvisor = CityAdvisorFeature.CityAdvisorInstance;
             m_Filter = new FriendsFilterFeature(m_LoggedInUser);
         }
 
@@ -36,22 +35,6 @@ namespace FacebookApp
             }
         }
 
-        public CityAdvisorFeature CityAdvisor
-        {
-            get
-            {
-                return m_CityAdvisor;
-            }
-        }
-
-        public FriendsFilterFeature FriendsFilter
-        {
-            get
-            {
-                return m_Filter;
-            }
-        }
-
         public string AppID
         {
             get
@@ -63,26 +46,33 @@ namespace FacebookApp
         public bool Login()
         {
             bool res = false;
-
-            this.LoginResult = FacebookService.Login(
-            AppID,
-            "email",
-            "public_profile",
-            "user_friends",
-            "user_likes",
-            "user_photos",
-            "user_posts",
-            "user_birthday",
-            "user_events",
-            "manage_pages",
-            "user_location",
-            "user_gender");
-            
-            if (!string.IsNullOrEmpty(this.LoginResult.AccessToken))
+            try
             {
-                LoggedUser = this.LoginResult.LoggedInUser;
-                res = true;
+                this.LoginResult = FacebookService.Login(
+                AppID,
+                "email",
+                "public_profile",
+                "user_friends",
+                "user_likes",
+                "user_photos",
+                "user_posts",
+                "user_birthday",
+                "user_events",
+                "manage_pages",
+                "user_location",
+                "user_gender");
+
+                if (!string.IsNullOrEmpty(this.LoginResult.AccessToken))
+                {
+                    LoggedUser = this.LoginResult.LoggedInUser;
+                    res = true;
+                }
             }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
 
             return res;
         }
@@ -99,22 +89,25 @@ namespace FacebookApp
             }
         }
 
-        public List<string> GetLatestPhotos(int i_NumOfItems)
+        //Facade
+
+        public List<PhotoProxy> GetLatestPhotos(int i_NumOfItems)
         {
-            List<string> resPhotos = new List<string>();
+            List<PhotoProxy> resPhotos = new List<PhotoProxy>();
 
             int counter = 0;
-
+            
             foreach(Album album in LoggedUser.Albums)
             {
                 for(int i = 0; i < album.Photos.Count; i++)
                 {
-                    resPhotos.Add(album.Photos[i].PictureNormalURL);
-                    counter++;
                     if (counter > i_NumOfItems)
                     {
                         break;
                     }
+                    resPhotos.Add(new PhotoProxy { Photo = album.Photos[i] });
+                    counter++;
+
                 }
             }
 
@@ -136,6 +129,38 @@ namespace FacebookApp
             }
 
             return resPosts;    
+        }
+
+        public List<string> GetCityAdvisorInfo(string i_CityName)
+        {
+            List<string> cityInfoList= new List<string>();
+            cityInfoList.Add("City Name: " + i_CityName);
+            cityInfoList.Add(CityAdvisorFeature.CityAdvisorInstance.FetchTemperatureString(i_CityName));
+            cityInfoList.Add(CityAdvisorFeature.CityAdvisorInstance.FetchHumidityString(i_CityName));
+            cityInfoList.Add(CityAdvisorFeature.CityAdvisorInstance.FetchSunriseTime(i_CityName));
+            cityInfoList.Add(CityAdvisorFeature.CityAdvisorInstance.FetchSunsetTime(i_CityName));
+
+            return cityInfoList;
+        }
+
+        public FacebookObjectCollection<User> FilterBySameBirthMonth()
+        {
+            return this.m_Filter.FilterBySameBirthMonth();
+        }
+
+        public FacebookObjectCollection<User> FilterByLanguage(string i_Language)
+        {
+            return this.m_Filter.FilterByLanguage(i_Language);
+        }
+
+        public FacebookObjectCollection<User> FilterByYearDifference(int i_YearsDifference)
+        {
+            return this.m_Filter.FilterByYearDifference(i_YearsDifference);
+        }
+
+        public FacebookObjectCollection<User> FilterByGender(User.eGender i_Gender)
+        {
+            return this.m_Filter.FilterByGender(i_Gender);
         }
     }
 }

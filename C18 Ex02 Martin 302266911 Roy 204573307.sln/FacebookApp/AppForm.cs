@@ -31,9 +31,9 @@ namespace FacebookApp
             {
                 this.r_AppLogic.Connect(this.r_AppLogic.AppSettings.LastAccessToken);
                 this.r_AppLogic.m_LoginStatus = eLoginStatus.LoggedIn;
-                this.r_AppLogic.LoggedUser = this.r_AppLogic.LoginResult.LoggedInUser;
-                if (this.r_AppLogic.LoggedUser != null)
+                if (this.r_AppLogic.LoginResult != null && this.r_AppLogic.LoginResult.LoggedInUser != null)
                 {
+                    this.r_AppLogic.LoggedUser = this.r_AppLogic.LoginResult.LoggedInUser;
                     this.pictureBoxProfile.LoadAsync(this.r_AppLogic.LoggedUser.PictureLargeURL);
                     loginAndInit();
                 }
@@ -77,7 +77,7 @@ namespace FacebookApp
                 if (this.r_AppLogic.Login())
                 {
                     //TODO: Update the docx file about this multi-thread use.
-                    new Thread(loadLatestInfo).Start();
+                    loadLatestInfo();
                 }
             }
             catch
@@ -234,40 +234,10 @@ namespace FacebookApp
 
         private void fetchCityInfoToListBox(string i_SelectedCity)
         {
-            r_AppLogic.CityAdvisor.FetchXML(i_SelectedCity);
-            fetchCityNameToListBox(i_SelectedCity);
-            fetchCurrentTemperatureToListBox();
-            fetchHumidityPercentageToListBox();
-            fetchSunTimesToListBox();
+            listBoxCityWeather.Items.AddRange(r_AppLogic.GetCityAdvisorInfo(i_SelectedCity).ToArray());
             fetchWikipediaLinkToListBox(i_SelectedCity);
             this.listBoxFriendsFromSelectedCity.Enabled = true;
             this.listBoxCityWeather.Enabled = true;
-        }
-
-        private void fetchCityNameToListBox(string selectedCity)
-        {
-            string cityNameString = "City Name: " + selectedCity;
-            listBoxCityWeather.Items.Add(cityNameString);
-        }
-
-        private void fetchCurrentTemperatureToListBox()
-        {
-            string temperatureStr = r_AppLogic.CityAdvisor.FetchTemperatureString();
-            listBoxCityWeather.Items.Add(temperatureStr);
-        }
-
-        private void fetchHumidityPercentageToListBox()
-        {
-            string humidityString = r_AppLogic.CityAdvisor.FetchHumidityString();
-            listBoxCityWeather.Items.Add(humidityString);
-        }
-
-        private void fetchSunTimesToListBox()
-        {
-            string sunriseTime = r_AppLogic.CityAdvisor.FetchSunriseTime();
-            listBoxCityWeather.Items.Add(sunriseTime);
-            string sunsetTime = r_AppLogic.CityAdvisor.FetchSunsetTime();
-            listBoxCityWeather.Items.Add(sunsetTime);
         }
 
         private void fetchWikipediaLinkToListBox(string selectedCity)
@@ -344,15 +314,15 @@ namespace FacebookApp
         private void radioButtonSameMonth_CheckedChanged(object sender, EventArgs e)
         {
             listBoxFilteredFriends.Items.Clear();
-            this.m_FilteredFriends = this.r_AppLogic.FriendsFilter.FilterBySameBirthMonth();
+            this.m_FilteredFriends = this.r_AppLogic.FilterBySameBirthMonth();
             displayOnEmptyList(string.Format("Nobody from your friendlist is born on this day :)", Environment.NewLine));
         }
 
         private void comboBoxCommonLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBoxFilteredFriends.Items.Clear();
-            this.m_FilteredFriends = this.r_AppLogic.FriendsFilter.FilterByLanguage(comboBoxCommonLanguage.SelectedItem as string);
-            displayOnEmptyList("Nobody from your friends speaks this language! (Or hasn't updated it)");
+            this.m_FilteredFriends = this.r_AppLogic.FilterByLanguage(comboBoxCommonLanguage.SelectedItem as string);
+            displayOnEmptyList("Nobody from your friends speaks this language!");
         }
 
         private void listBoxFilteredFriends_SelectedIndexChanged(object sender, EventArgs e)
@@ -369,7 +339,7 @@ namespace FacebookApp
             if(numericUpDownYearsRange.Enabled == true)
             {
                 listBoxFilteredFriends.Items.Clear();
-                m_FilteredFriends = r_AppLogic.FriendsFilter.FilterByYearDifference(Convert.ToInt32(numericUpDownYearsRange.Value));
+                m_FilteredFriends = r_AppLogic.FilterByYearDifference(Convert.ToInt32(numericUpDownYearsRange.Value));
                 displayOnEmptyList("Nobody matches this year range!");
             }
         }
@@ -377,7 +347,7 @@ namespace FacebookApp
         private void addFriendsByGender(User.eGender i_Gender)
         {
             listBoxFilteredFriends.Items.Clear();
-            m_FilteredFriends = r_AppLogic.FriendsFilter.FilterByGender(i_Gender);
+            m_FilteredFriends = r_AppLogic.FilterByGender(i_Gender);
             displayOnEmptyList("No one from the friends stated this gender :(");
         }
 
@@ -427,11 +397,13 @@ namespace FacebookApp
             try
             {
                 PictureBox currentPictureBox;
-                List<string> latestPhotos = this.r_AppLogic.GetLatestPhotos(panelPhotos.Controls.Count);
+                ComboBox currentComboBox;
+                Label currentLabel;
+                List<PhotoProxy> latestPhotos = this.r_AppLogic.GetLatestPhotos(panelPhotos.Controls.Count);
 
                 int currentItem = 0;
 
-                foreach (string photo in latestPhotos)
+                foreach (PhotoProxy photo in latestPhotos)
                 {
                     if (currentItem >= panelPhotos.Controls.Count)
                     {
@@ -439,7 +411,11 @@ namespace FacebookApp
                     }
 
                     currentPictureBox = panelPhotos.Controls[currentItem] as PictureBox;
+                    currentComboBox = panelTagged.Controls[currentItem] as ComboBox;
+                    currentLabel = panelLinks.Controls[currentItem] as Label;
                     currentPictureBox.Invoke(new Action(() => currentPictureBox.LoadAsync(photo)));
+                    currentComboBox.Invoke(new Action(() => currentComboBox.Items.AddRange(photo.GetTaggedFriends())));
+                    currentLabel.Invoke(new Action(() => currentLabel.Text = photo.GetDaysSinceToday()));
                     currentItem++;
                 }
             }
