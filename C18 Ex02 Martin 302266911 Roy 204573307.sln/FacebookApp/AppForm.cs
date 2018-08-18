@@ -479,11 +479,6 @@ namespace FacebookApp
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //workExperienceBindingSource.DataSource = r_AppLogic.LoggedUser.FriendLists;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             new Thread(fetchAlbums).Start();
@@ -491,17 +486,14 @@ namespace FacebookApp
 
         private void fetchAlbums()
         {
-            /// this operation is the operation that takes time, and should be executed in the separate thread
             var albums = r_AppLogic.LoggedUser.Albums;
 
             if (!listBoxAlbums.InvokeRequired)
             {
-                // binding the data source of the binding source, to our data source:
                 albumBindingSource.DataSource = albums;
             }
             else
             {
-                // In case of cross-thread operation, invoking the binding code on the listBox's thread:
                 listBoxAlbums.Invoke(new Action(() => albumBindingSource.DataSource = albums));
             }
         }

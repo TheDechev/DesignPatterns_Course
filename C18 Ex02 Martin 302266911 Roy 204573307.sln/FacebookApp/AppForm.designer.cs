@@ -87,8 +87,9 @@
             this.listBoxFriendsFromSelectedCity = new System.Windows.Forms.ListBox();
             this.comboBoxCity = new System.Windows.Forms.ComboBox();
             this.cityLabel = new System.Windows.Forms.Label();
-            this.jobsInfo = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.myAlbums = new System.Windows.Forms.TabPage();
+            this.labelMyAlbums = new System.Windows.Forms.Label();
+            this.panelAlbumDetails = new System.Windows.Forms.Panel();
             this.countTextBox = new System.Windows.Forms.TextBox();
             this.albumBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.createdTimeDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -97,7 +98,6 @@
             this.fetchAlbumsBtn = new System.Windows.Forms.Button();
             this.listBoxAlbums = new System.Windows.Forms.ListBox();
             this.photosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             countLabel = new System.Windows.Forms.Label();
             createdTimeLabel = new System.Windows.Forms.Label();
             nameLabel = new System.Windows.Forms.Label();
@@ -122,8 +122,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYearsRange)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCityFriend)).BeginInit();
-            this.jobsInfo.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.myAlbums.SuspendLayout();
+            this.panelAlbumDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.albumBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageAlbumPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.photosBindingSource)).BeginInit();
@@ -222,7 +222,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.jobsInfo);
+            this.tabControl1.Controls.Add(this.myAlbums);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -797,34 +797,46 @@
             this.cityLabel.TabIndex = 4;
             this.cityLabel.Text = "City:";
             // 
-            // jobsInfo
+            // myAlbums
             // 
-            this.jobsInfo.AutoScroll = true;
-            this.jobsInfo.BackColor = System.Drawing.Color.SteelBlue;
-            this.jobsInfo.Controls.Add(this.label1);
-            this.jobsInfo.Controls.Add(this.panel1);
-            this.jobsInfo.Controls.Add(this.fetchAlbumsBtn);
-            this.jobsInfo.Controls.Add(this.listBoxAlbums);
-            this.jobsInfo.Location = new System.Drawing.Point(4, 22);
-            this.jobsInfo.Name = "jobsInfo";
-            this.jobsInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.jobsInfo.Size = new System.Drawing.Size(701, 495);
-            this.jobsInfo.TabIndex = 4;
-            this.jobsInfo.Text = "My Albums";
+            this.myAlbums.AutoScroll = true;
+            this.myAlbums.BackColor = System.Drawing.Color.SteelBlue;
+            this.myAlbums.Controls.Add(this.labelMyAlbums);
+            this.myAlbums.Controls.Add(this.panelAlbumDetails);
+            this.myAlbums.Controls.Add(this.fetchAlbumsBtn);
+            this.myAlbums.Controls.Add(this.listBoxAlbums);
+            this.myAlbums.Location = new System.Drawing.Point(4, 22);
+            this.myAlbums.Name = "myAlbums";
+            this.myAlbums.Padding = new System.Windows.Forms.Padding(3);
+            this.myAlbums.Size = new System.Drawing.Size(701, 495);
+            this.myAlbums.TabIndex = 4;
+            this.myAlbums.Text = "My Albums";
             // 
-            // panel1
+            // labelMyAlbums
             // 
-            this.panel1.Controls.Add(countLabel);
-            this.panel1.Controls.Add(this.countTextBox);
-            this.panel1.Controls.Add(createdTimeLabel);
-            this.panel1.Controls.Add(this.createdTimeDateTimePicker);
-            this.panel1.Controls.Add(this.imageAlbumPictureBox);
-            this.panel1.Controls.Add(nameLabel);
-            this.panel1.Controls.Add(this.nameTextBox);
-            this.panel1.Location = new System.Drawing.Point(321, 49);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(360, 355);
-            this.panel1.TabIndex = 3;
+            this.labelMyAlbums.AutoSize = true;
+            this.labelMyAlbums.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold);
+            this.labelMyAlbums.ForeColor = System.Drawing.Color.White;
+            this.labelMyAlbums.Location = new System.Drawing.Point(19, 14);
+            this.labelMyAlbums.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelMyAlbums.Name = "labelMyAlbums";
+            this.labelMyAlbums.Size = new System.Drawing.Size(114, 21);
+            this.labelMyAlbums.TabIndex = 55;
+            this.labelMyAlbums.Text = "My Albums:";
+            // 
+            // panelAlbumDetails
+            // 
+            this.panelAlbumDetails.Controls.Add(countLabel);
+            this.panelAlbumDetails.Controls.Add(this.countTextBox);
+            this.panelAlbumDetails.Controls.Add(createdTimeLabel);
+            this.panelAlbumDetails.Controls.Add(this.createdTimeDateTimePicker);
+            this.panelAlbumDetails.Controls.Add(this.imageAlbumPictureBox);
+            this.panelAlbumDetails.Controls.Add(nameLabel);
+            this.panelAlbumDetails.Controls.Add(this.nameTextBox);
+            this.panelAlbumDetails.Location = new System.Drawing.Point(321, 49);
+            this.panelAlbumDetails.Name = "panelAlbumDetails";
+            this.panelAlbumDetails.Size = new System.Drawing.Size(360, 355);
+            this.panelAlbumDetails.TabIndex = 3;
             // 
             // countTextBox
             // 
@@ -885,24 +897,11 @@
             this.listBoxAlbums.Name = "listBoxAlbums";
             this.listBoxAlbums.Size = new System.Drawing.Size(271, 368);
             this.listBoxAlbums.TabIndex = 1;
-            this.listBoxAlbums.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // photosBindingSource
             // 
             this.photosBindingSource.DataMember = "Photos";
             this.photosBindingSource.DataSource = this.albumBindingSource;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(19, 14);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 21);
-            this.label1.TabIndex = 55;
-            this.label1.Text = "My Albums:";
             // 
             // AppForm
             // 
@@ -942,10 +941,10 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCityFriend)).EndInit();
-            this.jobsInfo.ResumeLayout(false);
-            this.jobsInfo.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.myAlbums.ResumeLayout(false);
+            this.myAlbums.PerformLayout();
+            this.panelAlbumDetails.ResumeLayout(false);
+            this.panelAlbumDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.albumBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageAlbumPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.photosBindingSource)).EndInit();
@@ -1007,16 +1006,16 @@
         private System.Windows.Forms.TextBox textBoxPosts1;
         private System.Windows.Forms.TextBox textBoxPosts4;
         private System.Windows.Forms.TextBox textBoxPosts2;
-        private System.Windows.Forms.TabPage jobsInfo;
+        private System.Windows.Forms.TabPage myAlbums;
         private System.Windows.Forms.ListBox listBoxAlbums;
         private System.Windows.Forms.Button fetchAlbumsBtn;
         private System.Windows.Forms.BindingSource albumBindingSource;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelAlbumDetails;
         private System.Windows.Forms.TextBox countTextBox;
         private System.Windows.Forms.DateTimePicker createdTimeDateTimePicker;
         private System.Windows.Forms.PictureBox imageAlbumPictureBox;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.BindingSource photosBindingSource;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelMyAlbums;
     }
 }
