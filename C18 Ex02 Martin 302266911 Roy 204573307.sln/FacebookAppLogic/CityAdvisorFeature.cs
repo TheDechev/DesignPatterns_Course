@@ -12,17 +12,17 @@ namespace FacebookAppLogic
         {
             get
             {
-                return CityAdvisorSingleton.sr_instance;
+                return CityAdvisorSingleton.Sr_Instance;
             }
         }
 
         private class CityAdvisorSingleton
         {
-            static CityAdvisorSingleton()
+            private CityAdvisorSingleton()
             {
             }
 
-            internal static readonly CityAdvisorFeature sr_instance = new CityAdvisorFeature();
+            internal static readonly CityAdvisorFeature Sr_Instance = new CityAdvisorFeature();
         }
 
         private XmlDocument m_XmlDoc = new XmlDocument();

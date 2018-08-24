@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
-using System;
 
 namespace FacebookAppLogic
 {
@@ -96,9 +96,9 @@ namespace FacebookAppLogic
                     {
                         break;
                     }
+
                     resPhotos.Add(new PhotoProxy { Photo = album.Photos[i] });
                     counter++;
-
                 }
             }
 
@@ -124,7 +124,7 @@ namespace FacebookAppLogic
 
         public List<string> GetCityAdvisorInfo(string i_CityName)
         {
-            List<string> cityInfoList= new List<string>();
+            List<string> cityInfoList = new List<string>();
             cityInfoList.Add("City Name: " + i_CityName);
             cityInfoList.Add(CityAdvisorFeature.CityAdvisorInstance.FetchTemperatureString(i_CityName));
             cityInfoList.Add(CityAdvisorFeature.CityAdvisorInstance.FetchHumidityString(i_CityName));

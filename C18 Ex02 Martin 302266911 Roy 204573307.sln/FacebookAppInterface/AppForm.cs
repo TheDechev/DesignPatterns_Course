@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
-using System.Threading;
+
 using FacebookAppLogic;
 
 namespace FacebookAppInterface
@@ -77,8 +78,8 @@ namespace FacebookAppInterface
             {
                 if (this.r_AppLogic.Login())
                 {
-                    //TODO: Update the docx file about this multi-thread use.
                     loadLatestInfo();
+                    buttonLogin.Enabled = false;
                 }
             }
             catch
@@ -127,6 +128,7 @@ namespace FacebookAppInterface
                 userNameLabel.Text = string.Empty;
                 buttonPostStatus.Enabled = false;
                 listBoxFilteredFriends.Enabled = false;
+                buttonLogin.Enabled = true;
             }
             catch
             {
@@ -187,6 +189,11 @@ namespace FacebookAppInterface
             foreach (Control profilePic in panelPhotosMain.Controls)
             {
                 (profilePic as PictureBox).Image = Resource.EmptyPicture;
+            }
+
+            foreach(Control text in panelDaysSince.Controls)
+            {
+                (text as Label).Text = string.Empty;
             }
 
             comboBoxCity.Items.Clear();
@@ -379,7 +386,6 @@ namespace FacebookAppInterface
                 foreach (User friend in this.r_AppLogic.LoggedUser.Friends)
                 {
                     listBoxFriendsMain.Invoke(new Action(() => listBoxFriendsMain.Items.Add(friend)));
-                    //listBox1.Invoke(new Action(() => listBox1.Items.Add(friend)));
                 }
             }
         }
@@ -413,7 +419,7 @@ namespace FacebookAppInterface
 
                     currentPictureBox = panelPhotos.Controls[currentItem] as PictureBox;
                     currentComboBox = panelTagged.Controls[currentItem] as ComboBox;
-                    currentLabel = panelLinks.Controls[currentItem] as Label;
+                    currentLabel = panelDaysSince.Controls[currentItem] as Label;
                     currentPictureBox.Invoke(new Action(() => currentPictureBox.LoadAsync(photo)));
                     currentComboBox.Invoke(new Action(() => currentComboBox.Items.AddRange(photo.GetTaggedFriends())));
                     currentLabel.Invoke(new Action(() => currentLabel.Text = photo.GetDaysSinceToday()));
@@ -441,6 +447,7 @@ namespace FacebookAppInterface
                     {
                         break;
                     }
+
                     postInfo = string.Format(
                         "{0}{1}Created On: {2}{1} Liked By: {3}{1}. ", post.Message, Environment.NewLine, post.CreatedTime.ToString(), post.LikedBy.Count);
                     currentTextBox = panelPostsMain.Controls[currentItem] as TextBox;

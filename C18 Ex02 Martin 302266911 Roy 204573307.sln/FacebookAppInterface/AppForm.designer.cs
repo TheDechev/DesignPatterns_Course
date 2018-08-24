@@ -48,6 +48,12 @@
             this.comboBoxThirdPicture = new System.Windows.Forms.ComboBox();
             this.comboBoxSecondPicture = new System.Windows.Forms.ComboBox();
             this.comboBoxFirstPicture = new System.Windows.Forms.ComboBox();
+            this.panelDaysSince = new System.Windows.Forms.Panel();
+            this.labelDaysFifth = new System.Windows.Forms.Label();
+            this.labelDaysFourth = new System.Windows.Forms.Label();
+            this.labelDaysThird = new System.Windows.Forms.Label();
+            this.labelDaysSecond = new System.Windows.Forms.Label();
+            this.labelDaysFirst = new System.Windows.Forms.Label();
             this.panelPhotosMain = new System.Windows.Forms.Panel();
             this.pictureBoxPosts1 = new System.Windows.Forms.PictureBox();
             this.pictureBoxPosts2 = new System.Windows.Forms.PictureBox();
@@ -60,6 +66,7 @@
             this.textBoxPosts2 = new System.Windows.Forms.TextBox();
             this.panelPhotos = new System.Windows.Forms.Panel();
             this.pictureBoxPhoto1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxPhoto5 = new System.Windows.Forms.PictureBox();
             this.pictureBoxPhoto4 = new System.Windows.Forms.PictureBox();
             this.pictureBoxPhoto3 = new System.Windows.Forms.PictureBox();
             this.pictureBoxPhoto2 = new System.Windows.Forms.PictureBox();
@@ -104,13 +111,6 @@
             this.fetchAlbumsBtn = new System.Windows.Forms.Button();
             this.listBoxAlbums = new System.Windows.Forms.ListBox();
             this.photosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pictureBoxPhoto5 = new System.Windows.Forms.PictureBox();
-            this.labelDaysFirst = new System.Windows.Forms.Label();
-            this.labelDaysSecond = new System.Windows.Forms.Label();
-            this.labelDaysThird = new System.Windows.Forms.Label();
-            this.labelDaysFourth = new System.Windows.Forms.Label();
-            this.labelDaysFifth = new System.Windows.Forms.Label();
-            this.panelLinks = new System.Windows.Forms.Panel();
             countLabel = new System.Windows.Forms.Label();
             createdTimeLabel = new System.Windows.Forms.Label();
             nameLabel = new System.Windows.Forms.Label();
@@ -118,6 +118,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panelTagged.SuspendLayout();
+            this.panelDaysSince.SuspendLayout();
             this.panelPhotosMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts2)).BeginInit();
@@ -126,6 +127,7 @@
             this.panelPostsMain.SuspendLayout();
             this.panelPhotos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto2)).BeginInit();
@@ -140,8 +142,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.albumBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageAlbumPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.photosBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto5)).BeginInit();
-            this.panelLinks.SuspendLayout();
             this.SuspendLayout();
             // 
             // countLabel
@@ -250,7 +250,7 @@
             this.tabPage1.BackColor = System.Drawing.Color.SteelBlue;
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.panelTagged);
-            this.tabPage1.Controls.Add(this.panelLinks);
+            this.tabPage1.Controls.Add(this.panelDaysSince);
             this.tabPage1.Controls.Add(this.panelPhotosMain);
             this.tabPage1.Controls.Add(this.panelPostsMain);
             this.tabPage1.Controls.Add(this.panelPhotos);
@@ -351,6 +351,73 @@
             this.comboBoxFirstPicture.TabIndex = 0;
             this.comboBoxFirstPicture.Text = "Tagged Friends";
             // 
+            // panelDaysSince
+            // 
+            this.panelDaysSince.Controls.Add(this.labelDaysFifth);
+            this.panelDaysSince.Controls.Add(this.labelDaysFourth);
+            this.panelDaysSince.Controls.Add(this.labelDaysThird);
+            this.panelDaysSince.Controls.Add(this.labelDaysSecond);
+            this.panelDaysSince.Controls.Add(this.labelDaysFirst);
+            this.panelDaysSince.Location = new System.Drawing.Point(53, 444);
+            this.panelDaysSince.Name = "panelDaysSince";
+            this.panelDaysSince.Size = new System.Drawing.Size(642, 22);
+            this.panelDaysSince.TabIndex = 75;
+            // 
+            // labelDaysFifth
+            // 
+            this.labelDaysFifth.AutoSize = true;
+            this.labelDaysFifth.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+            this.labelDaysFifth.ForeColor = System.Drawing.Color.White;
+            this.labelDaysFifth.Location = new System.Drawing.Point(25, 5);
+            this.labelDaysFifth.Name = "labelDaysFifth";
+            this.labelDaysFifth.Size = new System.Drawing.Size(69, 15);
+            this.labelDaysFifth.TabIndex = 81;
+            this.labelDaysFifth.Text = "X days ago";
+            // 
+            // labelDaysFourth
+            // 
+            this.labelDaysFourth.AutoSize = true;
+            this.labelDaysFourth.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+            this.labelDaysFourth.ForeColor = System.Drawing.Color.White;
+            this.labelDaysFourth.Location = new System.Drawing.Point(419, 4);
+            this.labelDaysFourth.Name = "labelDaysFourth";
+            this.labelDaysFourth.Size = new System.Drawing.Size(69, 15);
+            this.labelDaysFourth.TabIndex = 80;
+            this.labelDaysFourth.Text = "X days ago";
+            // 
+            // labelDaysThird
+            // 
+            this.labelDaysThird.AutoSize = true;
+            this.labelDaysThird.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+            this.labelDaysThird.ForeColor = System.Drawing.Color.White;
+            this.labelDaysThird.Location = new System.Drawing.Point(287, 4);
+            this.labelDaysThird.Name = "labelDaysThird";
+            this.labelDaysThird.Size = new System.Drawing.Size(69, 15);
+            this.labelDaysThird.TabIndex = 79;
+            this.labelDaysThird.Text = "X days ago";
+            // 
+            // labelDaysSecond
+            // 
+            this.labelDaysSecond.AutoSize = true;
+            this.labelDaysSecond.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+            this.labelDaysSecond.ForeColor = System.Drawing.Color.White;
+            this.labelDaysSecond.Location = new System.Drawing.Point(152, 4);
+            this.labelDaysSecond.Name = "labelDaysSecond";
+            this.labelDaysSecond.Size = new System.Drawing.Size(69, 15);
+            this.labelDaysSecond.TabIndex = 78;
+            this.labelDaysSecond.Text = "X days ago";
+            // 
+            // labelDaysFirst
+            // 
+            this.labelDaysFirst.AutoSize = true;
+            this.labelDaysFirst.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+            this.labelDaysFirst.ForeColor = System.Drawing.Color.White;
+            this.labelDaysFirst.Location = new System.Drawing.Point(556, 4);
+            this.labelDaysFirst.Name = "labelDaysFirst";
+            this.labelDaysFirst.Size = new System.Drawing.Size(69, 15);
+            this.labelDaysFirst.TabIndex = 77;
+            this.labelDaysFirst.Text = "X days ago";
+            // 
             // panelPhotosMain
             // 
             this.panelPhotosMain.Controls.Add(this.pictureBoxPosts1);
@@ -375,7 +442,7 @@
             // 
             // pictureBoxPosts2
             // 
-            this.pictureBoxPosts2.Image = FacebookAppInterface.Resource.EmptyPicture;
+            this.pictureBoxPosts2.Image = global::FacebookAppInterface.Resource.EmptyPicture;
             this.pictureBoxPosts2.Location = new System.Drawing.Point(3, 180);
             this.pictureBoxPosts2.Name = "pictureBoxPosts2";
             this.pictureBoxPosts2.Size = new System.Drawing.Size(49, 53);
@@ -385,7 +452,7 @@
             // 
             // pictureBoxPosts3
             // 
-            this.pictureBoxPosts3.Image = FacebookAppInterface.Resource.EmptyPicture;
+            this.pictureBoxPosts3.Image = global::FacebookAppInterface.Resource.EmptyPicture;
             this.pictureBoxPosts3.Location = new System.Drawing.Point(3, 122);
             this.pictureBoxPosts3.Name = "pictureBoxPosts3";
             this.pictureBoxPosts3.Size = new System.Drawing.Size(49, 53);
@@ -482,6 +549,17 @@
             this.pictureBoxPhoto1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPhoto1.TabIndex = 73;
             this.pictureBoxPhoto1.TabStop = false;
+            // 
+            // pictureBoxPhoto5
+            // 
+            this.pictureBoxPhoto5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBoxPhoto5.Image = global::FacebookAppInterface.Resource.NoImage;
+            this.pictureBoxPhoto5.Location = new System.Drawing.Point(544, 4);
+            this.pictureBoxPhoto5.Name = "pictureBoxPhoto5";
+            this.pictureBoxPhoto5.Size = new System.Drawing.Size(115, 110);
+            this.pictureBoxPhoto5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPhoto5.TabIndex = 72;
+            this.pictureBoxPhoto5.TabStop = false;
             // 
             // pictureBoxPhoto4
             // 
@@ -988,84 +1066,6 @@
             this.photosBindingSource.DataMember = "Photos";
             this.photosBindingSource.DataSource = this.albumBindingSource;
             // 
-            // pictureBoxPhoto5
-            // 
-            this.pictureBoxPhoto5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBoxPhoto5.Image = global::FacebookAppInterface.Resource.NoImage;
-            this.pictureBoxPhoto5.Location = new System.Drawing.Point(544, 4);
-            this.pictureBoxPhoto5.Name = "pictureBoxPhoto5";
-            this.pictureBoxPhoto5.Size = new System.Drawing.Size(115, 110);
-            this.pictureBoxPhoto5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPhoto5.TabIndex = 72;
-            this.pictureBoxPhoto5.TabStop = false;
-            // 
-            // labelDaysFirst
-            // 
-            this.labelDaysFirst.AutoSize = true;
-            this.labelDaysFirst.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-            this.labelDaysFirst.ForeColor = System.Drawing.Color.White;
-            this.labelDaysFirst.Location = new System.Drawing.Point(556, 4);
-            this.labelDaysFirst.Name = "labelDaysFirst";
-            this.labelDaysFirst.Size = new System.Drawing.Size(69, 15);
-            this.labelDaysFirst.TabIndex = 77;
-            this.labelDaysFirst.Text = "X days ago";
-            // 
-            // labelDaysSecond
-            // 
-            this.labelDaysSecond.AutoSize = true;
-            this.labelDaysSecond.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-            this.labelDaysSecond.ForeColor = System.Drawing.Color.White;
-            this.labelDaysSecond.Location = new System.Drawing.Point(152, 4);
-            this.labelDaysSecond.Name = "labelDaysSecond";
-            this.labelDaysSecond.Size = new System.Drawing.Size(69, 15);
-            this.labelDaysSecond.TabIndex = 78;
-            this.labelDaysSecond.Text = "X days ago";
-            // 
-            // labelDaysThird
-            // 
-            this.labelDaysThird.AutoSize = true;
-            this.labelDaysThird.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-            this.labelDaysThird.ForeColor = System.Drawing.Color.White;
-            this.labelDaysThird.Location = new System.Drawing.Point(287, 4);
-            this.labelDaysThird.Name = "labelDaysThird";
-            this.labelDaysThird.Size = new System.Drawing.Size(69, 15);
-            this.labelDaysThird.TabIndex = 79;
-            this.labelDaysThird.Text = "X days ago";
-            // 
-            // labelDaysFourth
-            // 
-            this.labelDaysFourth.AutoSize = true;
-            this.labelDaysFourth.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-            this.labelDaysFourth.ForeColor = System.Drawing.Color.White;
-            this.labelDaysFourth.Location = new System.Drawing.Point(419, 4);
-            this.labelDaysFourth.Name = "labelDaysFourth";
-            this.labelDaysFourth.Size = new System.Drawing.Size(69, 15);
-            this.labelDaysFourth.TabIndex = 80;
-            this.labelDaysFourth.Text = "X days ago";
-            // 
-            // labelDaysFifth
-            // 
-            this.labelDaysFifth.AutoSize = true;
-            this.labelDaysFifth.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-            this.labelDaysFifth.ForeColor = System.Drawing.Color.White;
-            this.labelDaysFifth.Location = new System.Drawing.Point(25, 5);
-            this.labelDaysFifth.Name = "labelDaysFifth";
-            this.labelDaysFifth.Size = new System.Drawing.Size(69, 15);
-            this.labelDaysFifth.TabIndex = 81;
-            this.labelDaysFifth.Text = "X days ago";
-            // 
-            // panelLinks
-            // 
-            this.panelLinks.Controls.Add(this.labelDaysFifth);
-            this.panelLinks.Controls.Add(this.labelDaysFourth);
-            this.panelLinks.Controls.Add(this.labelDaysThird);
-            this.panelLinks.Controls.Add(this.labelDaysSecond);
-            this.panelLinks.Controls.Add(this.labelDaysFirst);
-            this.panelLinks.Location = new System.Drawing.Point(53, 444);
-            this.panelLinks.Name = "panelLinks";
-            this.panelLinks.Size = new System.Drawing.Size(642, 22);
-            this.panelLinks.TabIndex = 75;
-            // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1083,6 +1083,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.panelTagged.ResumeLayout(false);
+            this.panelDaysSince.ResumeLayout(false);
+            this.panelDaysSince.PerformLayout();
             this.panelPhotosMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPosts2)).EndInit();
@@ -1092,6 +1094,7 @@
             this.panelPostsMain.PerformLayout();
             this.panelPhotos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto2)).EndInit();
@@ -1111,9 +1114,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.albumBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageAlbumPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.photosBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto5)).EndInit();
-            this.panelLinks.ResumeLayout(false);
-            this.panelLinks.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1190,7 +1190,7 @@
         private System.Windows.Forms.ComboBox comboBoxFirstPicture;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBoxPhoto5;
-        private System.Windows.Forms.Panel panelLinks;
+        private System.Windows.Forms.Panel panelDaysSince;
         private System.Windows.Forms.Label labelDaysFifth;
         private System.Windows.Forms.Label labelDaysFourth;
         private System.Windows.Forms.Label labelDaysThird;

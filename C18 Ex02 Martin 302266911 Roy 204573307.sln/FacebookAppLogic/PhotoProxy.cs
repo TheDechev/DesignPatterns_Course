@@ -9,6 +9,11 @@ namespace FacebookAppLogic
     {
         public FacebookWrapper.ObjectModel.Photo Photo { get; set; }
 
+        public static implicit operator string(PhotoProxy v)
+        {
+            return v.ToString();
+        }
+
         public override string ToString()
         {
             string resString = string.Empty;
@@ -23,7 +28,7 @@ namespace FacebookAppLogic
 
         public string GetDaysSinceToday()
         {
-            return string.Format("{0} days ago",(DateTime.Today - Photo.CreatedTime.Value).Days);
+            return string.Format("{0} days ago", (DateTime.Today - Photo.CreatedTime.Value).Days);
         }
 
         public string[] GetTaggedFriends()
@@ -38,11 +43,6 @@ namespace FacebookAppLogic
             }
 
             return resList.ToArray();
-        }
-
-        public static implicit operator string(PhotoProxy v)
-        {
-            return v.ToString();
         }
     }
 }
