@@ -1,6 +1,6 @@
 ﻿using FacebookWrapper.ObjectModel;
 
-namespace FacebookApp
+namespace FacebookAppLogic
 {
     internal class FriendsFilterFeature
     {

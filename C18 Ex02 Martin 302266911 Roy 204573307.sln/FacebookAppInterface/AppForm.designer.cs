@@ -1,4 +1,4 @@
-﻿namespace FacebookApp
+﻿namespace FacebookAppInterface
 {
     internal partial class AppForm
     {
@@ -174,7 +174,7 @@
             // pictureBoxProfile
             // 
             this.pictureBoxProfile.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBoxProfile.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxProfile.Image = global::FacebookAppInterface.Resource.EmptyPicture;
             this.pictureBoxProfile.Location = new System.Drawing.Point(8, 12);
             this.pictureBoxProfile.Name = "pictureBoxProfile";
             this.pictureBoxProfile.Size = new System.Drawing.Size(150, 150);
@@ -365,7 +365,7 @@
             // 
             // pictureBoxPosts1
             // 
-            this.pictureBoxPosts1.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxPosts1.Image = global::FacebookAppInterface.Resource.EmptyPicture;
             this.pictureBoxPosts1.Location = new System.Drawing.Point(3, 5);
             this.pictureBoxPosts1.Name = "pictureBoxPosts1";
             this.pictureBoxPosts1.Size = new System.Drawing.Size(49, 53);
@@ -375,7 +375,7 @@
             // 
             // pictureBoxPosts2
             // 
-            this.pictureBoxPosts2.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxPosts2.Image = FacebookAppInterface.Resource.EmptyPicture;
             this.pictureBoxPosts2.Location = new System.Drawing.Point(3, 180);
             this.pictureBoxPosts2.Name = "pictureBoxPosts2";
             this.pictureBoxPosts2.Size = new System.Drawing.Size(49, 53);
@@ -385,7 +385,7 @@
             // 
             // pictureBoxPosts3
             // 
-            this.pictureBoxPosts3.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxPosts3.Image = FacebookAppInterface.Resource.EmptyPicture;
             this.pictureBoxPosts3.Location = new System.Drawing.Point(3, 122);
             this.pictureBoxPosts3.Name = "pictureBoxPosts3";
             this.pictureBoxPosts3.Size = new System.Drawing.Size(49, 53);
@@ -395,7 +395,7 @@
             // 
             // pictureBoxPosts4
             // 
-            this.pictureBoxPosts4.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxPosts4.Image = global::FacebookAppInterface.Resource.EmptyPicture;
             this.pictureBoxPosts4.Location = new System.Drawing.Point(3, 63);
             this.pictureBoxPosts4.Name = "pictureBoxPosts4";
             this.pictureBoxPosts4.Size = new System.Drawing.Size(49, 53);
@@ -475,7 +475,7 @@
             // pictureBoxPhoto1
             // 
             this.pictureBoxPhoto1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBoxPhoto1.Image = global::FacebookApp.Resource.NoImage;
+            this.pictureBoxPhoto1.Image = global::FacebookAppInterface.Resource.NoImage;
             this.pictureBoxPhoto1.Location = new System.Drawing.Point(20, 4);
             this.pictureBoxPhoto1.Name = "pictureBoxPhoto1";
             this.pictureBoxPhoto1.Size = new System.Drawing.Size(115, 110);
@@ -486,7 +486,7 @@
             // pictureBoxPhoto4
             // 
             this.pictureBoxPhoto4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBoxPhoto4.Image = global::FacebookApp.Resource.NoImage;
+            this.pictureBoxPhoto4.Image = global::FacebookAppInterface.Resource.NoImage;
             this.pictureBoxPhoto4.Location = new System.Drawing.Point(413, 4);
             this.pictureBoxPhoto4.Name = "pictureBoxPhoto4";
             this.pictureBoxPhoto4.Size = new System.Drawing.Size(115, 110);
@@ -497,7 +497,7 @@
             // pictureBoxPhoto3
             // 
             this.pictureBoxPhoto3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBoxPhoto3.Image = global::FacebookApp.Resource.NoImage;
+            this.pictureBoxPhoto3.Image = global::FacebookAppInterface.Resource.NoImage;
             this.pictureBoxPhoto3.Location = new System.Drawing.Point(282, 4);
             this.pictureBoxPhoto3.Name = "pictureBoxPhoto3";
             this.pictureBoxPhoto3.Size = new System.Drawing.Size(115, 110);
@@ -508,7 +508,7 @@
             // pictureBoxPhoto2
             // 
             this.pictureBoxPhoto2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBoxPhoto2.Image = global::FacebookApp.Resource.NoImage;
+            this.pictureBoxPhoto2.Image = global::FacebookAppInterface.Resource.NoImage;
             this.pictureBoxPhoto2.Location = new System.Drawing.Point(151, 4);
             this.pictureBoxPhoto2.Name = "pictureBoxPhoto2";
             this.pictureBoxPhoto2.Size = new System.Drawing.Size(115, 110);
@@ -612,7 +612,7 @@
             // 
             // pictureBoxFriends
             // 
-            this.pictureBoxFriends.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxFriends.Image = global::FacebookAppInterface.Resource.EmptyPicture;
             this.pictureBoxFriends.Location = new System.Drawing.Point(531, 209);
             this.pictureBoxFriends.Name = "pictureBoxFriends";
             this.pictureBoxFriends.Size = new System.Drawing.Size(120, 120);
@@ -784,7 +784,7 @@
             // 
             // pictureBoxCityFriend
             // 
-            this.pictureBoxCityFriend.Image = global::FacebookApp.Resource.EmptyPicture;
+            this.pictureBoxCityFriend.Image = global::FacebookAppInterface.Resource.EmptyPicture;
             this.pictureBoxCityFriend.Location = new System.Drawing.Point(55, 191);
             this.pictureBoxCityFriend.Name = "pictureBoxCityFriend";
             this.pictureBoxCityFriend.Size = new System.Drawing.Size(120, 120);
@@ -991,7 +991,7 @@
             // pictureBoxPhoto5
             // 
             this.pictureBoxPhoto5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBoxPhoto5.Image = global::FacebookApp.Resource.NoImage;
+            this.pictureBoxPhoto5.Image = global::FacebookAppInterface.Resource.NoImage;
             this.pictureBoxPhoto5.Location = new System.Drawing.Point(544, 4);
             this.pictureBoxPhoto5.Name = "pictureBoxPhoto5";
             this.pictureBoxPhoto5.Size = new System.Drawing.Size(115, 110);

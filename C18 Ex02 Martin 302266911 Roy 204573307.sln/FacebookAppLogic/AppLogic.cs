@@ -3,9 +3,9 @@ using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 using System;
 
-namespace FacebookApp
+namespace FacebookAppLogic
 {
-    internal class AppLogic
+    public class AppLogic
     {
         private readonly string r_AppID = "980644158781216";
         private User m_LoggedInUser;
@@ -46,38 +46,31 @@ namespace FacebookApp
         public bool Login()
         {
             bool res = false;
-            try
-            {
-                this.LoginResult = FacebookService.Login(
-                AppID,
-                "email",
-                "public_profile",
-                "user_friends",
-                "user_likes",
-                "user_photos",
-                "user_posts",
-                "user_birthday",
-                "user_events",
-                "manage_pages",
-                "user_location",
-                "user_gender");
 
-                if (!string.IsNullOrEmpty(this.LoginResult.AccessToken))
-                {
-                    LoggedUser = this.LoginResult.LoggedInUser;
-                    res = true;
-                }
-            }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            this.LoginResult = FacebookService.Login(
+            AppID,
+            "email",
+            "public_profile",
+            "user_friends",
+            "user_likes",
+            "user_photos",
+            "user_posts",
+            "user_birthday",
+            "user_events",
+            "manage_pages",
+            "user_location",
+            "user_gender");
 
+            if (!string.IsNullOrEmpty(this.LoginResult.AccessToken))
+            {
+                LoggedUser = this.LoginResult.LoggedInUser;
+                res = true;
+            }
 
             return res;
         }
 
-        internal void Connect(string i_LastAccessToken)
+        public void Connect(string i_LastAccessToken)
         {
             try
             {
@@ -88,8 +81,6 @@ namespace FacebookApp
                 Login();
             }
         }
-
-        //Facade
 
         public List<PhotoProxy> GetLatestPhotos(int i_NumOfItems)
         {

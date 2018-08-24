@@ -1,4 +1,4 @@
-﻿namespace FacebookApp
+﻿namespace FacebookAppLogic
 {
     public enum eLoginStatus
     {

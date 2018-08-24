@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace FacebookApp
+namespace FacebookAppLogic
 {
     internal sealed class CityAdvisorFeature
     {

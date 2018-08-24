@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 using System.Threading;
+using FacebookAppLogic;
 
-namespace FacebookApp
+namespace FacebookAppInterface
 {
     internal partial class AppForm : Form
     {

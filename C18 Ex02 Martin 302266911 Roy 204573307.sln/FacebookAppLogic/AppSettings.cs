@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Drawing;
 
-namespace FacebookApp
+namespace FacebookAppLogic
 {
     public class AppSettings
     {

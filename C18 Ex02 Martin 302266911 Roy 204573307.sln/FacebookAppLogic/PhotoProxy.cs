@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FacebookApp
+namespace FacebookAppLogic
 {
-    class PhotoProxy
+    public class PhotoProxy
     {
         public FacebookWrapper.ObjectModel.Photo Photo { get; set; }
 
