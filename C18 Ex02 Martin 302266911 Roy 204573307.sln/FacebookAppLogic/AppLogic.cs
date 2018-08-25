@@ -134,6 +134,29 @@ namespace FacebookAppLogic
             return cityInfoList;
         }
 
+        public List<string> GetFriendsLanguages()
+        {
+            List<string> resList = new List<string>();
+
+            if(LoggedUser != null)
+            {
+                foreach (Page page in LoggedUser.Languages)
+                {
+                    resList.Add(page.Name);
+                }
+            }
+
+            return resList;
+        }
+
+        public void UpdateAppSettings(System.Drawing.Point i_Location, bool i_RememberMe, string i_AccessToken)
+        {
+            AppSettings.LastWindowLocation = i_Location;
+            AppSettings.RememberUser = i_RememberMe;
+            AppSettings.LastAccessToken = i_AccessToken;
+            AppSettings.SaveToFile();
+        }
+
         public FacebookObjectCollection<User> FilterBySameBirthMonth()
         {
             return this.m_Filter.FilterBySameBirthMonth();

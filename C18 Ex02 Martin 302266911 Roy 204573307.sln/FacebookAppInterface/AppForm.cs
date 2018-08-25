@@ -47,7 +47,16 @@ namespace FacebookAppInterface
             base.OnFormClosing(e);
             if (this.checkBoxRememberMe.Checked && this.buttonLogout.Enabled == true)
             {
-                this.updateAppSettings();
+                string AccessToken = string.Empty;
+
+                if (this.r_AppLogic.LoggedUser != null)
+                {
+                    AccessToken = this.r_AppLogic.AppSettings.RememberUser
+                                                                      ? this.r_AppLogic.LoginResult.AccessToken
+                                                                      : string.Empty;
+                }
+
+                this.r_AppLogic.UpdateAppSettings(this.Location, this.checkBoxRememberMe.Checked, AccessToken);
             }
             else
             {
@@ -56,20 +65,6 @@ namespace FacebookAppInterface
                     this.r_AppLogic.AppSettings.DeleteFile();
                 }
             }
-        }
-
-        private void updateAppSettings()
-        {
-            this.r_AppLogic.AppSettings.LastWindowLocation = this.Location;
-            this.r_AppLogic.AppSettings.RememberUser = this.checkBoxRememberMe.Checked;
-            if (this.r_AppLogic.LoggedUser != null)
-            {
-                this.r_AppLogic.AppSettings.LastAccessToken = this.r_AppLogic.AppSettings.RememberUser
-                                                                  ? this.r_AppLogic.LoginResult.AccessToken
-                                                                  : null;
-            }
-
-            this.r_AppLogic.AppSettings.SaveToFile();
         }
 
         private void loginAndInit()
@@ -297,10 +292,7 @@ namespace FacebookAppInterface
                 {
                     comboBoxCommonLanguage.Enabled = true;
                     comboBoxCommonLanguage.Items.Clear();
-                    foreach (Page page in this.r_AppLogic.LoggedUser.Languages)
-                    {
-                        comboBoxCommonLanguage.Items.Add(page.Name);
-                    }
+                    comboBoxCommonLanguage.Items.AddRange(this.r_AppLogic.GetFriendsLanguages().ToArray());
                 }
             }
         }

@@ -12,13 +12,13 @@ namespace FacebookAppLogic
         {
             get
             {
-                return CityAdvisorSingleton.Sr_Instance;
+                return CityAdvisorInternal.Sr_Instance;
             }
         }
 
-        private class CityAdvisorSingleton
+        private class CityAdvisorInternal
         {
-            private CityAdvisorSingleton()
+            private CityAdvisorInternal()
             {
             }
 
