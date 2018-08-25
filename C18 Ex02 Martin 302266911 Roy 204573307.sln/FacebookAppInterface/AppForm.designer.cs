@@ -147,6 +147,7 @@
             // countLabel
             // 
             countLabel.AutoSize = true;
+            countLabel.ForeColor = System.Drawing.Color.White;
             countLabel.Location = new System.Drawing.Point(12, 48);
             countLabel.Name = "countLabel";
             countLabel.Size = new System.Drawing.Size(43, 13);
@@ -156,6 +157,7 @@
             // createdTimeLabel
             // 
             createdTimeLabel.AutoSize = true;
+            createdTimeLabel.ForeColor = System.Drawing.Color.White;
             createdTimeLabel.Location = new System.Drawing.Point(12, 75);
             createdTimeLabel.Name = "createdTimeLabel";
             createdTimeLabel.Size = new System.Drawing.Size(73, 13);
@@ -165,6 +167,7 @@
             // nameLabel
             // 
             nameLabel.AutoSize = true;
+            nameLabel.ForeColor = System.Drawing.Color.White;
             nameLabel.Location = new System.Drawing.Point(12, 22);
             nameLabel.Name = "nameLabel";
             nameLabel.Size = new System.Drawing.Size(38, 13);
@@ -1040,9 +1043,11 @@
             // 
             // fetchAlbumsBtn
             // 
-            this.fetchAlbumsBtn.BackColor = System.Drawing.Color.MediumBlue;
-            this.fetchAlbumsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.fetchAlbumsBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.fetchAlbumsBtn.BackColor = System.Drawing.Color.White;
+            this.fetchAlbumsBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
+            this.fetchAlbumsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fetchAlbumsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.fetchAlbumsBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.fetchAlbumsBtn.Location = new System.Drawing.Point(21, 451);
             this.fetchAlbumsBtn.Name = "fetchAlbumsBtn";
             this.fetchAlbumsBtn.Size = new System.Drawing.Size(271, 36);

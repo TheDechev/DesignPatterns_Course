@@ -2,8 +2,8 @@
 Exercise No...........: 2
 First Student Details.: 302266911 - Martin Dechev
 Second Student Details: 204573307 - Roy Koren
-Delivery Date.........: 
-Delivered In Delay....:  
+Delivery Date.........: 25 - 08 - 2018
+Delivered In Delay....: No
 Delay Reason..........: -
-Comments..............: 
+Comments..............: Test users are written at the end of the document.
 ========================End Exercise Checking Report========================
