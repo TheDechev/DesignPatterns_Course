@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{114A9BD9-4EF5-47D3-9C58-8949B8AF9363}"
+	ProjectSection(SolutionItems) = preProject
+		C18 Ex03 Martin 302266911 Roy 204573307.docx = C18 Ex03 Martin 302266911 Roy 204573307.docx
+		Exercise Checking Report.txt = Exercise Checking Report.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookAppInterface", "FacebookAppInterface\FacebookAppInterface.csproj", "{17D2309E-90A8-4B5D-8A5A-B1437F4983AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookAppLogic", "FacebookAppLogic\FacebookAppLogic.csproj", "{FC0199E4-7182-4819-B14F-3BBDDF243E2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17D2309E-90A8-4B5D-8A5A-B1437F4983AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17D2309E-90A8-4B5D-8A5A-B1437F4983AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17D2309E-90A8-4B5D-8A5A-B1437F4983AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17D2309E-90A8-4B5D-8A5A-B1437F4983AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC0199E4-7182-4819-B14F-3BBDDF243E2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC0199E4-7182-4819-B14F-3BBDDF243E2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC0199E4-7182-4819-B14F-3BBDDF243E2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0199E4-7182-4819-B14F-3BBDDF243E2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDA81E01-3720-4BF3-A39A-A2ED8D5AE073}
+	EndGlobalSection
+EndGlobal
