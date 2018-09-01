@@ -749,6 +749,7 @@
             // radioButtonSameMonth
             // 
             this.radioButtonSameMonth.AutoSize = true;
+            this.radioButtonSameMonth.Enabled = false;
             this.radioButtonSameMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButtonSameMonth.Location = new System.Drawing.Point(13, 131);
             this.radioButtonSameMonth.Name = "radioButtonSameMonth";
@@ -771,6 +772,7 @@
             // radioButtonYears
             // 
             this.radioButtonYears.AutoSize = true;
+            this.radioButtonYears.Enabled = false;
             this.radioButtonYears.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButtonYears.Location = new System.Drawing.Point(13, 79);
             this.radioButtonYears.Name = "radioButtonYears";
@@ -784,12 +786,12 @@
             // radioButtonLanguage
             // 
             this.radioButtonLanguage.AutoSize = true;
+            this.radioButtonLanguage.Enabled = false;
             this.radioButtonLanguage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButtonLanguage.Location = new System.Drawing.Point(13, 158);
             this.radioButtonLanguage.Name = "radioButtonLanguage";
             this.radioButtonLanguage.Size = new System.Drawing.Size(216, 21);
             this.radioButtonLanguage.TabIndex = 2;
-            this.radioButtonLanguage.TabStop = true;
             this.radioButtonLanguage.Text = "Speaking Common Language:";
             this.radioButtonLanguage.UseVisualStyleBackColor = true;
             this.radioButtonLanguage.CheckedChanged += new System.EventHandler(this.radioButtonLanguage_CheckedChanged);
@@ -797,6 +799,7 @@
             // radioButtonFemale
             // 
             this.radioButtonFemale.AutoSize = true;
+            this.radioButtonFemale.Enabled = false;
             this.radioButtonFemale.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButtonFemale.Location = new System.Drawing.Point(13, 51);
             this.radioButtonFemale.Name = "radioButtonFemale";
@@ -810,6 +813,7 @@
             // radioButtonMale
             // 
             this.radioButtonMale.AutoSize = true;
+            this.radioButtonMale.Enabled = false;
             this.radioButtonMale.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButtonMale.Location = new System.Drawing.Point(13, 26);
             this.radioButtonMale.Name = "radioButtonMale";

@@ -31,7 +31,7 @@ namespace FacebookAppLogic
             set
             {
                 m_LoggedInUser = value;
-                m_Filter.LoggedUser = value;
+                m_Filter.Filter.User = value;
             }
         }
 

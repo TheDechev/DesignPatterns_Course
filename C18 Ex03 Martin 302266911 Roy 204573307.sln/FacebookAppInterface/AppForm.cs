@@ -14,6 +14,7 @@ namespace FacebookAppInterface
     {
         private readonly AppLogic r_AppLogic = new AppLogic();
         private FacebookObjectCollection<User> m_FilteredFriends;
+        private RadioButtonSubject m_RadioButtonSubject = new RadioButtonSubject();
 
         public AppForm()
         {
@@ -24,6 +25,7 @@ namespace FacebookAppInterface
             checkBoxRememberMe.Checked = this.r_AppLogic.AppSettings.RememberUser;
             FacebookService.s_CollectionLimit = 10;
             FacebookService.s_FbApiVersion = 2.8f;
+            initRadioButtonObservers();
         }
 
         protected override void OnShown(EventArgs e)
@@ -75,6 +77,7 @@ namespace FacebookAppInterface
                 {
                     loadLatestInfo();
                     buttonLogin.Enabled = false;
+                    m_RadioButtonSubject.NotifyObservers(true);
                 }
             }
             catch
@@ -124,11 +127,43 @@ namespace FacebookAppInterface
                 buttonPostStatus.Enabled = false;
                 listBoxFilteredFriends.Enabled = false;
                 buttonLogin.Enabled = true;
+                m_RadioButtonSubject.NotifyObservers(false);
             }
             catch
             {
                 MessageBox.Show("There was a problem. Try logging in again.", "Log-out Problem", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void resetControls()
+        {
+            foreach (Control picture in panelPhotos.Controls)
+            {
+                (picture as PictureBox).Image = Resource.NoImage;
+            }
+
+            listBoxFriendsMain.Items.Clear();
+
+            foreach (Control post in panelPostsMain.Controls)
+            {
+                (post as TextBox).Text = string.Empty;
+            }
+
+            foreach (Control profilePic in panelPhotosMain.Controls)
+            {
+                (profilePic as PictureBox).Image = Resource.EmptyPicture;
+            }
+
+            foreach (Control text in panelDaysSince.Controls)
+            {
+                (text as Label).Text = string.Empty;
+            }
+
+            comboBoxCity.Items.Clear();
+            pictureBoxCityFriend.Image = Resource.EmptyPicture;
+            pictureBoxFriends.Image = Resource.EmptyPicture;
+            listBoxFilteredFriends.Items.Clear();
+            comboBoxCommonLanguage.Items.Clear();
         }
 
         // ===================== ====================== ====================== 
@@ -167,33 +202,13 @@ namespace FacebookAppInterface
             }
         }
 
-        private void resetControls()
+        private void initRadioButtonObservers()
         {
-            foreach (Control picture in panelPhotos.Controls)
-            {
-                (picture as PictureBox).Image = Resource.NoImage;
-            }
-
-            listBoxFriendsMain.Items.Clear();
-
-            foreach (Control post in panelPostsMain.Controls)
-            {
-                (post as TextBox).Text = string.Empty;
-            }
-
-            foreach (Control profilePic in panelPhotosMain.Controls)
-            {
-                (profilePic as PictureBox).Image = Resource.EmptyPicture;
-            }
-
-            foreach(Control text in panelDaysSince.Controls)
-            {
-                (text as Label).Text = string.Empty;
-            }
-
-            comboBoxCity.Items.Clear();
-            pictureBoxCityFriend.Image = Resource.EmptyPicture;
-            pictureBoxFriends.Image = Resource.EmptyPicture;
+            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonMale).Update);
+            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonFemale).Update);
+            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonLanguage).Update);
+            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonSameMonth).Update);
+            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonYears).Update);
         }
 
         private void ComboBoxCity_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -270,6 +285,7 @@ namespace FacebookAppInterface
         // ===================== ====================== ====================== 
         // ======================= Second Feature Code =======================
         // ===================== ====================== ====================== 
+
         private void radioButtonMale_CheckedChanged(object sender, EventArgs e)
         {
             addFriendsByGender(User.eGender.male);
