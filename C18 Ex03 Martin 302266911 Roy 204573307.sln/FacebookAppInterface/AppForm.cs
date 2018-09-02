@@ -285,7 +285,6 @@ namespace FacebookAppInterface
         // ===================== ====================== ====================== 
         // ======================= Second Feature Code =======================
         // ===================== ====================== ====================== 
-
         private void radioButtonMale_CheckedChanged(object sender, EventArgs e)
         {
             addFriendsByGender(User.eGender.male);

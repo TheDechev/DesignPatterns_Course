@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FacebookWrapper.ObjectModel;
+﻿using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
 {
-    class FilterByBirth : IFilterStrategy
+    public class FilterByBirth : IFilterStrategy
     {
         public FacebookObjectCollection<User> FilterFriends(Filter i_FilterBy)
         {

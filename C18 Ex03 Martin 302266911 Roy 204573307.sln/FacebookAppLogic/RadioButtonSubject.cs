@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace FacebookAppLogic
+﻿namespace FacebookAppLogic
 {
     public delegate void LoginStatusChangeDelegate(bool i_LoginStatus);
 

@@ -37,7 +37,7 @@ namespace FacebookAppLogic
 
         public FacebookObjectCollection<User> FilterBySameBirthMonth()
         {
-            m_FilterStrategy = new FilterByBirth ();
+            m_FilterStrategy = new FilterByBirth();
             return m_FilterStrategy.FilterFriends(Filter);
         }
     }
