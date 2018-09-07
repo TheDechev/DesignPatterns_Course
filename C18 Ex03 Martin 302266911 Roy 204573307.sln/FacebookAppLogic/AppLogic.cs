@@ -125,11 +125,14 @@ namespace FacebookAppLogic
         public List<string> GetCityAdvisorInfo(string i_CityName)
         {
             List<string> cityInfoList = new List<string>();
+            CityData[] cityData = new CityData[] { new Temperature(), new Humidity(), new Sunrise(), new Sunset() };
+
             cityInfoList.Add("City Name: " + i_CityName);
-            cityInfoList.Add(CityAdvisorFeature.CityAdvisorInstance.FetchTemperatureString(i_CityName));
-            cityInfoList.Add(CityAdvisorFeature.CityAdvisorInstance.FetchHumidityString(i_CityName));
-            cityInfoList.Add(CityAdvisorFeature.CityAdvisorInstance.FetchSunriseTime(i_CityName));
-            cityInfoList.Add(CityAdvisorFeature.CityAdvisorInstance.FetchSunsetTime(i_CityName));
+
+            for (int i = 0; i < cityData.Length; i++)
+            {
+                cityInfoList.Add(cityData[i].FetchValue(i_CityName));
+            }
 
             return cityInfoList;
         }

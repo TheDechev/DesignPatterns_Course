@@ -41,19 +41,23 @@
   <ItemGroup>
     <Compile Include="AppLogic.cs" />
     <Compile Include="AppSettings.cs" />
-    <Compile Include="CityAdvisorFeature.cs" />
+    <Compile Include="CityData.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="FilterByBirth.cs" />
     <Compile Include="FilterByGender.cs" />
     <Compile Include="FilterByLanguage.cs" />
     <Compile Include="FilterByYear.cs" />
     <Compile Include="FriendsFilterFeature.cs" />
+    <Compile Include="Humidity.cs" />
     <Compile Include="IFilterStrategy.cs" />
     <Compile Include="IObserver.cs" />
     <Compile Include="LoginStatus.cs" />
     <Compile Include="RadioButtonObserver.cs" />
     <Compile Include="PhotoProxy.cs" />
     <Compile Include="RadioButtonSubject.cs" />
+    <Compile Include="Sunrise.cs" />
+    <Compile Include="Sunset.cs" />
+    <Compile Include="Temperature.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Facebook">
