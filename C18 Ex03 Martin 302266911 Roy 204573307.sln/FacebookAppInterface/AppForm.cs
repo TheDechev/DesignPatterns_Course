@@ -211,7 +211,7 @@ namespace FacebookAppInterface
             m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonYears));
         }
 
-        private void ComboBoxCity_OnSelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxCity_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedCity = comboBoxCity.SelectedItem as string;
             listBoxFriendsFromSelectedCity.Items.Clear();
