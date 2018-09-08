@@ -204,11 +204,11 @@ namespace FacebookAppInterface
 
         private void initRadioButtonObservers()
         {
-            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonMale).Update);
-            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonFemale).Update);
-            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonLanguage).Update);
-            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonSameMonth).Update);
-            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonYears).Update);
+            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonMale));
+            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonFemale));
+            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonLanguage));
+            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonSameMonth));
+            m_RadioButtonSubject.Attach(new RadioButtonObserver(radioButtonYears));
         }
 
         private void ComboBoxCity_OnSelectedIndexChanged(object sender, EventArgs e)

@@ -14,14 +14,14 @@
             }
         }
 
-        public void Attach(LoginStatusChangeDelegate i_ObserverDelegate)
+        public void Attach(RadioButtonObserver i_Observer)
         {
-            m_LoginStatusChangeDelegates += i_ObserverDelegate;
+            m_LoginStatusChangeDelegates += i_Observer.Update;
         }
 
-        public void Detach(LoginStatusChangeDelegate i_ObserverDelegate)
+        public void Detach(RadioButtonObserver i_Observer)
         {
-            m_LoginStatusChangeDelegates -= i_ObserverDelegate;
+            m_LoginStatusChangeDelegates -= i_Observer.Update;
         }
     }
 }
