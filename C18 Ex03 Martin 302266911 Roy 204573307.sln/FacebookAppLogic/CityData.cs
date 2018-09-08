@@ -4,17 +4,17 @@ namespace FacebookAppLogic
 {
     internal abstract class CityData
     {
-        private string value = null;
+        private string m_Value = null;
         private XmlDocument m_XmlDoc = new XmlDocument();
 
         public string FetchValue(string i_CityName)
         {
-            XmlNodeList currentNode = FetchXML(i_CityName).SelectNodes(DataFormat());
-            value = currentNode[0].Attributes[ApiInteger()].Value;
-            return string.Format(DataTitle(ref value), value);
+            XmlNodeList currentNode = fetchXML(i_CityName).SelectNodes(DataFormat());
+            m_Value = currentNode[0].Attributes[ApiInteger()].Value;
+            return string.Format(DataTitle(ref m_Value), m_Value);
         }
 
-        private XmlElement FetchXML(string i_SelectedCity)
+        private XmlElement fetchXML(string i_SelectedCity)
         {
             string url = "http://api.openweathermap.org/data/2.5/weather?q=" + i_SelectedCity +
                     ",il&mode=xml&appid=0a08b75b9e93b7524a2642d309468a15";
